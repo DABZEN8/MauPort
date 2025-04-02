@@ -27,11 +27,11 @@ header h1 {
 }
 
 header h1 {
-    padding-left: 10px;
+    padding-left: 15px;
     font-size: 100px;
 }
 
-navbar {
+nav {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,7 +57,7 @@ navbar {
     background-color: rgb(12, 96, 253);
     color: white;
     transition: all 0.5s;
-
+    cursor: pointer;
     padding: 6px;
     padding-left: 10px;
     padding-right: 10px;
@@ -73,10 +73,6 @@ navbar {
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 5px;
-}
-
-a:hover {
-    cursor: pointer;
 }
 
 .search-form {
