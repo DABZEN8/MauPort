@@ -1,19 +1,16 @@
-# MauPort
+# Kamratgranskning - Projektversion 1.0
 
-## Kod för kamratgranskning:
-
-[MauPort Repository](https://github.com/DABZEN8/MauPort)
-
-Versionen ni ska granska: ['peer-review-1'](https://github.com/DABZEN8/MauPort/releases/tag/peer-review-1)
-
+## Innehåll:
+Den här versionen av projektet innehåller alla filer som krävs för att köra och granska koden. Alla filer finns i ZIP-filen som ni har fått.
 
 ## Hur man kör koden:
-1. **Öppna projektet i VS Code**
-    - Ladda ner ZIP-filen från länken ovan.
-    - Öppna projektmappen i **VS Code**
+1. Ladda upp mappen från ZIP-filen till din dator.
+2. Öppna filerna i **Visual Studio Code**.
+3. Använd **Go Live**-tillägget i VS Code för att starta projektet.
+4. Ingen ytterligare konfiguration eller bibliotek behövs.
 
-2. **Starta koden**
-    - Klicka på någon av HTML-filerna och sedan "Go Live".
+## Version:
+Den här versionen av koden är markerad som "peer-review-1" och är den som granskande grupp ska titta på.
 
-## Övrig information
-- Projektet använder **HTML och CSS** men inga externa ramverk eller bibliotek har använts.
+## Länkar till kod:
+- **Kodens repository på GitHub**: [MauPort GitHub Repository](https://github.com/DABZEN8/MauPort)
