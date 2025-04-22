@@ -111,7 +111,7 @@ nav {
 
 .search-form button:hover {
     background-color: rgb(0, 89, 255);
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 .info-box{
@@ -146,7 +146,7 @@ h3{
 }
 button:hover{
 
-    background-color: white;
+    background-color: rgb(171, 227, 244);
     color: rgb(0, 89, 255);
 }
 .info-box p {
