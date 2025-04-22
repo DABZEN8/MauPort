@@ -1,11 +1,10 @@
-
 body * {
     font-family: "Rubik", sans-serif;
-    /*font-optical-sizing: auto;*/
+    font-optical-sizing: auto;
     font-style: normal;
-    
+
     margin: 0px;
-    padding: 0px;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -22,7 +21,7 @@ header {
 
 header h1 {
     font-family: "Oswald", sans-serif;
-    /*font-optical-sizing: auto;*/
+    font-optical-sizing: auto;
     font-weight: weight;
     font-style: normal;
 }
@@ -31,8 +30,8 @@ header h1 {
     padding-left: 15px;
     font-size: 100px;
 }
-/* navbar är inte giltig HTML-element. Ska heta nav för semantisk kod*/
-nav {    
+
+nav {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +40,6 @@ nav {
 
     background-color: rgb(52, 123, 255);
 }
-
 
 .navbar {
     display: flex;
@@ -53,29 +51,19 @@ nav {
 
     list-style-type: none;
 }
-/*
+
 .navbar a:hover {
     transition: background-color 0.3s, color 0.3s, transform 0.3s;
     background-color: rgb(12, 96, 253);
     color: white;
     transition: all 0.5s;
-
+    cursor: pointer;
     padding: 6px;
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 10px;
 }
-*/
 
-.navbar a:hover {
-    cursor: pointer;
-    background-color: rgb(12, 96, 253);
-    color: white;
-    transition: all 0.5s;
-    
-    padding: 6px 10px;
-    border-radius: 10px;
-}
 .navbar a {
     color: rgb(255, 255, 255);
     text-decoration: none;
@@ -86,17 +74,13 @@ nav {
     padding-right: 10px;
     border-radius: 5px;
 }
-/*
-a:hover {
-    cursor: pointer;
-}
-*/
+
 .search-form {
     display: flex;
     align-items: center;
     padding-right: 20px;
 }
-/* slå ihop dessa?? */
+
 .search-form {
     display: flex;
     align-items: center;

@@ -1,6 +1,7 @@
 body * { 
-    font-family: "RUBIK", sans-serif ; /* importerad font, ska länkas i html-fil */
+    font-family: "RUBIK", sans-serif ; 
     font-style: normal;  
+    font-optical-sizing: auto;
     margin:0px;
     padding:0px;
     box-sizing: border-box;
@@ -19,6 +20,7 @@ header {
 
 header h1 {
     font-family: "Oswald", "sans-serif" ;
+    font-optical-sizing: auto;
     font-weight: weight;
     font-style: normal;
     font-size: 100px;
