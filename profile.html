@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Min profil - MauPort</title>
+        <link href="profile.css" type="text/css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <h1>MauPort</h1>
+        </header>
+        <nav>
+            <ul class="navbar">
+                <li><a href="explore.html">Startsida</a></li>
+                <li><a href="profile.html">Min sida</a></li>
+                <li><a href="#">Om oss</a></li>
+                <li><a href="#">Inställningar</a></li>
+                <li><a href="index.html">Logga in</a></li>
+            </ul>
+            <form class="search-form">
+                <input type="search" id="search" placeholder="Sök...">
+                <button type="submit">Sök</button>
+            </form>
+        </nav>
+        <main class="profile-main">
+            <div class="profile-header">
+            <img src="/Photos/profile-placeholder.jpg" alt="Profilbild" class="profile-pic">
+                <div class="profile-info">
+                    <h2>Förnamn Efternamn</h2>
+                    <p><strong>Program:</strong> Informationsarkitekt</p>
+                    <p><strong>E-post:</strong> fornamn.efternamn@student.mau.se</p>
+                    <p><strong>Om mig:</strong> Passionerad student inom UX och frontend. Gillar att skapa, koda och samarbeta.</p>
+                <div class="logout-button">
+                <a href="#">Logga ut</a>
+                </div>
+                </div>
+            </div>
+            
+        <div class="user-projects">
+            <div class="project-grid">
+
+                <div class="card add-project">
+                    <div class="card-content">
+                        <p>+</p>
+                        <p>Lägg till ett nytt projekt i ditt portfolio!</p>
+                    </div>
+                </div>
+
+            <div class="card">
+                <img src="/Photos/snake-battle.jpg" alt="Snake Battle">
+                <div class="card-content">
+                    <h3>Snake Battle</h3>
+                    <p>Monica Joldic</p>
+                    <p>Spelutveckling</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="/Photos/whack-game.jpg" alt="Whack Game">
+                <div class="card-content">
+                    <h3>Whack! Game</h3>
+                    <p>Monica Joldic</p>
+                    <p>Spelutveckling</p>
+                </div>
+            </div>
+        </div>
+        </main>
+        <footer>
+            <h4>© 2025 MauPort. All rights reserved.</h4>
+        </footer>
+    </body>
+</html>
