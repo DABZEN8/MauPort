@@ -119,33 +119,89 @@ main {
 }
 
 /*Styling för profil-grid*/
-.profile-card{
-    background-color:lightblue;
-    display:flex;
-    width:500px;
-    gap:1rem;
-    align-items:center;
-    padding:0.5rem;
+.profile-container {
+    text-align:center;
+    margin-top: 2rem;
+}
+
+.profile-card {
+background: linear-gradient(to top, rgba(74,79,81,0.3) 0%, rgba(189, 189, 189, 0.3) 1%, rgba(215, 215, 215, 0) 100%);
+
+    padding: 2rem;
     border-radius:12px;
-    text-decoration:none;
-    margin-top:44px;
-    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#347bff+1,7db9e8+100&1+0,0+74,0+74,0+97 */
-    background: linear-gradient(45deg,  rgba(52,123,255,1) 0%,rgba(52,123,255,0.99) 1%,rgba(106,169,238,0) 74%,rgba(123,183,233,0) 97%,rgba(125,185,232,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    
+    width: 590px;
+    margin: 0 auto;
+    margin-top:10%;
 }
 
-.profile-picture{
-    width:60px;
-    height:60px;
-    border-radius:50px;
-    background-color:darkblue;
+.profile-picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #00cfff;
+    margin-bottom: 1rem;
 }
 
-.username{
-    color:white;
-    font-size:24px;
-    margin: 0;
+.profile-name{
+    margin:0;
+    font-size:1.5rem;
+    color: black;
 }
+
+.profile-program{
+    font-size: 0.9rem;
+    color: gray;
+    margin-bottom: 1.5rem;
+}
+
+.profile-button {
+    display: block;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    width:500px;
+    text-decoration: none;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    font-weight: bold;
+}
+
+.profile-button:hover {
+    background: linear-gradient(to right, #007da0, #003372);
+}
+
+/* Styling för den mindre profilkortet ovanför portfolioinnehåll */
+.profile-card-mini {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    margin: 1rem;
+}
+
+.mini-profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
+    object-fit:cover;
+}
+
+.mini-profile-name {
+    font-size: 1rem;
+    color: black;
+    font-weight: bold;
+}
+
+.mini-profile-badge {
+    background-color: #239adf;
+    color: white;
+    font-weight: bold;
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
 
 /* Styling för footer */
 footer {
