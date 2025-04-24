@@ -6,11 +6,11 @@ Den här versionen av projektet innehåller alla filer som krävs för att köra
 ## Hur man kör koden:
 1. Ladda upp mappen från ZIP-filen till din dator.
 2. Öppna filerna i **Visual Studio Code**.
-3. Använd **Go Live**-tillägget i VS Code för att starta projektet.
+3. Kör programmet och öppna webbsidan.
 4. Ingen ytterligare konfiguration eller bibliotek behövs.
 
 ## Version:
-Den här versionen av koden är markerad som "peer-review-1" och är den som granskande grupp ska titta på.
+Den här versionen av koden är markerad som "peer-review-2" på GitHub och är den som granskande grupp ska titta på.
 
 ## Länkar till kod:
 - **Kodens repository på GitHub**: [MauPort GitHub Repository](https://github.com/DABZEN8/MauPort)
