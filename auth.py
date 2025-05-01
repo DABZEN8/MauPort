@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from db import connect_db
+import psycopg2.extras
 import re
 
 auth = Blueprint('auth', __name__)
@@ -9,18 +10,12 @@ def user_exists(username, email):
     """Kollar om användaren redan finns i databasen baserat på användarnamn eller e-post."""
     conn = connect_db()
     cursor = conn.cursor()
-
-    # Kollar om användarnamnet redan finns
     cursor.execute("SELECT * FROM users WHERE username = %s OR email = %s", (username, email))
     user = cursor.fetchone()
-
     cursor.close()
     conn.close()
 
-    # Om en användare hittades, returnera True
     return user is not None
-
-
 
 #Registrering
 @auth.route('/register', methods=['GET', 'POST'])
@@ -68,3 +63,31 @@ def register():
         return redirect(url_for('auth.login'))
     
     return render_template('register.html')
+
+@auth.route('/login', methods =['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        conn = connect_db()
+        cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        cursor.execute("SELECT id, username, password_hash FROM users WHERE username = %s", (username,))
+        user = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        if user is None:
+            flash('Username not found. Please try again!', 'danger')
+            return render_template('login.html')
+        
+        if not check_password_hash(user['password_haash'], password):
+            flash('Incorrect password. Please try again!', 'danger')
+            return render_template('login.html')
+
+        session['user_id'] = user['id']
+        session['username'] = user['username']
+        flash('Login successful!', 'success')
+        return redirect(url_for('index'))
+    
+    return render_template('login.html')
