@@ -81,7 +81,7 @@ def login():
             flash('Username not found. Please try again!', 'danger')
             return render_template('login.html')
         
-        if not check_password_hash(user['password_haash'], password):
+        if not check_password_hash(user['password_hash'], password):
             flash('Incorrect password. Please try again!', 'danger')
             return render_template('login.html')
 
@@ -91,3 +91,12 @@ def login():
         return redirect(url_for('index'))
     
     return render_template('login.html')
+
+@auth.route('/logout')
+def logout():
+    session.clear()
+    flash('You have been logged out.', 'info')
+    
+    response = redirect(url_for('auth.login'))
+    response.cache_control.no_store = True
+    return response
