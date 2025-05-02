@@ -202,7 +202,6 @@ background: linear-gradient(to top, rgba(74,79,81,0.3) 0%, rgba(189, 189, 189, 0
     font-size: 0.8rem;
 }
 
-
 /* Styling för footer */
 footer {
     display: flex;
@@ -217,7 +216,6 @@ footer {
 footer h4 {
     color: rgb(74, 137, 255);
 }
-
 
 footer {
     display: flex;

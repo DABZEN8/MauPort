@@ -7,7 +7,6 @@ body * {
     box-sizing: border-box;
 }
 
-
 header {
     display: flex;
     align-items: center;
@@ -28,8 +27,6 @@ header h1 {
 }
 
 .main{
-
-
     display: grid;
     height: 100vh;
     grid-template-columns: 1fr, 2fr, 1fr;
@@ -151,17 +148,20 @@ h3{
     font-size: large;
 
 }
-button:hover{
 
+button:hover{
     background-color: rgb(171, 227, 244);
     color: rgb(0, 89, 255);
 }
+
 .info-box p {
     font-weight:500;
 }
+
 h2{
     color:  rgb(52, 123, 255);
 }
+
 .center{
     justify-content: center;
     width: 500px;
@@ -172,13 +172,13 @@ h2{
     border-radius: 10px; 
     align-items: center; 
 }
+
 .center form{
     display: flex;
     flex-direction:column;
     width: 200px;
     align-self: center;   
 }
-
 
 footer { 
    text-align: center;
