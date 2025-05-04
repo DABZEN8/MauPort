@@ -1,17 +1,17 @@
 import psycopg2 as psql
-import configparser
+import os
+from dotenv import load_dotenv
 
 def connect_db():
     """Anslut till PostgreSQL-databasen och returnera anslutningen. Vi referar till säkerhetsnycklar
     från vå text fil."""
-    config = configparser.ConfigParser()
-    config.read('config.ini')
+    load_dotenv()
 
     db_config = {
-        'host': config['database']['host'],
-        'user': config['database']['user'],
-        'password': config['database']['password'],
-        'dbname': config['database']['database']
+        'db_host': os.getenv('db_host'),
+        'db_user': os.getenv('db_user'),
+        'db_password': os.getenv('db_password'),
+        'db_name': os.getenv('db_name')
     }
 
     try:
