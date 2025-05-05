@@ -1,0 +1,59 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+}
+
+body {
+    background-color: rgb(46, 46, 46);
+}
+
+header {
+    height: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  header h1 {
+    font-size: 10rem; /* eller clamp() */
+    margin: 0;
+    
+    color: rgb(165, 201, 255);
+    font-family: 'Oswald', sans-serif;
+  }
+
+.message {
+    text-align: center;
+    margin-top: 1rem;
+
+    color: rgb(165, 201, 255);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    margin-top: 2rem;
+
+    background-color: rgb(15, 52, 75);
+    color: rgb(255, 255, 255);
+}
+
+.container button {
+    font-family: inherit;
+    padding: 0.5rem 5rem;
+
+    border-radius: 5px;
+    background-color: rgb(165, 201, 255);
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+  }
