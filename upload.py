@@ -1,5 +1,13 @@
-from flask import Flask, render_template
+from flask import Blueprint, render_template
 
-#app = Flask(__name__)
+upload = Blueprint('upload', __name__)
 
-@app.route('/upload') 
+@upload.route('/upload')
+def upload_file():
+    return render_template('upload.html')
+
+#if __name__ == '__main__':
+    upload.run(debug=True)
+    
+    
+    
