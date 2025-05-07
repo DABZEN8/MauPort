@@ -1,10 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from db import connect_db
 import psycopg2.extras
 import re
-
-auth = Blueprint('auth', __name__)
 
 def user_exists(username, email):
     """Kollar om användaren redan finns i databasen baserat på användarnamn eller e-post."""
@@ -17,8 +15,6 @@ def user_exists(username, email):
 
     return user is not None
 
-#Registrering
-@auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         first_name = request.form['first_name']
@@ -64,7 +60,6 @@ def register():
     
     return render_template('register.html')
 
-@auth.route('/login', methods =['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
@@ -92,7 +87,6 @@ def login():
     
     return render_template('login.html')
 
-@auth.route('/logout')
 def logout():
     session.clear()
     flash('You have been logged out.', 'info')
