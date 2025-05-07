@@ -32,6 +32,11 @@
         <main>
             <!--HÄR kommer ladda upp filer finnas-->
             <h1> Ladda upp filer </h1>
+            <form method="POST"> 
+                {{form.hidden_tag()}}
+                {{form.file()}}
+                {{form.submit()}}
+            </form>    
         </main>
 
         <footer>

@@ -30,7 +30,7 @@ def portfolio():
 
 # Route till sida för att ladda upp inlägg
 @app.route('/upload')
-def upload():
+def upload_file():
     return render_template('upload.html')
 
 # Route till felhantering 
