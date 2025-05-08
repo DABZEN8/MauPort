@@ -26,32 +26,33 @@ def user_exists(username, email):
 
 def register():
     if request.method == 'POST':
-        first_name = request.form['first_name'].capitalize()
-        last_name = request.form['last_name'].capitalize()
-        username = request.form['username']
-        username = username[0].upper() + username[1:] if username else username
+        form_data = request.form
+        first_name = form_data.get('first_name').capitalize()
+        last_name = form_data.get('last_name').capitalize()
+        username = form_data.get('username')
+        username = username.capitalize() if username else username
         email = request.form['email']
         password = request.form['password']
 
         #Validera namn och efternamn
         if not re.match(r"^[A-Za-z]+$", first_name) or not re.match(r"^[A-Za-z]+$", last_name):
             flash("First and last name can only contain letters.")
-            return redirect('/register')
+            return render_template('register.html', form_data=request.form)
 
         #Validerar användarnamn
         if not re.match(r"^(?=.*[A-Za-z])[A-Za-z0-9_]+$", username):
             flash("Username can only contain letters, numbers and underscore.")
-            return redirect('/register')
+            return render_template('register.html', form_data=request.form)
 
         #Validera email
         if not re.match(r"^[A-Za-z0-9._%+-]+@(hotmail|gmail|outlook|yahoo)\.com$", email):
             flash("Invalid email.")
-            return redirect('/register')
+            return render_template('register.html', form_data=request.form)
         
         #Validerar lösenord
         if not re.match(r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", password):
             flash("Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.")
-            return redirect('/register')
+            return redirect('register')
 
         #Kontrollera om användaren redan finns
         if user_exists(username, email):
@@ -78,9 +79,9 @@ def register():
                 conn.close()
 
         flash('Registration successful!', 'success')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('login'))
     
-    return render_template('register.html')
+    return render_template('register.html', form_data={})
 
 def login():
     if request.method == 'POST':
@@ -102,11 +103,11 @@ def login():
 
         if user is None:
             flash('Username not found. Please try again!', 'danger')
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('login'))
         
         if not check_password_hash(user['password_hash'], password):
             flash('Incorrect password. Please try again!', 'danger')
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('login'))
 
         session['user_id'] = user['id']
         session['username'] = user['username']
@@ -119,6 +120,6 @@ def logout():
     session.clear()
     flash('You have been logged out.', 'info')
     
-    response = redirect(url_for('auth.login'))
+    response = redirect(url_for('login'))
     response.cache_control.no_store = True
     return response
