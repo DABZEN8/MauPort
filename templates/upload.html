@@ -18,10 +18,11 @@
             <ul class="navbar">
                 <li><a href="/">Startsida</a></li>
                 <li><a href="/profile">Min sida</a></li>
+                <a href="{{ url_for('upload_files') }}">Ladda upp</a>
                 <li><a href="#">Om oss</a></li>
                 <li><a href="#">Inställningar</a></li>
                 <li><a href="/login">Logga in</a></li>
-                <li><a href="{{ url_for('auth.register') }}">Registrera dig</a></li>
+                <li><a href="{{ url_for('register') }}">Registrera dig</a></li>
             </ul>
             <form class="search-form">
                 <input type="search" id="search" placeholder="Sök...">
@@ -31,12 +32,14 @@
 
         <main>
             <!--HÄR kommer ladda upp filer finnas-->
-            <h1> Ladda upp filer </h1>
-            <form method="POST"> 
-                {{form.hidden_tag()}}
-                {{form.file()}}
-                {{form.submit()}}
-            </form>    
+            <h1> Ladda upp filer <h1>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {{form.hidden_tag() }} <!--För att skydda innehåll från virusattack-->
+                    {{form.file() }}         <!--För att uppvisa välj fil knapp-->
+                    {{form.submit() }}       <!--För att uppvisa Ladda upp knapp-->
+                </form>    
+              
         </main>
 
         <footer>

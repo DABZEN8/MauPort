@@ -1,8 +1,16 @@
 from flask import Flask, render_template
 from auth import register as auth_register, login as auth_login, logout as auth_logout
+from upload import handle_file_upload
+from flask_wtf import FlaskForm
+from wtforms import FileField, SubmitField
+from werkzeug.utils import secure_filename
+import os
+from wtforms.validators import InputRequired
+
 
 app = Flask (__name__)
 app.secret_key = '3d9f728e4c2b3f6f8e5a1c7a8b9d2f3e4c5a6b7d8e9f0a1b2c3d4e5f6a7b8c9d'
+
 
 # Route till startsidan
 @app.route('/')
@@ -33,9 +41,9 @@ def portfolio():
     return render_template('portfolio.html')
 
 # Route till sida för att ladda upp inlägg
-@app.route('/upload')
-def upload_file():
-    return render_template('upload.html')
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_files():
+    return handle_file_upload()
 
 # Route till felhantering 
 @app.errorhandler(404)

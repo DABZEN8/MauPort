@@ -21,9 +21,11 @@
                 <ul>
                     <li><a href="/">Startsida</a></li>
                     <li><a href="/profile">Min sida</a></li>
+                    <li><a href="{{ url_for('upload_files') }}">Ladda upp</a></li>
                     <li><a href="#">Om oss</a></li>
                     <li><a href="#">Inställningar</a></li>
                     <li><a href="/login">Logga in</a></li>
+                    <li><a href="{{ url_for('register') }}">Registrera dig</a></li>
                 </ul>
                 <form class="search-form">
                     <input type="search" id="search" placeholder="Sök...">
@@ -42,7 +44,7 @@
         </div>    
         <div class="center">
             <h3> Logga in </h3>
-            
+            <!--
             <form action="#">
                 <label for="username"> Användarnamn/E-mail:</label>
                     <input type="text" id="username" name="E-mail" size="15" maxlength="45">
@@ -55,9 +57,9 @@
                     <button> <a href="profile.html"> Logga in </a> </button>
                 </div>    
                 </p>
-
-                <!--FORM TILL LOGIN KOPPLAT TILL PYTHON:
-                <form action="{{url_for('auth.login')}}" method="POST">
+            -->
+                <!--<FORM TILL LOGIN KOPPLAT TILL PYTHON:<!-->
+                <form action="{{url_for('login')}}" method="POST">
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" required placeholder="Enter your username">
@@ -73,8 +75,8 @@
                 </div>
 
                 <div class="form-group">
-                    <p>Don't have an account? <a href="{{url_for('auth.register')}}">Register</a></p>
-                </div>-->
+                    <p>Don't have an account? <a href="{{url_for('register')}}">Register</a></p>
+                </div>
 
             </form>
         </div>

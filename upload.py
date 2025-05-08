@@ -1,24 +1,34 @@
-from flask import Flask, render_template
-from flask_wtf import FlaskForm
-from wtforms import FileField, SubmitField
+import os
+from flask import Flask, render_template, request
+from werkzeug.utils import secure_filename
+from forms import UploadFileForm
 
-upload = Flask('__name__')
 
-#Denna nyckel används för att kryptera data som lagras i cookies t.ex. användarinformation mellan sidladdningar.
-upload.config['SECRET_KEY'] = 'temporary_secret_key'
 
-class UploadFileForm(FlaskForm):
-    file = FileField('File')
-    submit = SubmitField('Upload File')
+upload_file = Flask(__name__)
+upload_file.config['UPLOAD_FOLDER'] = 'static/files'
 
-@app.route('/upload', methods=['GET', 'POST'])
-def upload_file():
+# Se till att uppladdningsmappen finns
+upload_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), upload_file.config['UPLOAD_FOLDER'])
+os.makedirs(upload_path, exist_ok=True)
+
+
+def handle_file_upload():
     form = UploadFileForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        file = form.file.data # Hämta filen från formuläret
+        
+        if file: 
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(upload_path, filename))  # Sparar filen            
+            return "Filen har laddats upp"
+        else:
+            return "Ingen fil har valts"
     return render_template('upload.html', form=form)
 
 
 
-if __name__ == '__main__':
-    upload.run(debug=True)    
+
+    
     
     
