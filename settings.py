@@ -11,7 +11,6 @@ def user_settings():
     """
     # Session då ändringar enbart ska ske i inloggat läge
     if 'user_id' not in session:
-        flash("Logga in för att se och ändra dina inställningar.")
         return redirect(url_for('login'))
 
     user_id = session['user_id']
