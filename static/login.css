@@ -194,29 +194,3 @@ footer {
 footer h4 {
     color: rgb(74, 137, 255);
 }
-
-.flash-messages {
-    margin-bottom: 20px; /* Space between messages and form */
-}
-
-.flash {
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.flash.success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.flash.danger {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-.flash.error {
-    background-color: #f8d7da;
-    color: #721c24;
-}
