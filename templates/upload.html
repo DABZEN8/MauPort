@@ -34,10 +34,10 @@
             <!--HÄR kommer ladda upp filer finnas-->
             <h1> Ladda upp filer <h1>
 
-                <form method="POST" enctype="multipart/form-data">
-                    {{form.hidden_tag() }} <!--För att skydda innehåll från virusattack-->
-                    {{form.file() }}         <!--För att uppvisa välj fil knapp-->
-                    {{form.submit() }}       <!--För att uppvisa Ladda upp knapp-->
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" multiple/> 
+                    <input type = "submit" value="Ladda upp"> 
+                
                 </form>    
               
         </main>
