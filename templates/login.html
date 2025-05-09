@@ -24,7 +24,7 @@
                     <li><a href="{{ url_for('upload_files') }}">Ladda upp</a></li>
                     <li><a href="#">Om oss</a></li>
                     <li><a href="#">Inställningar</a></li>
-                    <li><a href="/login">Logga in</a></li>
+                    <li><a href="{{ url_for('login')}}">Logga in</a></li>
                     <li><a href="{{ url_for('register') }}">Registrera dig</a></li>
                 </ul>
                 <form class="search-form">
@@ -59,7 +59,16 @@
                 </p>
             -->
                 <!--<FORM TILL LOGIN KOPPLAT TILL PYTHON:<!-->
-                <form action="{{url_for('login')}}" method="POST">
+            <form action="{{url_for('login')}}" method="POST">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <ul class="flashes">
+                            {% for category, message in messages %}
+                                <li class="{{ category }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" required placeholder="Enter your username">

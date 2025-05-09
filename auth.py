@@ -87,18 +87,24 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        user = None
 
         try:
             conn = connect_db()
+            if not conn:
+                flash("Could not connect to the database.", "error")
+                return redirect(url_for('login'))
+
+            print(f"Database connection: {conn}")
             cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             cursor.execute("SELECT id, username, password_hash FROM users WHERE username = %s", (username,))
             user = cursor.fetchone()
         except psycopg2.Error as e:
             flash(f"Database error: {str(e)}", "error")
         finally:
-            if 'cursor' in locals():
+            if 'cursor' in locals() and cursor:
                 cursor.close()
-            if 'conn' in locals():
+            if 'conn' in locals() and conn:
                 conn.close()
 
         if user is None:
@@ -112,7 +118,7 @@ def login():
         session['user_id'] = user['id']
         session['username'] = user['username']
         flash('Login successful!', 'success')
-        return redirect(url_for('index'))
+        redirect(url_for('index'))
     
     return render_template('login.html')
 
