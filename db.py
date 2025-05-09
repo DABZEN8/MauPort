@@ -8,10 +8,10 @@ def connect_db():
     load_dotenv()
 
     db_config = {
-        'db_host': os.getenv('db_host'),
-        'db_user': os.getenv('db_user'),
-        'db_password': os.getenv('db_password'),
-        'db_name': os.getenv('db_name')
+        'host': os.getenv('db_host'),
+        'user': os.getenv('db_user'),
+        'password': os.getenv('db_password'),
+        'name': os.getenv('db_name')
     }
 
     try:
