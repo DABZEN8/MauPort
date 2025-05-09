@@ -25,10 +25,3 @@ def handle_file_upload():
         else:
             return "Ingen fil har valts"
     return render_template('upload.html', form=form)
-
-
-
-
-    
-    
-    
