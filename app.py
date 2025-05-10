@@ -9,7 +9,7 @@ import os
 
 app = Flask (__name__)
 app.secret_key = '3d9f728e4c2b3f6f8e5a1c7a8b9d2f3e4c5a6b7d8e9f0a1b2c3d4e5f6a7b8c9d'
-
+app.config['UPLOAD_FOLDER'] = 'files/portfolio_files'
 
 # Route till startsidan
 @app.route('/')
