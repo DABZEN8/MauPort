@@ -3,9 +3,6 @@ from wtforms import FileField, SubmitField
 from wtforms import StringField, TextAreaField, FileField
 from wtforms.validators import InputRequired, DataRequired
 
-class UploadFileForm(FlaskForm):
-    file = FileField('Välj fil', validators=[InputRequired()])
-    submit = SubmitField('Ladda upp')
 
 # Formulär där användare ändrar inställningar i inloggat läge
 class SettingsForm(FlaskForm):
