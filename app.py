@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from auth import register as auth_register, login as auth_login, logout as auth_logout
 from upload import handle_file_upload
+from settings import user_settings
 from flask_wtf import FlaskForm
 from wtforms import FileField, SubmitField
 from werkzeug.utils import secure_filename
@@ -44,6 +45,11 @@ def portfolio():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_files():
     return handle_file_upload()
+
+# Route till sida för inställningar
+@app.route('/settings', methods=['GET', 'POST'])
+def settings():
+    return user_settings()
 
 # Route till felhantering 
 @app.errorhandler(404)
