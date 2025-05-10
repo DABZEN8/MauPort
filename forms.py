@@ -3,10 +3,6 @@ from wtforms import FileField, SubmitField
 from wtforms import StringField, TextAreaField
 from wtforms.validators import InputRequired, Length
 
-# Formulär för att lagga upp filer
-class UploadFileForm(FlaskForm):
-    file = FileField('Välj fil', validators=[InputRequired()])
-    submit = SubmitField('Ladda upp')
 
 # Formulär för att ändra inställningar för användaren
 class SettingsForm(FlaskForm):
