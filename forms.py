@@ -11,3 +11,5 @@ class SettingsForm(FlaskForm):
     biography = TextAreaField('Biografi', validators=[Length(max=3000)])
     file = FileField('Profilbild')
     submit = SubmitField('Spara ändringar')
+    
+    
