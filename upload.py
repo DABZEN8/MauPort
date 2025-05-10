@@ -4,7 +4,6 @@ from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 from db import connect_db
 import psycopg2
-from app import app
 
 
 
@@ -82,7 +81,7 @@ def save_portfolio_to_database(files):
     
  #Sparar filen fysiskt på servern och returnerar relativ sökväg till databasen.
 def save_file_locally(file, filename):
-    
+    from app import app
     upload_folder = app.config['UPLOAD_FOLDER']
 
     # Se till att uppladdningsmappen finns
