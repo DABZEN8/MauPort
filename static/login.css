@@ -1,222 +1,227 @@
-body * { 
-    font-family: "RUBIK", sans-serif ; 
-    font-style: normal;  
-    font-optical-sizing: auto;
-    margin:0px;
-    padding:0px;
-    box-sizing: border-box;
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2E2E2E;
+    color: #f0f0f0;
+    font-family: "Rubik", sans-serif;
 }
 
+/* Header */
 header {
     display: flex;
     align-items: center;
-    width:100%;
-    color: rgb(255, 255, 255);
-    background-color: rgb(74, 137, 255);
+    background-color: #2E2E2E;
     height: 20vh;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.2);   
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.4);
 }
 
 header h1 {
-    font-family: "Oswald", "sans-serif" ;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
+    font-family: "Oswald", sans-serif;
     font-size: 100px;
+    color: #A5C9FF;
     padding-left: 15px;
 }
 
-.main{
-    display: grid;
-    height: 100vh;
-    grid-template-columns: 1fr, 2fr, 1fr;
-    grid-template-rows: repeat(4, minmax(200px,auto));
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-    align-items: stretch;
-    justify-content: center;
-    justify-items: center;
-   
-    
-}
-
+/* Navbar */
 nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgb(52, 123, 255);
-        padding: 10px 20px;
-    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
+}
 
 .navbar {
-    display: flex;
-    justify-content: center; 
-    gap: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-.navbar ul{
-    display: flex;
-    gap:20px;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.navbar ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.navbar a{ 
-    color: rgb(255, 255, 255);
+.navbar a {
+    color: #A5C9FF;
     text-decoration: none;
-    font-size: 25px;
-    padding: 6px 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
+    font-size: 18px;
+    padding: 8px 12px;
+    border-radius: 6px;
 }
 
 .navbar a:hover {
-    cursor: pointer;
-    background-color: rgb(12, 96, 253);
-    color: white;
-    transition: all 0.5s;  /* När du hovrar över länken, 
-    så kommer bakgrundsfärgen, textfärgen och padding att ändras mjukt över 0.5 sek. 
-    ist för att ändras direkt.*/   
-    padding: 6px 10px;
-    border-radius: 10px;
+    background-color: #333;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
 }
 
-.search-form{
-    display: flex;
-    align-items: center;
-    position: absolute;
-    right: 20px;
-    padding-right: 20px;
+/* Sökfält */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.search-form input{
+.search-form input {
     padding: 5px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #555;
+    background-color: #1f1f1f;
+    color: #eee;
     border-radius: 5px;
-    margin-right: 10px;
 }
 
-.search-form button{
+.search-form button {
     padding: 6px 12px;
-    background-color: rgb(255, 255, 255);
-    color: #292929;
-    border:#333;
+    background-color: #333;
+    color: white;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .search-form button:hover {
-    background-color: rgb(0, 89, 255);
-    color: rgb(255, 255, 255);
+    background-color: #555;
 }
 
-.info-box{
-    display:flex;
+/* Layout */
+.main {
+    display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+    gap: 40px;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* Styling för Info */
+.info-box {
     text-align: center;
-    gap: 15px;
+    max-width: 600px;
+    color: #ddd;
 }
 
-a {
-    color: rgb(52, 123, 255);
-    cursor: pointer;
-}
-
-.login_button a {
-    color:black;
-    text-decoration: none;
-}
-
-.center button {
-    font-weight: bold;
-    cursor: pointer;
-    color: white;
-    transition: all 0.5s; 
-    padding: 10px;
-    background-color: rgb(58, 126, 242);
-    color: #292929;
-    border:#333;
-    border-radius: 5px;
-    width: 100px;
-}
-
-h3{
-    font-size: large;
-
-}
-
-button:hover{
-    background-color: rgb(171, 227, 244);
-    color: rgb(0, 89, 255);
+.info-box h2 {
+    font-size: 1.5rem;
+    color: #A5C9FF;
+    margin-bottom: 10px;
 }
 
 .info-box p {
-    font-weight:500;
+    font-weight: 500;
 }
 
-h2{
-    color:  rgb(52, 123, 255);
-}
-
-.center{
-    justify-content: center;
-    width: 500px;
-    height:250px;
+/* Styling för Login-formulär */
+.center {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 30px;
+    width: 350px;
     display: flex;
     flex-direction: column;
-    border: 2px solid  #ccc;
-    border-radius: 10px; 
-    align-items: center; 
+    gap: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
-.center form{
+.center h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.center form {
     display: flex;
-    flex-direction:column;
-    width: 200px;
-    align-self: center;   
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
 }
 
-footer { 
-   text-align: center;
-    background-color: rgb(202, 202, 202);
-    height: 100px;
-
-    padding-top: 30px;
-    margin-top: 50px;
-
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+.center label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+    font-weight: bold;
 }
 
-footer h4 {
-    color: rgb(74, 137, 255);
+.center input {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    width: 50%;
+    border: none;
+    background-color: #e0e0e0;
+    color: #2E2E2E;
 }
 
-.flash-messages {
-    margin-bottom: 20px; /* Space between messages and form */
+.center button {
+    padding: 10px;
+    background-color: #A5C9FF;
+    color: #1a1a1a;
+    font-weight: bold;
+    align-items: center;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.flash {
+.center button:hover {
+    background-color: #dce9ff;
+    color: #0052cc;
+}
+
+/* Flashmeddelanden */
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+}
+
+.flashes li {
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
     text-align: center;
 }
 
-.flash.success {
+.success {
     background-color: #d4edda;
     color: #155724;
 }
 
-.flash.danger {
+.danger, .error {
     background-color: #f8d7da;
     color: #721c24;
 }
 
-.flash.error {
-    background-color: #f8d7da;
-    color: #721c24;
+/* Footer */
+footer {
+    text-align: center;
+    height: 100px;
+    padding-top: 30px;
+    box-shadow: 0 -4px 6px rgba(48, 48, 48, 0.4);
+}
+
+footer h4 {
+    color: #888;
+}
+
+/* Länkar */
+a {
+    color: #A5C9FF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

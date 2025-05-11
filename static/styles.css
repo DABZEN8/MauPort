@@ -1,9 +1,20 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: #2E2E2E;
+    color: #f0f0f0;
+    overflow-x: hidden;
+}
+
 body * {
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-
-    margin: 0px;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
@@ -11,186 +22,126 @@ body * {
 header {
     display: flex;
     align-items: center;
-    color: rgb(255, 255, 255);
-    background-color: rgb(74, 137, 255);
-
+    color: #A5C9FF;
+    background-color: #2E2E2E;
     height: 20vh;
-
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-header h1 {
-    font-family: "Oswald", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 header h1 {
     padding-left: 15px;
     font-size: 100px;
+    font-family: "Oswald", sans-serif;
 }
 
+/* Styling för navigation */
 nav {
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding: 10px 20px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#3f3f3f+28,3f3f3f+53,2e2e2e+100 */
+    background: linear-gradient(to right,  rgba(63,63,63,1) 28%,rgba(63,63,63,1) 53%,rgba(46,46,46,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 
-    background-color: rgb(52, 123, 255);
-}
-
-.navbar {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-
-    padding: 0;
-    margin: 0;
-
-    list-style-type: none;
-}
-
-.navbar a:hover {
-    transition: background-color 0.3s, color 0.3s, transform 0.3s;
-    background-color: rgb(12, 96, 253);
-    color: white;
-    transition: all 0.5s;
-    cursor: pointer;
-    padding: 6px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
 }
 
 .navbar a {
-    color: rgb(255, 255, 255);
+    color: #A5C9FF;
     text-decoration: none;
     font-size: 25px;
-
     padding: 6px 10px;
-    padding-left: 10px;
-    padding-right: 10px;
     border-radius: 5px;
 }
 
-.search-form {
-    display: flex;
-    align-items: center;
-    padding-right: 20px;
+.navbar a:hover {
+    background-color: #333;
+    color: #fff;
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
 }
 
-.search-form {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    right: 20px;
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 25px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
+.navbar li {
+  list-style: none;
+}
+
+.navbar a {
+  color: #A5C9FF;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+/* Styling för sökning */
 .search-form input {
     padding: 5px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #555;
+    background-color: #1f1f1f;
+    color: #eee;
     border-radius: 5px;
-    margin-right: 10px;
 }
 
 .search-form button {
     padding: 6px 12px;
-    background-color: rgb(255, 255, 255);
-    color: #292929;
-
-    border: #333;
+    background-color: #333;
+    color: white;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .search-form button:hover {
-    background-color: rgb(0, 89, 255);
-    color: white;
+    background-color: #555;
 }
 
 main {
     display: grid;
     height: 100vh;
-    
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr 3fr 1fr;
     align-items: center;
     justify-items: center;
-    
-
     margin-top: 50px;
     padding-top: 10px;
 }
 
-/* Styling för varje portfolio */
-.portfolio1, .portfolio2, .portfolio3, .portfolio4, .portfolio5, .portfolio6, .portfolio7, .portfolio8 {
-    width: 80%;
-    padding: 15px;
-  }
-  
-  .portfolio1, .portfolio2, .portfolio3, .portfolio4, .portfolio5, .portfolio6, .portfolio7, .portfolio8:hover {
-    cursor: pointer;
-  }
+/* Styling för portfoliokort */
+.card {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
 
-  /* Styling för själva korten */
-  .card {
-    height: 300px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+.card-content h2 {
+    color: #fff;
+}
 
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  /* Lägg till en effekt när man hoverar över korten */
-  .card:hover {
-    transform: translateY(-5px);
-  }
-  
-  /* Styling för bilderna inom korten */
-  .card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover; /* Gör att bilden täcker hela utrymmet */
-  }
-  
-  /* Innehållet i korten */
-  .card-content {
-    padding: 15px;
-  }
-  
-  .card-content h2 {
-    margin: 0;
-    font-size: 1.5em;
-    color: #333;
-  }
-  
-  .card-content p {
-    color: #555;
-    font-size: 1em;
-    margin: 10px 0;
-  }
+.card-content p {
+    color: #ccc;
+}
 
+/* Styling för Footer */
 footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(202, 202, 202);
     height: 100px;
-
     padding-top: 30px;
     margin-top: 50px;
-
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
 
 footer h4 {
-    color: rgb(74, 137, 255);
+    color: #888;
 }

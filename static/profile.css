@@ -1,122 +1,111 @@
-body * { 
-    font-family: "RUBIK", sans-serif ; 
-    font-style: normal;  
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2E2E2E;
+    color: #f0f0f0;
+    font-family: "Rubik", sans-serif;
+    overflow-x: hidden;
+}
+
+body * {
+    font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
-    margin:0px;
-    padding:0px;
+    font-style: normal;
     box-sizing: border-box;
 }
 
+/* Styling för Header */
 header {
     display: flex;
     align-items: center;
-    width:100%;
-    color: rgb(255, 255, 255);
-    background-color: rgb(74, 137, 255);
+    background-color: #2E2E2E;
     height: 20vh;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.2);   
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 header h1 {
-    font-family: "Oswald", "sans-serif" ;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
-    font-size: 100px;
     padding-left: 15px;
+    font-size: 100px;
+    font-family: "Oswald", sans-serif;
+    color: #A5C9FF;
 }
 
+/* Styling för Navigation */
 nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgb(52, 123, 255);
-        padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
 }
 
 .navbar {
     display: flex;
-    justify-content: center; 
-    gap: 50px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
-.navbar ul{
+.navbar ul {
     display: flex;
-    gap:20px;
-    list-style-type: none;
+    gap: 25px;
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.navbar a{ 
-    color: rgb(255, 255, 255);
+.navbar li {
+    list-style: none;
+}
+
+.navbar a {
+    color: #A5C9FF;
     text-decoration: none;
-    font-size: 25px;
-    padding: 6px 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
+    font-size: 18px;
+    padding: 8px 12px;
+    border-radius: 6px;
 }
 
 .navbar a:hover {
-    cursor: pointer;
-    background-color: rgb(12, 96, 253);
-    color: white;
-    transition: all 0.5s;  /* När du hovrar över länken, 
-    så kommer bakgrundsfärgen, textfärgen och padding att ändras mjukt över 0.5 sek. 
-    ist för att ändras direkt.*/   
-    padding: 6px 10px;
-    border-radius: 10px;
+    background-color: #333;
+    color: #fff;
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
 }
 
-.search-form{
+.search-form {
     display: flex;
     align-items: center;
-    position: absolute;
-    right: 20px;
-    padding-right: 20px;
+    gap: 10px;
 }
 
-.search-form input{
+.search-form input {
     padding: 5px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #555;
+    background-color: #1f1f1f;
+    color: #eee;
     border-radius: 5px;
-    margin-right: 10px;
 }
 
-.search-form button{
+.search-form button {
     padding: 6px 12px;
-    background-color: rgb(255, 255, 255);
-    color: #292929;
-    border:#333;
+    background-color: #333;
+    color: white;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .search-form button:hover {
-    background-color: rgb(0, 89, 255);
-    color: white;
+    background-color: #555;
 }
 
-footer { 
-   text-align: center;
-    background-color: rgb(202, 202, 202);
-    height: 100px;
-
-    padding-top: 30px;
-    margin-top: 50px;
-
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-}
-
-footer h4 {
-    color: rgb(74, 137, 255);
-}
-
+/* Styling för Profilinformation */
 .profile-main {
     padding: 40px 20px;
-    background-color: #f5f8ff;
     max-width: 1200px;
     margin: auto;
 }
@@ -126,7 +115,7 @@ footer h4 {
     align-items: center;
     gap: 40px;
     margin-bottom: 30px;
-    border-bottom: 2px solid #d4e2ff;
+    border-bottom: 2px solid #444;
     padding-bottom: 20px;
 }
 
@@ -135,30 +124,39 @@ footer h4 {
     height: 160px;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid rgb(74, 137, 255);
+    border: 4px solid #A5C9FF;
 }
 
 .profile-info h2 {
     font-size: 28px;
-    color: #2c2c2c;
+    color: #f0f0f0;
     margin-bottom: 5px;
 }
 
 .profile-info p {
     font-size: 16px;
-    color: #555;
+    color: #ccc;
     margin: 2px 0;
 }
 
 .logout-button {
     text-align: right;
-    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .logout-button a {
     font-weight: bold;
     text-decoration: none;
-    color: #000;
+    color: #A5C9FF;
+}
+
+.logout-button a:hover {
+    text-decoration: underline;
+}
+
+/* Projekt */
+.user-projects {
+    margin-top: 40px;
 }
 
 .project-grid {
@@ -167,219 +165,78 @@ footer h4 {
     gap: 25px;
 }
 
-.card.add-project {
-    background-color: #eaf1ff;
-    border: 2px dashed rgb(74, 137, 255);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-    text-align: center;
-}
-
-.card.add-project p {
-    font-size: 40px;
-    color: rgb(74, 137, 255);
-    margin-bottom: 10px;
-}
-
-.card.add-project span {
-    font-size: 14px;
-    color: #444;
-}
-
-body * {
-    font-family: "Rubik", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-
-    margin: 0px;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-header {
-    display: flex;
-    align-items: center;
-    color: rgb(255, 255, 255);
-    background-color: rgb(74, 137, 255);
-
-    height: 20vh;
-
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-header h1 {
-    font-family: "Oswald", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: weight;
-    font-style: normal;
-}
-
-header h1 {
-    padding-left: 15px;
-    font-size: 100px;
-}
-
-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 10px 20px;
-
-    background-color: rgb(52, 123, 255);
-}
-
-.navbar {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-
-    padding: 0;
-    margin: 0;
-
-    list-style-type: none;
-}
-
-.navbar a:hover {
-    transition: background-color 0.3s, color 0.3s, transform 0.3s;
-    background-color: rgb(12, 96, 253);
-    color: white;
-    transition: all 0.5s;
-    cursor: pointer;
-    padding: 6px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
-}
-
-.navbar a {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    font-size: 25px;
-
-    padding: 6px 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-}
-
-.search-form {
-    display: flex;
-    align-items: center;
-    padding-right: 20px;
-}
-
-.search-form {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    right: 20px;
-}
-
-.search-form input {
-    padding: 5px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-.search-form button {
-    padding: 6px 12px;
-    background-color: rgb(255, 255, 255);
-    color: #292929;
-
-    border: #333;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.search-form button:hover {
-    background-color: rgb(0, 89, 255);
-    color: white;
-}
-
-/* Styling för varje portfolio */
-  
-  /* Styling för själva korten */
-  .card {
+/* Styling för Kort */
+.card {
     height: 300px;
-    overflow: hidden;
+    background-color: #1e1e1e;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
-
-    background-color: #fff;
-    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
     transition: transform 0.3s ease-in-out;
-  }
+}
 
-  /* Lägg till en effekt när man hoverar över korten */
-  .card:hover {
+.card:hover {
     transform: translateY(-5px);
-  }
+}
 
-  /* Styling för bilderna inom korten */
-  .card img {
+.card img {
     width: 100%;
     height: 200px;
-    object-fit: cover; /* Gör att bilden täcker hela utrymmet */
-  }
+    object-fit: cover;
+}
 
-  /* Innehållet i korten */
-  .card-content {
+.card-content {
     padding: 15px;
-  }
+}
 
-  .card-content h2 {
+.card-content h3 {
     margin: 0;
-    font-size: 1.5em;
-    color: #333;
-  }
+    font-size: 1.2em;
+    color: #fff;
+}
 
-  .card-content p {
-    color: #555;
+.card-content p {
+    color: #bbb;
     font-size: 1em;
-    margin: 10px 0;
-  }
-
-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(202, 202, 202);
-    height: 100px;
-
-    padding-top: 30px;
-    margin-top: 50px;
-
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    margin: 4px 0;
 }
 
-footer h4 {
-    color: rgb(74, 137, 255);
-}
-
+/* Lägg till nytt projekt */
 .add-project-banner {
     width: 100%;
-    background-color: #eaf1ff;
-    border: 2px dashed rgb(74, 137, 255);
+    background-color: #2a2a2a;
+    border: 2px dashed #A5C9FF;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
     padding: 15px;
     border-radius: 8px;
 }
 
 .add-project-banner a {
     text-decoration: none;
-    color: rgb(74, 137, 255);
+    color: #A5C9FF;
     font-weight: bold;
     font-size: 16px;
 }
 
 .add-project-banner a:hover {
     text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a1a;
+    height: 100px;
+    padding-top: 30px;
+    margin-top: 50px;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.4);
+}
+
+footer h4 {
+    color: #888;
 }
