@@ -13,7 +13,7 @@ def connect_db():
         'user': os.getenv('db_user'),
         'password': os.getenv('db_password')
     }
-
+    
     try:
         connection = psql.connect(**db_config)
         return connection
