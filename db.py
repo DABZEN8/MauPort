@@ -11,7 +11,7 @@ def connect_db():
         'host': os.getenv('db_host'),
         'user': os.getenv('db_user'),
         'password': os.getenv('db_password'),
-        'name': os.getenv('db_name')
+        'database': os.getenv('db_database')
     }
 
     try:
