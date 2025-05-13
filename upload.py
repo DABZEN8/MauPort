@@ -55,19 +55,7 @@ def save_portfolio_to_database(files):
             cur.execute (""" INSERT INTO port.img (portf_id, img_path))
                          VALUES( %s, %s) """, 
                          (portfolio_id, relative_path)) 
-        
-        elif  file_extension in ['mp4', 'mov']:
-               cur.execute(""" 
-                           INSERT INTO port.video (portf_id, video_path)
-                           VALUES (%s, %s) """,
-                           (portfolio_id, relative_path))     
-        
-        elif file_extension in ['py', 'txt']: 
-            cur.execute(""" 
-                        INSERT INTO code.projekt (portf_id, file_link)
-                        VALUES (%s, %s)""", 
-                        (portfolio_id, psycopg2.Binary(file_content)))   
-            
+
         else:
             print("Denna filtyp stöds inte", file_extension)
 
