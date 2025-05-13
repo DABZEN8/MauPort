@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import FileField, SubmitField
+from wtforms import FileField
 from wtforms import StringField, TextAreaField, FileField
-from wtforms.validators import InputRequired, DataRequired
+from wtforms.validators import DataRequired
 
 
 # Formulär där användare ändrar inställningar i inloggat läge

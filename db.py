@@ -4,14 +4,14 @@ from dotenv import load_dotenv
 
 def connect_db():
     """Anslut till PostgreSQL-databasen och returnera anslutningen. Vi referar till säkerhetsnycklar
-    från vå text fil."""
+    från vår text fil."""
     load_dotenv()
 
     db_config = {
         'host': os.getenv('db_host'),
+        'database': os.getenv('db_database'),
         'user': os.getenv('db_user'),
-        'password': os.getenv('db_password'),
-        'database': os.getenv('db_database')
+        'password': os.getenv('db_password')
     }
 
     try:

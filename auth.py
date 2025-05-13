@@ -11,8 +11,7 @@ def user_exists(username, email):
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM users WHERE username = %s OR email = %s", (username, email))
         user = cursor.fetchone()
-        cursor.close()
-        conn.close()
+        return user is not None
     except psycopg2.Error as e:
         flash(f"Database error: {str(e)}", "error")
         return None
@@ -21,8 +20,6 @@ def user_exists(username, email):
             cursor.close()
         if 'conn' in locals(): #Stängs bara om 'conn' finns
             conn.close()
-
-    return user is not None
 
 def register():
     if request.method == 'POST':
@@ -70,17 +67,17 @@ def register():
                 (first_name, last_name, username, email, password_hash),
             )
             conn.commit()
+            flash('Registration successful!', 'success')
+            return redirect(url_for('login'))
         except psycopg2.Error as e:
             flash(f"Database error: {str(e)}", "error")
+            return redirect(url_for("register"))
         finally:
-            if 'cursor' in locals() and cursor:
+            if 'cursor' in locals() and not cursor.closed:
                 cursor.close()
-            if 'conn' in locals() and cursor:
+            if 'conn' in locals() and not conn.closed:
                 conn.close()
 
-        flash('Registration successful!', 'success')
-        return redirect(url_for('login'))
-    
     return render_template('register.html', form_data={})
 
 def login():
