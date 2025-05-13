@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>MauPort - Inställningar</title>
-    <link href="/static/login.css" type="text/css" rel="stylesheet"> 
+    <link href="/static/login.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
@@ -34,6 +34,7 @@
         <div class="main">
             <div class="center">
                 <h3>Inställningar</h3>
+
                 <form method="POST" enctype="multipart/form-data">
                     {{ form.hidden_tag() }}
 
@@ -48,19 +49,42 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="biography">Biografi</label>
-                        {{ form.biography(rows=5) }}
+                        <label for="username">Användarnamn</label>
+                        {{ form.username(size=32) }}
                     </div>
 
                     <div class="form-group">
-                        <label for="file">Profilbild</label>
-                        {{ form.file }}
+                        <label for="email">Email</label>
+                        {{ form.email(size=32) }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="program">Program</label>
+                        {{ form.program(size=32) }}
+                    </div>                    
+
+                    <div class="form-group">
+                        <label for="bio">Biografi</label>
+                        {{ form.bio(rows=5) }}
+                    </div>
+
+                    {% if profile_picture %}
+                    <div class="form-group">
+                        <p>Nuvarande profilbild:</p>
+                        <img src="{{ url_for('static', filename=profile_picture) }}" alt="Profilbild" style="width:150px; height:auto; border-radius: 50%;">
+                    </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="profile_picture">Ladda upp ny profilbild (endast JPG, JPEG, PNG).</label>
+                        <input type="file" name="profile_picture" id="profile_picture" accept=".jpg, .jpeg, .png">
                     </div>
 
                     <div class="form-group">
                         {{ form.submit(class="btn btn-primary") }}
                     </div>
                 </form>
+
             </div>
         </div>
     </main>
@@ -68,6 +92,6 @@
     <footer>
         <h4>© 2025 MauPort. All rights reserved.</h4>
     </footer>
-
+    
 </body>
 </html>

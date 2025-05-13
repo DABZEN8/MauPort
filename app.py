@@ -3,6 +3,7 @@ from auth import register as auth_register, login as auth_login, logout as auth_
 from upload import handle_file_upload
 from settings import user_settings
 from werkzeug.utils import secure_filename
+from wtforms.validators import Email
 import os
 
 
