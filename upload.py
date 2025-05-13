@@ -71,7 +71,7 @@ def save_portfolio_to_database(files):
         else:
             print("Denna filtyp stöds inte", file_extension)
 
-
+    
 
     conn.commit()
     cur.close()
