@@ -47,14 +47,25 @@ def save_portfolio_to_database(files):
     for file in files: 
         filename = secure_filename(file.filename)  
         relative_path = save_file_locally(file, filename)
-        file_extension = filename.lower().split('.') [-1]   
+        file_extension = filename.lower().split('.') [-1]  
+        file_content = file.read() 
           
 
         if file_extension in ['jpg' , 'jpeg', 'png']: 
             cur.execute ("""INSERT INTO portfolio_images (portfolio_id, img_path)
                          VALUES( %s, %s)""", 
                          (portfolio_id, relative_path)) 
-
+        elif  file_extension in ['mp4', 'mov']:
+            cur.execute(""" 
+                        INSERT INTO port.video (portf_id, video_path)
+                        VALUES (%s, %s) """,
+                        (portfolio_id, relative_path))     
+        
+        elif file_extension in ['py', 'txt']: 
+            cur.execute(""" 
+                        INSERT INTO code.projekt (portf_id, file_link)
+                        VALUES (%s, %s)""", 
+                        (portfolio_id, psycopg2.Binary(file_content)))   
         else:
             print("Denna filtyp stöds inte", file_extension)
 
