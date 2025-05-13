@@ -40,7 +40,7 @@ def save_portfolio_to_database(files):
                 RETURNING id
                 """, (user_id, title, description, text_content))
 
-    save_file_locally(files, portfolio_id)           
+          
     portfolio_id = cur.fetchone()[0]
 
 
@@ -48,25 +48,21 @@ def save_portfolio_to_database(files):
         filename = secure_filename(file.filename)  
         relative_path = save_file_locally(file, filename)
         file_extension = filename.lower().split('.') [-1]   
-        file_content = file.read()
           
 
         if file_extension in ['jpg' , 'jpeg', 'png']: 
-            cur.execute (""" INSERT INTO port.img (portf_id, img_path))
-                         VALUES( %s, %s) """, 
+            cur.execute ("""INSERT INTO portfolio_images (portfolio_id, img_path)
+                         VALUES( %s, %s)""", 
                          (portfolio_id, relative_path)) 
 
         else:
             print("Denna filtyp stöds inte", file_extension)
-
-    
 
     conn.commit()
     cur.close()
     conn.close()
     return portfolio_id
                 
-    
  #Sparar filen fysiskt på servern och returnerar relativ sökväg till databasen.
 def save_file_locally(file, filename):
     from app import app
