@@ -102,7 +102,7 @@ def login():
         finally:
             if 'cursor' in locals() and cursor:
                 cursor.close()
-            if 'conn' in locals()and cursor:
+            if 'conn' in locals()and conn:
                 conn.close()
 
         if user is None:
