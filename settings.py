@@ -20,7 +20,7 @@ def user_settings():
     # Session för att kontrollera att en användare är inloggad
     if "user_id" not in session:
         flash("Du måste vara inloggad för att ändra inställningar.", "danger")
-        return redirect(url_for('login'))
+        return redirect(url_for("login"))
 
     # Databasanslutning
     conn = connect_db()
@@ -41,11 +41,11 @@ def user_settings():
         new_profile_picture_path = None
         if "profile_picture" in request.files:
             file = request.files["profile_picture"]
-            if file and file.filename != '' and allowed_file(file.filename):
+            if file and file.filename != "" and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
 
-                # Spara i /files/profile_pictures/
-                upload_folder = os.path.join("files", "profile_pictures")
+                # Spara i /static/profile_pictures/
+                upload_folder = os.path.join("static", "profile_pictures")
                 os.makedirs(upload_folder, exist_ok=True)
 
                 file_path = os.path.join(upload_folder, filename)
@@ -59,7 +59,7 @@ def user_settings():
                 file.save(file_path)
 
                 # Relativ sökväg som sparas i databasen
-                new_profile_picture_path = os.path.join("files", "profile_pictures", filename)
+                new_profile_picture_path = os.path.join("profile_pictures", filename)
 
         # Om ingen ny bild laddas upp, använd nuvarande
         if not new_profile_picture_path:
