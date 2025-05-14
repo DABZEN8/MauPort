@@ -52,7 +52,8 @@ def save_portfolio_to_database(files):
           
 
         if file_extension in ['jpg' , 'jpeg', 'png']: 
-            cur.execute ("""INSERT INTO portfolio_images (portfolio_id, img_path)
+            cur.execute ("""
+                         INSERT INTO portfolio_images (portfolio_id, img_path)
                          VALUES( %s, %s)""", 
                          (portfolio_id, relative_path)) 
             
