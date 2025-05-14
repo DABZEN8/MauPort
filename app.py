@@ -18,7 +18,7 @@ def index():
     return render_template("index.html")
 
 # Route till login sidan
-@app.route("/login", methods =["GET', 'POST"])
+@app.route("/login", methods =["GET", "POST"])
 def login():
     return auth_login()
 
