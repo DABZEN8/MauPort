@@ -10,7 +10,7 @@ import psycopg2
 # Hanterar filuppladdningen
 def handle_file_upload():
 
-    if request.method == 'POST':
+    if request.method == "POST":
         #file = form.file.data # Hämta filen från formuläret
         files = request.files.getlist("file")
 
@@ -19,7 +19,7 @@ def handle_file_upload():
             return f"Filen har laddats upp i din portfolio {portfolio_id}"
         else:
             return "Ingen fil har valts"
-    return render_template('upload.html')
+    return render_template("upload.html")
 
 
 #sparar filerna i databasen
@@ -51,19 +51,19 @@ def save_portfolio_to_database(files):
         file_content = file.read() 
           
 
-        if file_extension in ['jpg' , 'jpeg', 'png']: 
+        if file_extension in ["jpg" , "jpeg", "png"]: 
             cur.execute ("""
                          INSERT INTO portfolio_images (portfolio_id, img_path)
                          VALUES( %s, %s)""", 
                          (portfolio_id, relative_path)) 
             
-        elif  file_extension in ['mp4', 'mov']:
+        elif  file_extension in ["mp4", "mov"]:
             cur.execute(""" 
                         INSERT INTO portfolio_videos (portfolio_id, video_path)
                         VALUES (%s, %s) """,
                         (portfolio_id, relative_path))     
         
-        elif file_extension in ['py', 'txt']: 
+        elif file_extension in ["py", "txt"]: 
             cur.execute(""" 
                         INSERT INTO portfolio_code (portfolio_id, file_path)
                         VALUES (%s, %s)""", 
@@ -79,7 +79,7 @@ def save_portfolio_to_database(files):
  #Sparar filen fysiskt på servern och returnerar relativ sökväg till databasen.
 def save_file_locally(file, filename):
     from app import app
-    upload_folder = app.config['UPLOAD_FOLDER']
+    upload_folder = app.config["UPLOAD_FOLDER"]
 
     # Se till att uppladdningsmappen finns
     upload_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), upload_folder)
@@ -93,7 +93,7 @@ def save_file_locally(file, filename):
        filename = f'{int(time.time())}_{filename}' #Detta är en tidsstämpel som säkerställer att filer man samma namn inte skrivs över.
        file_path = os.path.join(upload_path, filename)
 
-    with open(file_path , 'wb') as upload_portfolio:
+    with open(file_path , "wb") as upload_portfolio:
         upload_portfolio.write(file.read()) 
 
     return os.path.join(upload_folder, filename)
