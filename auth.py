@@ -50,15 +50,11 @@ def register():
             return render_template('register.html', form_data=request.form)
         
         # Validerar lösenord
-        if not re.match(r"^[A-Za-z0-9._%+-]+@(hotmail|gmail|outlook|yahoo)\.com$", email):
-            flash("Invalid email.")
+        if not re.match(r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", password):
+            flash("Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.")
             return render_template('register.html', form_data=form_data)
 
         password = request.form['password']
-
-            if not re.match(r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", password):
-            flash("Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.")
-            return render_template('register.html', form_data=form_data)
 
         # Kontrollera om användaren redan finns
         if user_exists(username, email):
@@ -108,7 +104,7 @@ def login():
 
         except psycopg2.Error as e:
             flash(f"Database error: {str(e)}", "error")
-            
+
         finally:
             if 'cursor' in locals() and cursor:
                 cursor.close()
