@@ -12,13 +12,15 @@ def user_exists(username, email):
         cursor.execute("SELECT * FROM users WHERE username = %s OR email = %s", (username, email))
         user = cursor.fetchone()
         return user is not None
+    
     except psycopg2.Error as e:
         flash(f"Database error: {str(e)}", "error")
         return None
+    
     finally:
-        if 'cursor' in locals(): #Stängs bara om 'cursor' finns
+        if 'cursor' in locals(): # Stängs bara om 'cursor' finns
             cursor.close()
-        if 'conn' in locals(): #Stängs bara om 'conn' finns
+        if 'conn' in locals(): # Stängs bara om 'conn' finns
             conn.close()
 
 def register():
@@ -31,34 +33,34 @@ def register():
         email = request.form['email']
         password = request.form['password']
 
-        #Validera namn och efternamn
+        # Validera namn och efternamn
         if not re.match(r"^[A-Za-z]+$", first_name) or not re.match(r"^[A-Za-z]+$", last_name):
             flash("First and last name can only contain letters.")
             return render_template('register.html', form_data=request.form)
 
-        #Validerar användarnamn
+        # Validerar användarnamn
         if not re.match(r"^(?=.*[A-Za-z])[A-Za-z0-9_]+$", username):
             flash("Username can only contain letters, numbers and underscore.")
             return render_template('register.html', form_data=request.form)
 
-        #Validera email
+        # Validera email
         if not re.match(r"^[A-Za-z0-9._%+-]+@(hotmail|gmail|outlook|yahoo)\.com$", email):
             flash("Invalid email.")
             return render_template('register.html', form_data=request.form)
         
-        #Validerar lösenord
+        # Validerar lösenord
         if not re.match(r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", password):
             flash("Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.")
             return redirect('register')
 
-        #Kontrollera om användaren redan finns
+        # Kontrollera om användaren redan finns
         if user_exists(username, email):
             flash("The username or email are already registered", "error")
             return redirect(url_for("register"))
         
         password_hash = generate_password_hash(password)
 
-        #Lägg till användare i databas
+        # Lägg till användare i databas
         try:
             conn = connect_db()
             cursor = conn.cursor()
@@ -69,9 +71,11 @@ def register():
             conn.commit()
             flash('Registration successful!', 'success')
             return redirect(url_for('login'))
+        
         except psycopg2.Error as e:
             flash(f"Database error: {str(e)}", "error")
             return redirect(url_for("register"))
+        
         finally:
             if 'cursor' in locals() and not cursor.closed:
                 cursor.close()
@@ -94,8 +98,10 @@ def login():
             cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
             cursor.execute("SELECT id, username, password_hash FROM users WHERE username = %s", (username,))
             user = cursor.fetchone()
+
         except psycopg2.Error as e:
             flash(f"Database error: {str(e)}", "error")
+            
         finally:
             if 'cursor' in locals() and cursor:
                 cursor.close()
