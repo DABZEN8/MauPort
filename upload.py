@@ -56,26 +56,24 @@ def save_portfolio_to_database(files, title, text_content, thumbnail):
         file_extension = filename.lower().split('.') [-1]  
         file_content = file.read() 
           
-        if file_extension in ['jpg' , 'jpeg', 'png']: 
-            cur.execute ("""INSERT INTO portfolio_images (portfolio_id, img_path)
-
         if file_extension in ["jpg" , "jpeg", "png"]: 
             cur.execute ("""
                          INSERT INTO portfolio_images (portfolio_id, img_path)
-                         VALUES( %s, %s)""", 
-                         (portfolio_id, relative_path)) 
+                         VALUES( %s, %s)
+                    """, (portfolio_id, relative_path)) 
             
         elif  file_extension in ["mp4", "mov"]:
             cur.execute(""" 
                         INSERT INTO portfolio_videos (portfolio_id, video_path)
-                        VALUES (%s, %s) """,
-                        (portfolio_id, relative_path))     
+                        VALUES (%s, %s) 
+                    """, (portfolio_id, relative_path))     
         
-        elif file_extension in ["py", "txt"]: 
-            cur.execute(""" 
+        elif file_extension in ["py", "txt"]:
+            cur.execute("""
                         INSERT INTO portfolio_code (portfolio_id, file_path)
-                        VALUES (%s, %s)""", 
-                        (portfolio_id, psycopg2.Binary(file_content)))   
+                        VALUES (%s, %s)
+                    """, (portfolio_id, psycopg2.Binary(file_content)))
+
         else:
             print("Denna filtyp stöds inte", file_extension)
 
@@ -84,18 +82,22 @@ def save_portfolio_to_database(files, title, text_content, thumbnail):
     conn.close()
     return portfolio_id
                 
- # Sparar filen fysiskt på servern och returnerar relativ sökväg till databasen.
 def save_file_locally(file, filename):
     from app import app
 
     upload_folder = os.path.join(app.root_path, "static", "project_uploads")
     os.makedirs(upload_folder, exist_ok=True)
-    
-     # Kontrollera om filen redan finns
-    if os.path.exists(file_path):
-       filename = f'{int(time.time())}_{filename}' # Detta är en tidsstämpel som säkerställer att filer man samma namn inte skrivs över.
-       file_path = os.path.join(upload_folder, filename)
 
+    # Skapa en första file_path
+    file_path = os.path.join(upload_folder, filename)
+    
+    # Kontrollera om filen redan finns
+    if os.path.exists(file_path):
+        filename = f'{int(time.time())}_{filename}'  # Lägg till timestamp för unikt namn
+        file_path = os.path.join(upload_folder, filename)  # Uppdatera path med nya filnamnet
+
+    # Spara filen
     file.save(file_path)
 
+    # Returnera relativ sökväg (till databasen)
     return os.path.join("project_uploads", filename)
