@@ -1,59 +1,233 @@
-* {
-    padding: 0;
+html, body {
     margin: 0;
-    box-sizing: border-box;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2E2E2E;
+    color: #f0f0f0;
     font-family: "Rubik", sans-serif;
 }
 
-body {
-    background-color: rgb(46, 46, 46);
-}
-
+/* Header */
 header {
-    height: 25vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-  }
-  
-  header h1 {
-    font-size: 10rem; /* eller clamp() */
-    margin: 0;
-    
-    color: rgb(165, 201, 255);
-    font-family: 'Oswald', sans-serif;
-  }
-
-.message {
-    text-align: center;
-    margin-top: 1rem;
-
-    color: rgb(165, 201, 255);
+    background-color: #2E2E2E;
+    height: 20vh;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.4);
 }
 
-.container {
+header h1 {
+    font-family: "Oswald", sans-serif;
+    font-size: 100px;
+    color: #A5C9FF;
+    padding-left: 15px;
+}
+
+/* Navbar */
+nav {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 2rem;
-    margin-top: 2rem;
-
-    background-color: rgb(15, 52, 75);
-    color: rgb(255, 255, 255);
+    padding: 10px 40px;
+    background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
 }
 
-.container button {
-    font-family: inherit;
-    padding: 0.5rem 5rem;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
+.navbar ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar a {
+    color: #A5C9FF;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.navbar a:hover {
+    background-color: #333;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Sökfält */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-form input {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #555;
+    background-color: #1f1f1f;
+    color: #eee;
     border-radius: 5px;
-    background-color: rgb(165, 201, 255);
+}
+
+.search-form button {
+    padding: 6px 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.form-group {
-    margin-bottom: 1rem;
-  }
+.search-form button:hover {
+    background-color: #555;
+}
+
+/* Layout */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* Styling för Info */
+.info-box {
+    text-align: center;
+    max-width: 600px;
+    color: #ddd;
+}
+
+.info-box h2 {
+    font-size: 1.5rem;
+    color: #A5C9FF;
+    margin-bottom: 10px;
+}
+
+.info-box p {
+    font-weight: 500;
+}
+
+/* Styling för Register-formulär */
+.center {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 30px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+.center h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.center form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+}
+
+.center label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.center input {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    width: 50%;
+    border: none;
+    background-color: #e0e0e0;
+    color: #2E2E2E;
+}
+
+.center button {
+    padding: 10px;
+    background-color: #A5C9FF;
+    color: #1a1a1a;
+    font-weight: bold;
+    align-items: center;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.center button:hover {
+    background-color: #dce9ff;
+    color: #0052cc;
+}
+
+/* Flashmeddelanden */
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+}
+
+.flashes li {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 16px; /* Optional: Set font size to make it more readable */
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.danger, .error {
+    background-color: #f8d7da;
+    color: red; /* Apply red color directly */
+    font-weight: bold; /* Optional: Make the text bold to emphasize it */
+}
+
+.flashes .error {
+    color: red !important;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    height: 100px;
+    padding-top: 30px;
+    box-shadow: 0 -4px 6px rgba(48, 48, 48, 0.4);
+}
+
+footer h4 {
+    color: #888;
+}
+
+/* Länkar */
+a {
+    color: #A5C9FF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

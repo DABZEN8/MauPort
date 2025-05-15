@@ -25,23 +25,24 @@ def user_exists(username, email):
 
 def register():
     if request.method == 'POST':
-        form_data = request.form
+        form_data = request.form.copy()  # Gör en kopia med alla inputs
+        form_data.pop('password', None)  #Ta bort lösenord från form_data
+
         first_name = form_data.get('first_name').capitalize()
         last_name = form_data.get('last_name').capitalize()
         username = form_data.get('username')
         username = username.capitalize() if username else username
-        email = request.form['email']
-        password = request.form['password']
+        email = form_data.get('email')
 
         # Validera namn och efternamn
         if not re.match(r"^[A-Za-z]+$", first_name) or not re.match(r"^[A-Za-z]+$", last_name):
             flash("First and last name can only contain letters.")
-            return render_template('register.html', form_data=request.form)
+            return render_template('register.html', form_data=form_data)
 
         # Validerar användarnamn
         if not re.match(r"^(?=.*[A-Za-z])[A-Za-z0-9_]+$", username):
             flash("Username can only contain letters, numbers and underscore.")
-            return render_template('register.html', form_data=request.form)
+            return render_template('register.html', form_data=form_data)
 
         # Validera email
         if not re.match(r"^[A-Za-z0-9._%+-]+@(hotmail|gmail|outlook|yahoo)\.com$", email):
@@ -49,15 +50,21 @@ def register():
             return render_template('register.html', form_data=request.form)
         
         # Validerar lösenord
-        if not re.match(r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", password):
+        if not re.match(r"^[A-Za-z0-9._%+-]+@(hotmail|gmail|outlook|yahoo)\.com$", email):
+            flash("Invalid email.")
+            return render_template('register.html', form_data=form_data)
+
+        password = request.form['password']
+
+            if not re.match(r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", password):
             flash("Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.")
-            return redirect('register')
+            return render_template('register.html', form_data=form_data)
 
         # Kontrollera om användaren redan finns
         if user_exists(username, email):
             flash("The username or email are already registered", "error")
-            return redirect(url_for("register"))
-        
+            return render_template('register.html', form_data=form_data)
+
         password_hash = generate_password_hash(password)
 
         # Lägg till användare i databas
@@ -66,7 +73,7 @@ def register():
             cursor = conn.cursor()
             cursor.execute(
                 "INSERT INTO users(first_name, last_name, username, email, password_hash) VALUES (%s, %s, %s, %s, %s)", 
-                (first_name, last_name, username, email, password_hash),
+                (first_name, last_name, username, email, password_hash)
             )
             conn.commit()
             flash('Registration successful!', 'success')
@@ -74,8 +81,8 @@ def register():
         
         except psycopg2.Error as e:
             flash(f"Database error: {str(e)}", "error")
-            return redirect(url_for("register"))
-        
+            return render_template('register.html', form_data=form_data)
+
         finally:
             if 'cursor' in locals() and not cursor.closed:
                 cursor.close()

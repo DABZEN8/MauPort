@@ -6,11 +6,11 @@ from db import connect_db
 from forms import SettingsForm
 
 # Tillåtna filformat för profilbilder
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
 # Kontrollerar att filändelsen är korrekt
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Visa/ändra användarens inställningar
 def user_settings():
@@ -18,16 +18,16 @@ def user_settings():
     current_profile_picture = None
 
     # Session för att kontrollera att en användare är inloggad
-    if 'user_id' not in session:
-        flash('Du måste vara inloggad för att ändra inställningar.', 'danger')
-        return redirect(url_for('login'))
+    if "user_id" not in session:
+        flash("Du måste vara inloggad för att ändra inställningar.", "danger")
+        return redirect(url_for("login"))
 
     # Databasanslutning
     conn = connect_db()
     cursor = conn.cursor()
 
     # Kontrollerar hur formuläret skickas och att det är korrekt ifyllt
-    if request.method == 'POST' and form.validate_on_submit():
+    if request.method == "POST" and form.validate_on_submit():
 
         # Ta emot fälten från användaren
         first_name = form.first_name.data
@@ -39,13 +39,13 @@ def user_settings():
 
         # Hantera profilbildens sökväg
         new_profile_picture_path = None
-        if 'profile_picture' in request.files:
-            file = request.files['profile_picture']
-            if file and file.filename != '' and allowed_file(file.filename):
+        if "profile_picture" in request.files:
+            file = request.files["profile_picture"]
+            if file and file.filename != "" and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
 
-                # Spara i /files/profile_pictures/
-                upload_folder = os.path.join('files', 'profile_pictures')
+                # Spara i /static/profile_pictures/
+                upload_folder = os.path.join("static", "profile_pictures")
                 os.makedirs(upload_folder, exist_ok=True)
 
                 file_path = os.path.join(upload_folder, filename)
@@ -59,7 +59,7 @@ def user_settings():
                 file.save(file_path)
 
                 # Relativ sökväg som sparas i databasen
-                new_profile_picture_path = os.path.join('files', 'profile_pictures', filename)
+                new_profile_picture_path = os.path.join("profile_pictures", filename)
 
         # Om ingen ny bild laddas upp, använd nuvarande
         if not new_profile_picture_path:
@@ -80,12 +80,12 @@ def user_settings():
             """, (first_name, last_name, username, email, bio, program, new_profile_picture_path, session['user_id']))
 
             conn.commit()
-            flash('Dina ändringar har sparats!', 'success')
+            flash("Dina ändringar har sparats!", "success")
             return redirect(url_for('settings'))
 
         except Exception as e:
             conn.rollback()
-            flash(f"Fel vid sparning: {e}", 'danger')
+            flash(f"Fel vid sparning: {e}", "danger")
 
     else:
         # GET: Läs nuvarande användardata
@@ -93,7 +93,7 @@ def user_settings():
             SELECT first_name, last_name, username, email, bio, program, profile_pic
             FROM users
             WHERE id = %s
-        """, (session['user_id'],))
+        """, (session["user_id"],))
         user = cursor.fetchone()
 
         if user:
@@ -110,4 +110,4 @@ def user_settings():
     conn.close()
 
     # Visa inställningssidan och skicka formulär/profilbild
-    return render_template('settings.html', form=form, profile_picture=current_profile_picture)
+    return render_template("settings.html", form=form, profile_picture=current_profile_picture)

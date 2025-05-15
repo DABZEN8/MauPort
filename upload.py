@@ -13,7 +13,7 @@ def handle_file_upload():
         flash("Du måste vara inloggad för att ladda upp filer!")
         return redirect(url_for("login"))
 
-    if request.method == 'POST':
+    if request.method == "POST":
         files = request.files.getlist("file")
         title = request.form.get("title")
         text_content = request.form.get("text_content")
@@ -58,16 +58,20 @@ def save_portfolio_to_database(files, title, text_content, thumbnail):
           
         if file_extension in ['jpg' , 'jpeg', 'png']: 
             cur.execute ("""INSERT INTO portfolio_images (portfolio_id, img_path)
+
+        if file_extension in ["jpg" , "jpeg", "png"]: 
+            cur.execute ("""
+                         INSERT INTO portfolio_images (portfolio_id, img_path)
                          VALUES( %s, %s)""", 
                          (portfolio_id, relative_path)) 
             
-        elif  file_extension in ['mp4', 'mov']:
+        elif  file_extension in ["mp4", "mov"]:
             cur.execute(""" 
                         INSERT INTO portfolio_videos (portfolio_id, video_path)
                         VALUES (%s, %s) """,
                         (portfolio_id, relative_path))     
         
-        elif file_extension in ['py', 'txt']: 
+        elif file_extension in ["py", "txt"]: 
             cur.execute(""" 
                         INSERT INTO portfolio_code (portfolio_id, file_path)
                         VALUES (%s, %s)""", 
@@ -86,8 +90,6 @@ def save_file_locally(file, filename):
 
     upload_folder = os.path.join(app.root_path, "static", "project_uploads")
     os.makedirs(upload_folder, exist_ok=True)
-
-    file_path = os.path.join(upload_folder, filename)
     
      # Kontrollera om filen redan finns
     if os.path.exists(file_path):
