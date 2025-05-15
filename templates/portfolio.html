@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MauPort - Portfolio</title>
+    <meta charset="UTF-8">
+    <title>{{ portfolio[0] }}</title>
+    <link href="/static/profile.css" rel="stylesheet" type="text/css">
     <link href="/static/portfolio.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
 <header>
@@ -15,62 +16,78 @@
 </header>
 
 <nav>
-    <ul class="navbar">
-        <li><a href="/">Startsida</a></li>
-        <li><a href="/profile">Min sida</a></li>
-        <li><a href="{{ url_for('upload_files') }}">Ladda upp</a></li>
-        <li><a href="#">Om oss</a></li>
-        <li><a href="/settings">Inställningar</a></li>
-        <li><a href="/login">Logga in</a></li>
-        <li><a href="{{ url_for('register') }}">Registrera dig</a></li>
-    </ul>
-    <form class="search-form">
-        <input type="search" id="search" placeholder="Sök...">
-        <button type="submit">Sök</button>
-    </form>
+    <div class="navbar">
+        <ul>
+            <li><a href="/">Startsida</a></li>
+            <li><a href="/profile">Min sida</a></li>
+            <li><a href="/upload">Ladda upp</a></li>
+            <li><a href="#">Om oss</a></li>
+            <li><a href="/settings">Inställningar</a></li>
+            <li><a href="/logout">Logga ut</a></li>
+        </ul>
+        <form class="search-form">
+            <input type="search" placeholder="Sök...">
+            <button type="submit">Sök</button>
+        </form>
+    </div>
 </nav>
 
 <main>
-    <a href="profile.html" class="profile-card-mini">
-        <img src="Photos/stockphotostudent.jpg" alt="profilbild" class="mini-profile-picture">
-        <span class="mini-profile-name">NAMN</span>
-        <span class="mini-profile-badge">PROGRAM/KURS</span>
-    </a>
-    
-    <section class="content">
-        <div class="header">
-            <h1>MITT PORTFOLIOINLÄGG!</h1>
-        </div>
-
-        <div class="gallery-grid-big">
-            <img src="Photos/0_HxHHfXD0QbLInasZ.jpg">
-        </div>
-
-        <div class="gallery-grid">
-            <img src="Photos/1_-Ux6UAPTbJxgWb_XCH6cag.gif">
-            <img src="Photos/03_Freshbooks.jpg">
-        </div>
-
+    <div class="content">
         <div class="caption-grid">
-            <p>Sample text here... Describe your project - tell us more - express yourself.</p> 
+            <h1>{{ portfolio[0] }}</h1>
+            <p>{{ portfolio[1] }}</p>
         </div>
 
-        <div class="gallery-grid">
-            <img src="Photos/snakebattle.webp">
-            <img src="Photos/take-awesome-pictures-phone.webp">
+        <section class="section">
+            <h2 class="caption-grid">Bilder</h2>
+            {% if images %}
+                <div class="gallery-grid">
+                    {% for img in images %}
+                        <img src="{{ url_for('static', filename=img[0]) }}" alt="Portfolio Bild">
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="caption-grid"><em>Inga bilder uppladdade.</em></p>
+            {% endif %}
+        </section>
+
+        <section class="section">
+            <h2 class="caption-grid">Videor</h2>
+            {% if videos %}
+                <div class="gallery-grid">
+                    {% for vid in videos %}
+                        <video controls style="width: 300px; border-radius: 10px;">
+                            <source src="{{ url_for('static', filename=vid[0]) }}" type="video/mp4">
+                            Din webbläsare stödjer inte videouppspelning.
+                        </video>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="caption-grid"><em>Inga videor uppladdade.</em></p>
+            {% endif %}
+        </section>
+
+        <section class="section">
+            <h2 class="caption-grid">Kodfiler</h2>
+            {% if codes %}
+                <ul style="text-align: center; list-style: none; padding: 0;">
+                    {% for code in codes %}
+                        <li style="margin: 10px 0;">
+                            <a href="{{ url_for('static', filename=code[0]) }}" download style="color: #4A89FF; text-decoration: none;">📄 Hämta kodfil</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="caption-grid"><em>Inga kodfiler uppladdade.</em></p>
+            {% endif %}
+        </section>
+
+        <div class="caption-grid" style="margin-top: 40px;">
+            <a href="/profile" class="profile-button" style="width: 300px;">← Tillbaka till Min Sida</a>
         </div>
 
-        <div class="profile-container">
-            <div class="profile-card">
-                <img src="Photos/stockphotostudent.jpg" alt="profilbild" class="profile-picture">
-                <h2 class="profile-name">NAMN</h2>
-                <p class="profile-program">PROGRAM/KURS</p>
-                <a href="profile.html" class="profile-button">BESÖK PROFIL</a>
-            </div>
-        </div>
-        
-        
-    </section>
+    </div>
 </main>
 
 <footer>

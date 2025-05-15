@@ -8,7 +8,6 @@ html, body {
     font-family: "Rubik", sans-serif;
 }
 
-/* Header */
 header {
     display: flex;
     align-items: center;
@@ -24,7 +23,6 @@ header h1 {
     padding-left: 15px;
 }
 
-/* Navbar */
 nav {
     display: flex;
     justify-content: space-between;
@@ -62,7 +60,6 @@ nav {
     transition: all 0.3s ease-in-out;
 }
 
-/* Sökfält */
 .search-form {
   display: flex;
   align-items: center;
@@ -91,7 +88,6 @@ nav {
     background-color: #555;
 }
 
-/* Layout */
 .main {
     display: flex;
     flex-direction: column;
@@ -102,7 +98,6 @@ nav {
     padding: 40px 20px;
 }
 
-/* Styling för Info */
 .info-box {
     text-align: center;
     max-width: 600px;
@@ -119,7 +114,6 @@ nav {
     font-weight: 500;
 }
 
-/* Styling för Login-formulär */
 .center {
     background-color: #3a3a3a;
     border: 1px solid #555;
@@ -204,7 +198,6 @@ nav {
     color: #721c24;
 }
 
-/* Footer */
 footer {
     text-align: center;
     height: 100px;
@@ -216,7 +209,6 @@ footer h4 {
     color: #888;
 }
 
-/* Länkar */
 a {
     color: #A5C9FF;
     text-decoration: none;

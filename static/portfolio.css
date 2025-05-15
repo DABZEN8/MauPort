@@ -1,235 +1,180 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2E2E2E;
+    color: #f0f0f0;
+    font-family: "Rubik", sans-serif;
+    overflow-x: hidden;
+}
+
 body * {
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 header {
     display: flex;
     align-items: center;
-    color: #fff;
-    background-color: rgb(74, 137, 255);
+    background-color: #2E2E2E;
+    color: #A5C9FF;
     height: 20vh;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
-    
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 header h1 {
-    font-family: "Oswald", sans-serif;
     padding-left: 15px;
     font-size: 100px;
+    font-family: "Oswald", sans-serif;
 }
 
 nav {
+    top: 0;
+    width: 100%;
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
-    background-color: rgb(52, 123, 255);
+    background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
 }
 
 .navbar {
     display: flex;
-    justify-content: center;
-    gap: 50px;
-    list-style-type: none;
+    justify-content: flex-start;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.navbar li {
+    list-style: none;
 }
 
 .navbar a {
-    color: #fff;
+    color: #A5C9FF;
     text-decoration: none;
-    font-size: 25px;
-    padding: 6px 10px;
-    border-radius: 5px;
+    font-size: 18px;
+    padding: 8px 12px;
+    border-radius: 6px;
 }
 
 .navbar a:hover {
-    background-color: rgb(12, 96, 253);
+    background-color: #333;
     color: #fff;
-    cursor: pointer;
-    transition: all 0.5s;
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
 }
 
 .search-form {
     display: flex;
     align-items: center;
-    position: absolute;
+    gap: 8px;
     right: 20px;
 }
 
 .search-form input {
     padding: 5px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #555;
+    background-color: #1f1f1f;
+    color: #eee;
     border-radius: 5px;
-    margin-right: 10px;
 }
 
 .search-form button {
     padding: 6px 12px;
-    background-color: #fff;
-    color: #292929;
+    background-color: #333;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .search-form button:hover {
-    background-color: rgb(0, 89, 255);
-    color: #fff;
+    background-color: #555;
 }
 
 main {
+    padding-top: 120px;
     margin-top: 50px;
-    padding-top: 10px;
+    padding: 20px;
 }
 
 .content {
-    padding: 1rem;
+    max-width: 1200px;
+    margin: auto;
 }
 
-/*Styling för bilder och upplägg*/
+.caption-grid, h1, h2, h3 {
+    text-align: center;
+}
+
 .gallery-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
+    margin-top: 20px;
 }
 
-.gallery-grid img {
+.gallery-grid img, .gallery-grid video {
     width: 300px;
     height: auto;
-    border-radius:10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.6);
 }
 
-/*Styling för text för inlägg/gallery grids*/
-.caption-grid, h1 {
-    text-align:center;
+ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-.gallery-grid-big > img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 59%;
-    border-radius:25px;
+li {
+    margin: 10px 0;
 }
 
-/*Styling för profil-grid*/
-.profile-container {
-    text-align:center;
-    margin-top: 2rem;
+a {
+    color: #A5C9FF;
+    text-decoration: none;
 }
 
-.profile-card {
-background: linear-gradient(to top, rgba(74,79,81,0.3) 0%, rgba(189, 189, 189, 0.3) 1%, rgba(215, 215, 215, 0) 100%);
-
-    padding: 2rem;
-    border-radius:12px;
-    width: 590px;
-    margin: 0 auto;
-    margin-top:10%;
+a:hover {
+    text-decoration: underline;
 }
 
-.profile-picture {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background-color: #00cfff;
-    margin-bottom: 1rem;
-}
-
-.profile-name{
-    margin:0;
-    font-size:1.5rem;
-    color: black;
-}
-
-.profile-program{
-    font-size: 0.9rem;
-    color: gray;
-    margin-bottom: 1.5rem;
-}
-
+/* Tillbaka till min sida */
 .profile-button {
-    display: block;
+    display: inline-block;
     background: linear-gradient(to right, #00c6ff, #0072ff);
     color: white;
-    width:500px;
     text-decoration: none;
-    padding: 20px;
+    padding: 15px 30px;
     border-radius: 8px;
-    margin: 0.5rem 0;
     font-weight: bold;
+    margin-top: 40px;
 }
 
 .profile-button:hover {
     background: linear-gradient(to right, #007da0, #003372);
 }
 
-/* Styling för den mindre profilkortet ovanför portfolioinnehåll */
-.profile-card-mini {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    margin: 1rem;
-}
-
-.mini-profile-picture {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #d3d3d3;
-    object-fit:cover;
-}
-
-.mini-profile-name {
-    font-size: 1rem;
-    color: black;
-    font-weight: bold;
-}
-
-.mini-profile-badge {
-    background-color: #239adf;
-    color: white;
-    font-weight: bold;
-    padding: 0.3rem 0.6rem;
-    border-radius: 8px;
-    font-size: 0.8rem;
-}
-
-/* Styling för footer */
 footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(202, 202, 202);
+    background-color: #1a1a1a;
     height: 100px;
-    margin-top: 50px;
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-}
-
-footer h4 {
-    color: rgb(74, 137, 255);
-}
-
-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(202, 202, 202);
-    height: 100px;
-
     padding-top: 30px;
     margin-top: 50px;
-
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.4);
 }
 
 footer h4 {
-    color: rgb(74, 137, 255);
+    color: #888;
 }

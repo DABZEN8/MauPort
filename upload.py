@@ -1,6 +1,6 @@
 import os
 import time
-from flask import Flask, render_template, request
+from flask import render_template, request, session, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from db import connect_db
 import psycopg2
@@ -9,40 +9,46 @@ import psycopg2
 
 # Hanterar filuppladdningen
 def handle_file_upload():
+    if "user_id" not in session:
+        flash("Du måste vara inloggad för att ladda upp filer!")
+        return redirect(url_for("login"))
 
     if request.method == "POST":
-        #file = form.file.data # Hämta filen från formuläret
         files = request.files.getlist("file")
+        title = request.form.get("title")
+        text_content = request.form.get("text_content")
+        thumbnail = request.form.get("thumbnail")
 
         if files and files[0].filename:
-            portfolio_id = save_portfolio_to_database(files)
-            return f"Filen har laddats upp i din portfolio {portfolio_id}"
+            portfolio_id = save_portfolio_to_database(files, title, text_content, thumbnail)
+            return redirect(url_for("show_portfolio", portfolio_id=portfolio_id))
         else:
-            return "Ingen fil har valts"
-    return render_template("upload.html")
+            flash("Ingen fil har valts")
+            return redirect(url_for("upload_files"))
+        
+    return render_template('upload.html')
 
-
-#sparar filerna i databasen
-def save_portfolio_to_database(files):
-                
+# Sparar filerna i databasen
+def save_portfolio_to_database(files, title, text_content, thumbnail):         
     conn = connect_db()
     cur = conn.cursor()    
             
-    user_id = 1
-    title = "Exempel"
-    description = "Uppladdad fil"
-    text_content = ""
+    user_id = session.get("user_id")
+
+    if not title:
+        title = "Titel saknas"
+    if not text_content:
+        text_content = "Beskrivning saknas"
+    if not thumbnail:
+        thumbnail = "Okategoriserad"
                 
-    
     cur.execute("""
-        INSERT INTO portfolio (user_id, title, description, text_content)
+        INSERT INTO portfolio (user_id, title, text_content, thumbnail)
                 VALUES (%s, %s, %s, %s)
                 RETURNING id
-                """, (user_id, title, description, text_content))
+                """, (user_id, title, text_content, thumbnail))
 
-          
     portfolio_id = cur.fetchone()[0]
-
 
     for file in files: 
         filename = secure_filename(file.filename)  
@@ -50,6 +56,8 @@ def save_portfolio_to_database(files):
         file_extension = filename.lower().split('.') [-1]  
         file_content = file.read() 
           
+        if file_extension in ['jpg' , 'jpeg', 'png']: 
+            cur.execute ("""INSERT INTO portfolio_images (portfolio_id, img_path)
 
         if file_extension in ["jpg" , "jpeg", "png"]: 
             cur.execute ("""
@@ -76,27 +84,18 @@ def save_portfolio_to_database(files):
     conn.close()
     return portfolio_id
                 
- #Sparar filen fysiskt på servern och returnerar relativ sökväg till databasen.
+ # Sparar filen fysiskt på servern och returnerar relativ sökväg till databasen.
 def save_file_locally(file, filename):
     from app import app
-    upload_folder = app.config["UPLOAD_FOLDER"]
 
-    # Se till att uppladdningsmappen finns
-    upload_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), upload_folder)
-    
-    os.makedirs(upload_path, exist_ok=True)
-
-    file_path = os.path.join(upload_path,filename)
+    upload_folder = os.path.join(app.root_path, "static", "project_uploads")
+    os.makedirs(upload_folder, exist_ok=True)
     
      # Kontrollera om filen redan finns
     if os.path.exists(file_path):
-       filename = f'{int(time.time())}_{filename}' #Detta är en tidsstämpel som säkerställer att filer man samma namn inte skrivs över.
-       file_path = os.path.join(upload_path, filename)
+       filename = f'{int(time.time())}_{filename}' # Detta är en tidsstämpel som säkerställer att filer man samma namn inte skrivs över.
+       file_path = os.path.join(upload_folder, filename)
 
-    with open(file_path , "wb") as upload_portfolio:
-        upload_portfolio.write(file.read()) 
+    file.save(file_path)
 
-    return os.path.join(upload_folder, filename)
-
-    
-    
+    return os.path.join("project_uploads", filename)

@@ -31,16 +31,50 @@
         </nav>
 
         <main>
-            <!--HÄR kommer ladda upp filer finnas-->
-            <h1> Ladda upp filer </h1>
-
-                <form action="/upload" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="file" multiple/> 
-                    <input type = "submit" value="Ladda upp"> 
-                
-                </form>    
-              
+            <h1>Ladda upp portfolio</h1>
+        
+            <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="text" name="title" placeholder="Titel" required><br><br>
+                <textarea name="text_content" placeholder="Beskrivning" required></textarea><br><br>
+                <input type="text" name="thumbnail" placeholder="Kategori" required><br><br>
+        
+                <input type="file" name="file" id="fileInput" multiple><br><br>
+        
+                <div id="fileList"></div>
+        
+                <input type="submit" value="Publicera">
+            </form>
+        
+            <script>
+            const fileInput = document.getElementById('fileInput');
+            const fileList = document.getElementById('fileList');
+        
+            fileInput.addEventListener('change', function() {
+                fileList.innerHTML = '';
+        
+                Array.from(fileInput.files).forEach((file, index) => {
+                    const fileItem = document.createElement('div');
+                    fileItem.innerHTML = `${file.name} <button type="button" onclick="removeFile(${index})">X</button>`;
+                    fileList.appendChild(fileItem);
+                });
+            });
+        
+            function removeFile(index) {
+                let dt = new DataTransfer();
+                let files = fileInput.files;
+        
+                Array.from(files).forEach((file, i) => {
+                    if (index !== i) {
+                        dt.items.add(file);
+                    }
+                });
+        
+                fileInput.files = dt.files;
+                fileInput.dispatchEvent(new Event('change'));
+            }
+            </script>
         </main>
+        
 
         <footer>
             <h4>© 2025 MauPort. All rights reserved.</h4>
