@@ -49,12 +49,14 @@ def register():
             flash("Ogiltig email.")
             return render_template('register.html', form_data=request.form)
         
+        password = request.form['password']
+
         # Validerar lösenord
         if not re.match(r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", password):
             flash("Lösenordet måste innehålla minst 8 karaktärer och inkludera en versal, en siffra och ett specialtecken.")
             return render_template('register.html', form_data=form_data)
 
-        password = request.form['password']
+        
 
         # Kontrollera om användaren redan finns
         if user_exists(username, email):
