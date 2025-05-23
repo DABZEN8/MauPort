@@ -20,3 +20,12 @@ def connect_db():
     except Exception as e:
         print("Fel vid anslutning till databasen:", e)
         return None
+    
+# def get_user_by_id(user_id):
+#     conn = connect_db()
+#     cur = conn.cursor()
+#     cur.execute("SELECT username, profile_pic FROM users WHERE id = %s", (user_id,))
+#     user = cur.fetchone()
+#     cur.close()
+#     conn.close()
+#     return user

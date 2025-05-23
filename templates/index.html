@@ -31,6 +31,28 @@
         </nav>
 
         <main>
+            <!-- <div class="profile-wrapper">
+                {% if username %}
+                    {% set image_path = profile_pic if profile_pic else 'profile_pictures/default.png' %}
+                    <div class="profile-card" onclick="toggleDropdown()">
+                        <img src="{{ url_for('static', filename=image_path) }}" alt="Profilbild" class="profile-image">
+                        <span>{{ username }}</span>
+                        <span class="arrow">▼</span>
+                    </div>
+
+                    <div id="dropdown-menu" class="dropdown hidden">
+                        <a href="/profile">Min profil</a>
+                        <a href="/settings">Inställningar</a>
+                        <a href="/logout">Logga ut</a>
+                    </div>
+                {% else %}
+                    <div class="login-links">
+                    <a href="/login">Logga in</a>
+                    <a href="/register">Registrera dig</a>
+                    </div>
+                {% endif %}
+            </div> -->
+
             <!--HÄR SKALL ALLA PORTFOLIOS LÄGGAS-->
         </main>
 
