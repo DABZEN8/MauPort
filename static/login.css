@@ -217,3 +217,26 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1em;
+  }
+  
+  .alert {
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  

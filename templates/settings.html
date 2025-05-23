@@ -33,6 +33,16 @@
     <main>
         <div class="main">
             <div class="center">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul class="flashes">
+                    {% for category, message in messages %}
+                        <li class="alert alert-{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+
                 <h3>Inställningar</h3>
 
                 <form method="POST" enctype="multipart/form-data">
@@ -81,8 +91,33 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="current_password">Nuvarande lösenord</label>
+                        {{ form.current_password(size=32) }}
+                        {% for error in form.current_password.errors %}
+                            <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new_password">Nytt lösenord</label>
+                        {{ form.new_password(size=32) }}
+                        {% for error in form.new_password.errors %}
+                            <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm_password">Bekräfta nytt lösenord</label>
+                        {{ form.confirm_password(size=32) }}
+                        {% for error in form.confirm_password.errors %}
+                            <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group">
                         {{ form.submit(class="btn btn-primary") }}
                     </div>
+
                 </form>
 
             </div>

@@ -1,7 +1,9 @@
 import os
 import time
+import re
 from flask import render_template, request, redirect, url_for, flash, session
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
 from db import connect_db
 from forms import SettingsForm
 
@@ -36,6 +38,7 @@ def user_settings():
         email = form.email.data
         bio = form.bio.data
         program = form.program.data
+        new_password = form.new_password.data
 
         # Hantera profilbildens sökväg
         new_profile_picture_path = None
@@ -66,18 +69,50 @@ def user_settings():
             new_profile_picture_path = current_profile_picture
 
         try:
-            # Uppdaterar användarens information i databasen
-            cursor.execute("""
-                UPDATE users
-                SET first_name = %s,
-                    last_name = %s,
-                    username = %s,
-                    email = %s,
-                    bio = %s,
-                    program = %s,
-                    profile_pic = %s
-                WHERE id = %s
-            """, (first_name, last_name, username, email, bio, program, new_profile_picture_path, session['user_id']))
+            current_password = form.current_password.data
+            new_password = form.new_password.data
+
+            if new_password:
+                cursor.execute("SELECT password_hash FROM users WHERE id = %s", (session["user_id"],))
+                db_password_hash = cursor.fetchone()[0]
+
+                if not re.match(r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", new_password):
+                    flash("Lösenordet måste innehålla minst 8 tecken och inkludera en versal, en siffra och ett specialtecken.", "danger")
+                    return redirect(url_for("settings"))
+
+                if not check_password_hash(db_password_hash, current_password):
+                    flash("Nuvarande lösenord är felaktigt", "danger")
+                    return redirect(url_for("settings"))
+                
+
+                password_hash = generate_password_hash(new_password)
+
+                # Uppdaterar användarens information i databasen
+                cursor.execute("""
+                    UPDATE users
+                    SET first_name = %s,
+                        last_name = %s,
+                        username = %s,
+                        email = %s,
+                        bio = %s,
+                        program = %s,
+                        profile_pic = %s,
+                        password_hash = %s
+                    WHERE id = %s
+                """, (first_name, last_name, username, email, bio, program, new_profile_picture_path, password_hash, session['user_id']))
+
+            else:
+                cursor.execute("""
+                    UPDATE users
+                    SET first_name = %s,
+                        last_name = %s,
+                        username = %s,
+                        email = %s,
+                        bio = %s,
+                        program = %s,
+                        profile_pic = %s
+                    WHERE id = %s
+                """, (first_name, last_name, username, email, bio, program, new_profile_picture_path, session['user_id']))
 
             conn.commit()
             flash("Dina ändringar har sparats!", "success")
