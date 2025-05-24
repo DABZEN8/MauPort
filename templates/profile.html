@@ -14,20 +14,23 @@
         </header>
 
         <nav>
-            <ul class="navbar">
-                <li><a href="/">Startsida</a></li>
-                <li><a href="/profile">Min sida</a></li>
-                <li><a href="{{ url_for('upload_files') }}">Ladda upp</a></li>
-                <li><a href="#">Om oss</a></li>
-                <li><a href="/settings">Inställningar</a></li>
-                <li><a href="/login">Logga in</a></li>
-                <li><a href="{{ url_for('register') }}">Registrera dig</a></li>
-            </ul>
-            <form class="search-form">
-                <input type="search" id="search" placeholder="Sök...">
-                <button type="submit">Sök</button>
-            </form>
+            <div class="navbar">
+                <ul>
+                    <li><a href="/">Startsida</a></li>
+                    <li><a href="/profile">Min sida</a></li>
+                    <li><a href="{{ url_for('upload_files') }}">Ladda upp</a></li>
+                    <li><a href="#">Om oss</a></li>
+                    <li><a href="/settings">Inställningar</a></li>
+                    <li><a href="/login">Logga in</a></li>
+                    <li><a href="{{ url_for('register') }}">Registrera dig</a></li>
+                </ul>
+                <form class="search-form">
+                    <input type="search" id="search" placeholder="Sök...">
+                    <button type="submit">Sök</button>
+                </form>
+            </div> 
         </nav>
+
 
         <main class="profile-main">
             <div class="profile-header">

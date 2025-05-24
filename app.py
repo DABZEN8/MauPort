@@ -1,3 +1,12 @@
+"""
+MauPorts huvudfil för Flask applikationen.
+
+Denna fil gör följande:
+- Registrerar alla routes för webbsidor
+- Kopplar moduler som hanterar inloggning, uppladdning och visning
+- Definierar grundinställningar för appen
+
+"""
 from flask import Flask, render_template
 from auth import register as auth_register, login as auth_login, logout as auth_logout
 from upload import handle_file_upload
@@ -9,10 +18,14 @@ from wtforms.validators import Email
 import os
 
 app = Flask (__name__)
+
+
 app.secret_key = '3d9f728e4c2b3f6f8e5a1c7a8b9d2f3e4c5a6b7d8e9f0a1b2c3d4e5f6a7b8c9d'
+
+#Här sparas alla uppladdade filer
 app.config['UPLOAD_FOLDER'] = "static"
 
-# Route till startsidan
+# Route till startsidan - listar alla portfolioinlägg
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -22,10 +35,12 @@ def index():
 def login():
     return auth_login()
 
+# Utloggning som avslutar inloggningsessionen
 @app.route("/logout")
 def logout():
     return auth_logout()
 
+# Route till registreringssidan
 @app.route("/register", methods=["GET", "POST"])
 def register():
     return auth_register()

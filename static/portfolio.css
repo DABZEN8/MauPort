@@ -31,6 +31,7 @@ header h1 {
     font-family: "Oswald", sans-serif;
 }
 
+/* Styling för navigation */
 nav {
     top: 0;
     width: 100%;
@@ -42,6 +43,7 @@ nav {
     background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
 }
 
+/* Styling för navigation */
 .navbar {
     display: flex;
     justify-content: flex-start;

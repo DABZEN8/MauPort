@@ -62,7 +62,7 @@ nav {
     transition: all 0.3s ease-in-out;
 }
 
-/* Sökfält */
+/* Styling för sökfält */
 .search-form {
   display: flex;
   align-items: center;
