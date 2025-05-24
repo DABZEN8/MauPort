@@ -23,6 +23,7 @@ header h1 {
     padding-left: 15px;
 }
 
+/* Styling för navigation */
 nav {
     display: flex;
     justify-content: space-between;
@@ -60,6 +61,7 @@ nav {
     transition: all 0.3s ease-in-out;
 }
 
+/* Styling för sökfält */
 .search-form {
   display: flex;
   align-items: center;
@@ -216,4 +218,36 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1em;
+  }
+  
+  .alert {
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .text-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-weight: 500;
 }
