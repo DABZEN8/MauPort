@@ -15,6 +15,8 @@ from portfolio import view_portfolio
 from upload import handle_file_upload
 from werkzeug.utils import secure_filename
 from wtforms.validators import Email
+from flask import Flask, render_template
+from db import connect_db
 import os
 
 app = Flask (__name__)
@@ -28,7 +30,23 @@ app.config['UPLOAD_FOLDER'] = "static"
 # Route till startsidan - listar alla portfolioinlägg
 @app.route('/')
 def index():
-    return render_template("index.html")
+    conn = connect_db()
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT p.id, p.title, p.description, p.thumbnail, p.created_at, u.username, img.img_path
+        FROM portfolio p
+        JOIN users u ON p.user_id = u.id
+        LEFT JOIN portfolio_images img ON p.id = img.portfolio_id
+        ORDER BY p.created_at DESC
+    """)
+    portfolios = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    return render_template("index.html", portfolios=portfolios)
+
 
 # Route till login sidan
 @app.route("/login", methods =["GET", "POST"])
