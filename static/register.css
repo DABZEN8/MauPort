@@ -62,6 +62,10 @@ nav {
     transition: all 0.3s ease-in-out;
 }
 
+nav ul li a:hover {
+  text-decoration: none;
+}
+
 /* Styling för sökfält */
 .search-form {
   display: flex;
