@@ -15,7 +15,6 @@ from portfolio import view_portfolio
 from upload import handle_file_upload
 from werkzeug.utils import secure_filename
 from wtforms.validators import Email
-from flask import Flask, render_template
 from db import connect_db
 import os
 
