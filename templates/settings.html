@@ -23,11 +23,10 @@
                 <li><a href="/settings">Inställningar</a></li>
                 <li><a href="/logout">Logga ut</a></li>
             </ul>
-            <form class="search-form">
-                <input type="search" placeholder="Sök...">
+            <form class="search-form" method="get" action="{{ url_for('search') }}">
+                <input type="search" name="query" id="search" placeholder="Sök..." required>
                 <button type="submit">Sök</button>
             </form>
-        </div>
     </nav>
 
     <main>
