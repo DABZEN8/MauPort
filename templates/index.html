@@ -25,8 +25,8 @@
                     <li><a href="/login">Logga in</a></li>
                     <li><a href="{{ url_for('register') }}">Registrera dig</a></li>
                 </ul>
-                <form class="search-form">
-                    <input type="search" id="search" placeholder="Sök...">
+                <form class="search-form" method="get" action="{{ url_for('search') }}">
+                    <input type="search" name="query" id="search" placeholder="Sök..." required>
                     <button type="submit">Sök</button>
                 </form>
             </div> 

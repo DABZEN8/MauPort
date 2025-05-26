@@ -13,6 +13,7 @@ from upload import handle_file_upload
 from settings import user_settings
 from portfolio import view_portfolio
 from upload import handle_file_upload
+from search_results import search_portfolios
 from werkzeug.utils import secure_filename
 from wtforms.validators import Email
 from db import connect_db
@@ -91,6 +92,11 @@ def show_portfolio(portfolio_id):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html")
+
+#Route till sökfunktion
+@app.route("/search")
+def search():
+    return search_portfolios()
 
 
 # Säkerställer att fel meddelas under testning
