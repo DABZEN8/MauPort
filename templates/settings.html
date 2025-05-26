@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>MauPort - Inställningar</title>
-    <link href="/static/login.css" type="text/css" rel="stylesheet">
+    <link href="/static/settings.css" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
-        <h1>MauPort</h1>
+        <h1><a href="/" class="header-link">MauPort</a></h1>
     </header>
 
     <nav>
@@ -18,8 +18,8 @@
             <ul>
                 <li><a href="/">Startsida</a></li>
                 <li><a href="/profile">Min sida</a></li>
-                <li><a href="{{ url_for('upload_files') }}">Ladda upp</a></li>
-                <li><a href="#">Om oss</a></li>
+                <li><a href="/upload">Ladda upp</a></li>
+                <li><a href="/about">Om oss</a></li>
                 <li><a href="/settings">Inställningar</a></li>
                 <li><a href="/logout">Logga ut</a></li>
             </ul>
@@ -81,7 +81,7 @@
                     {% if profile_picture %}
                     <div class="form-group">
                         <p>Nuvarande profilbild:</p>
-                        <img src="{{ url_for('static', filename=profile_picture) }}" alt="Profilbild" style="width:150px; height:auto; border-radius: 50%;">
+                        <img src="{{ url_for('static', filename=profile_picture) }}" alt="Profilbild">
                     </div>
                     {% endif %}
 

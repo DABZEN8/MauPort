@@ -1,0 +1,208 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Rubik", sans-serif;
+  background-color: #1f1f1f;
+  color: white;
+}
+
+header {
+  background-color: #2E2E2E;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  color: #A5C9FF;
+}
+
+header h1 {
+  font-family: "Oswald", sans-serif;
+  font-size: 100px;
+}
+
+.header-link {
+  color: #A5C9FF;
+  text-decoration: none;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar a {
+  color: #A5C9FF;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.navbar a:hover {
+  background-color: #333;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.logout-link {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-form input {
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #555;
+  background-color: #1f1f1f;
+  color: #eee;
+  border-radius: 5px;
+}
+
+.search-form button {
+  padding: 6px 12px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-wrapper {
+  padding: 40px 5%;
+  text-align: center;
+}
+
+.profile-header img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #A5C9FF;
+  box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  margin-bottom: 10px;
+}
+
+.profile-header h2 {
+  font-size: 24px;
+  margin: 5px 0;
+}
+
+.profile-header .program {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.profile-header .bio {
+  margin-top: 15px;
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-nav {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 30px 0;
+  border-bottom: 2px solid #444;
+  padding-bottom: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.profile-nav .nav-link {
+  color: #eee;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.profile-nav .nav-link.active {
+  color: #A5C9FF;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.profile-nav .nav-link:hover,
+.profile-nav .nav-link:focus {
+  color: #A5C9FF;
+  text-decoration: underline;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  justify-items: center;
+  margin-top: 30px;
+}
+
+.portfolio-card {
+  width: 100%;
+  max-width: 300px;
+  background-color: #444;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  color: white;
+}
+
+.portfolio-card img.thumbnail {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-content {
+  padding: 16px;
+  text-align: left;
+  color: white;
+}
+
+.card-content h5 {
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.card-content p {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.card-content .bookmark {
+  display: block;
+  text-align: right;
+  font-size: 20px;
+  color: #A5C9FF;
+  margin-top: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 0;
+  color: #888;
+}
