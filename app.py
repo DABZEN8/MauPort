@@ -87,7 +87,6 @@ def settings():
 def om_oss():
     return render_template("about.html")
 
-
 # Route till enskilt portfolio
 @app.route('/portfolio/<int:portfolio_id>')
 def show_portfolio(portfolio_id):
