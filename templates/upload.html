@@ -1,84 +1,69 @@
 <!DOCTYPE html>
 <html lang="sv">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MauPort</title>
-        <link href="/static/styles.css" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        
-        <header>
-            <h1>MauPort</h1>
-        </header>
-        
-        <nav>
-            <ul class="navbar">
+<head>
+    <meta charset="utf-8">
+    <title>MauPort – Ladda upp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/upload.css">
+    <script defer src="/static/upload.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h1>MauPort</h1>
+    </header>
+
+    <nav>
+        <div class="navbar">
+            <ul>
                 <li><a href="/">Startsida</a></li>
                 <li><a href="/profile">Min sida</a></li>
-                <a href="{{ url_for('upload_files') }}">Ladda upp</a>
+                <li><a href="{{ url_for('upload_files') }}">Ladda upp</a></li>
                 <li><a href="#">Om oss</a></li>
                 <li><a href="/settings">Inställningar</a></li>
                 <li><a href="/login">Logga in</a></li>
                 <li><a href="{{ url_for('register') }}">Registrera dig</a></li>
             </ul>
             <form class="search-form">
-                <input type="search" id="search" placeholder="Sök...">
+                <input type="search" placeholder="Sök...">
                 <button type="submit">Sök</button>
             </form>
-        </nav>
+        </div>
+    </nav>
 
-        <main>
-            <h1>Ladda upp portfolio</h1>
+    <main class="upload-main">
+        <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="title-section">
+                <input type="text" id="titleInput" name="title" placeholder="Välj titel..." required>
+                <h1 id="titleDisplay" class="title-display hidden"></h1>
+            </div>
         
-            <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
-                <input type="text" name="title" placeholder="Titel" required><br><br>
-                <textarea name="text_content" placeholder="Beskrivning" required></textarea><br><br>
-                <input type="text" name="thumbnail" placeholder="Kategori" required><br><br>
+            <div class="thumbnail-section">
+                <label for="thumbnail">Välj en thumbnail till ditt portfolio!</label>
+                <input type="file" name="thumbnail" id="thumbnail" accept=".jpg,.jpeg,.png" required>
+            </div>
         
-                <input type="file" name="file" id="fileInput" multiple><br><br>
+            <div class="drop-zone" id="dropZone">
+                <p>Dra och släpp filer här eller klicka för att välja</p>
+                <input type="file" id="fileInput" name="file" multiple hidden>
+            </div>
         
-                <div id="fileList"></div>
+            <div id="fileList" class="file-list"></div>
         
-                <input type="submit" value="Publicera">
-            </form>
+            <textarea name="text_content" placeholder="Beskriv ditt projekt..." required></textarea>
         
-            <script>
-            const fileInput = document.getElementById('fileInput');
-            const fileList = document.getElementById('fileList');
+            <div class="button-wrapper">
+                <button type="submit" class="publish-btn">Publicera</button>
+            </div>
+        </form>
         
-            fileInput.addEventListener('change', function() {
-                fileList.innerHTML = '';
-        
-                Array.from(fileInput.files).forEach((file, index) => {
-                    const fileItem = document.createElement('div');
-                    fileItem.innerHTML = `${file.name} <button type="button" onclick="removeFile(${index})">X</button>`;
-                    fileList.appendChild(fileItem);
-                });
-            });
-        
-            function removeFile(index) {
-                let dt = new DataTransfer();
-                let files = fileInput.files;
-        
-                Array.from(files).forEach((file, i) => {
-                    if (index !== i) {
-                        dt.items.add(file);
-                    }
-                });
-        
-                fileInput.files = dt.files;
-                fileInput.dispatchEvent(new Event('change'));
-            }
-            </script>
-        </main>
-        
+    </main>
 
-        <footer>
-            <h4>© 2025 MauPort. All rights reserved.</h4>
-        </footer>
-
-    </body>
+    <footer>
+        <h4>© 2025 MauPort. All rights reserved.</h4>
+    </footer>
+</body>
 </html>

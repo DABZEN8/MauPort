@@ -15,12 +15,27 @@ def handle_file_upload():
 
     if request.method == "POST":
         files = request.files.getlist("file")
+        thumbnail_file = request.files.get("thumbnail")
         title = request.form.get("title")
         text_content = request.form.get("text_content")
-        thumbnail = request.form.get("thumbnail")
+
+        if not title:
+            flash("Titel krävs.", "error")
+            return redirect(url_for("upload_files"))
+        
+        if not text_content:
+            flash("Lägg till en beskrivning!", "error")
+            return redirect(url_for("upload_files"))
+        
+        if not thumbnail_file or thumbnail_file.filename == "":
+                flash("Du måste välja en thumbnail!", "error")
+                return redirect(url_for("upload_files"))
+
+        thumbnail_filename = secure_filename(thumbnail_file.filename)
+        thumbnail_path = save_file_locally(thumbnail_file, thumbnail_filename)
 
         if files and files[0].filename:
-            portfolio_id = save_portfolio_to_database(files, title, text_content, thumbnail)
+            portfolio_id = save_portfolio_to_database(files, title, text_content, thumbnail_path)
             return redirect(url_for("show_portfolio", portfolio_id=portfolio_id))
         else:
             flash("Ingen fil har valts")
@@ -29,24 +44,17 @@ def handle_file_upload():
     return render_template('upload.html')
 
 # Sparar filerna i databasen
-def save_portfolio_to_database(files, title, text_content, thumbnail):         
+def save_portfolio_to_database(files, title, text_content, thumbnail_path):         
     conn = connect_db()
     cur = conn.cursor()    
             
     user_id = session.get("user_id")
-
-    if not title:
-        title = "Titel saknas"
-    if not text_content:
-        text_content = "Beskrivning saknas"
-    if not thumbnail:
-        thumbnail = "Okategoriserad"
-                
+         
     cur.execute("""
         INSERT INTO portfolio (user_id, title, text_content, thumbnail)
                 VALUES (%s, %s, %s, %s)
                 RETURNING id
-                """, (user_id, title, text_content, thumbnail))
+                """, (user_id, title, text_content, thumbnail_path))
 
     portfolio_id = cur.fetchone()[0]
 
