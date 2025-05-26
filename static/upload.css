@@ -1,0 +1,239 @@
+/* === Baslayout: Header, Nav och Footer (från styles.css) === */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2E2E2E;
+    color: #f0f0f0;
+    overflow-x: hidden;
+    font-family: "Rubik", sans-serif;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    color: #A5C9FF;
+    background-color: #2E2E2E;
+    height: 20vh;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+header h1 {
+    padding-left: 15px;
+    font-size: 100px;
+    font-family: "Oswald", sans-serif;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar ul {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+.navbar li {
+    list-style-type: none;
+}
+
+.navbar a {
+    color: #A5C9FF;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.navbar a:hover {
+    background-color: #333;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-form input {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #555;
+    background-color: #1f1f1f;
+    color: #eee;
+    border-radius: 5px;
+}
+
+.search-form button {
+    padding: 6px 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #555;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    padding-top: 30px;
+    margin-top: 50px;
+}
+
+footer h4 {
+    color: #888;
+}
+
+/* Specifikt för upload.html */
+.upload-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+}
+
+.title-section {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 95%;
+    max-width: 1100px;
+    border-bottom: 2px solid #888;
+}
+
+#titleInput {
+    font-size: 42px;
+    font-family: "Oswald", sans-serif;
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+#titleInput::placeholder {
+    color: #999;
+}
+
+.title-display {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.drop-zone {
+    border: 2px dashed #aaa;
+    padding: 40px;
+    width: 95%;
+    max-width: 1100px;
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #1e1e1e;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.file-list {
+    width: 95%;
+    max-width: 1100px;
+    margin-bottom: 20px;
+}
+
+.file-list div {
+    background-color: #444;
+    padding: 8px;
+    margin: 4px 0;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+}
+
+.file-list button {
+    background: #e74c3c;
+    border: none;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.thumbnail-section {
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+    width: 95%;
+    max-width: 1100px;
+}
+
+.thumbnail-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.thumbnail-section input[type="file"] {
+    color: white;
+    background-color: #1f1f1f;
+    border: 1px solid #555;
+    padding: 6px;
+    border-radius: 6px;
+    width: 60%;
+}
+
+textarea[name="text_content"] {
+    width: 95%;
+    max-width: 1100px;
+    height: 120px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #D6D6D6;
+    color: #111;
+    border: none;
+    border-radius: 12px;
+    resize: vertical;
+}
+
+.publish-btn {
+    background: linear-gradient(to bottom, #A5C9FF, #143d7e);
+    color: white;
+    padding: 14px 36px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+} 
+
+.publish-btn:hover {
+    background: #A5C9FF;
+}
