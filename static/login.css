@@ -23,6 +23,11 @@ header h1 {
     padding-left: 15px;
 }
 
+.header-link {
+    color: #A5C9FF;
+    text-decoration: none;
+  }
+
 /* Styling för navigation */
 nav {
     display: flex;

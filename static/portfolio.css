@@ -1,182 +1,177 @@
+/* portfolio.css – styling för portfolio.html */
+
 html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #2E2E2E;
-    color: #f0f0f0;
-    font-family: "Rubik", sans-serif;
-    overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2E2E2E;
+  color: #f0f0f0;
+  font-family: "Rubik", sans-serif;
+  overflow-x: hidden;
 }
 
 body * {
-    font-family: "Rubik", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 header {
-    display: flex;
-    align-items: center;
-    background-color: #2E2E2E;
-    color: #A5C9FF;
-    height: 20vh;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  background-color: #2E2E2E;
+  color: #A5C9FF;
+  height: 20vh;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 header h1 {
-    padding-left: 15px;
-    font-size: 100px;
-    font-family: "Oswald", sans-serif;
+  padding-left: 15px;
+  font-size: 100px;
+  font-family: "Oswald", sans-serif;
 }
 
-/* Styling för navigation */
-nav {
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 20px;
-    background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
+.header-link {
+  color: #A5C9FF;
+  text-decoration: none;
 }
 
-/* Styling för navigation */
 .navbar {
-    display: flex;
-    justify-content: flex-start;
-    gap: 25px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
 }
 
-.navbar li {
-    list-style: none;
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar a {
-    color: #A5C9FF;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 8px 12px;
-    border-radius: 6px;
+  color: #A5C9FF;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 6px;
 }
 
 .navbar a:hover {
-    background-color: #333;
-    color: #fff;
-    transform: scale(1.05);
-    transition: all 0.3s ease-in-out;
+  background-color: #333;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+.logout-link {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-size: 16px;
 }
 
 .search-form {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .search-form input {
-    padding: 5px;
-    font-size: 16px;
-    border: 1px solid #555;
-    background-color: #1f1f1f;
-    color: #eee;
-    border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #555;
+  background-color: #1f1f1f;
+  color: #eee;
+  border-radius: 5px;
 }
 
 .search-form button {
-    padding: 6px 12px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.search-form button:hover {
-    background-color: #555;
+  padding: 6px 12px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 main {
-    padding-top: 120px;
-    margin-top: 50px;
-    padding: 20px;
+  padding: 40px 5%;
+  text-align: center;
 }
 
-.content {
-    max-width: 1200px;
-    margin: auto;
+h2, h3 {
+  margin-bottom: 20px;
+  font-family: "Rubik", sans-serif;
 }
 
-.caption-grid, h1, h2, h3 {
-    text-align: center;
+.caption-grid h1 {
+  color: #A5C9FF;
+}
+
+p {
+  font-size: 16px;
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+  line-height: 1.6;
+  color: #ddd;
 }
 
 .gallery-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
 }
 
-.gallery-grid img, .gallery-grid video {
-    width: 300px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.6);
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin: 10px 0;
-}
-
-a {
-    color: #A5C9FF;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Tillbaka till min sida */
-.profile-button {
-    display: inline-block;
-    background: linear-gradient(to right, #00c6ff, #0072ff);
-    color: white;
-    text-decoration: none;
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-weight: bold;
-    margin-top: 40px;
-}
-
-.profile-button:hover {
-    background: linear-gradient(to right, #007da0, #003372);
+.gallery-grid img,
+.gallery-grid video,
+.gallery-grid iframe,
+.gallery-grid pre {
+  width: 100%;
+  max-width: 350px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #1a1a1a;
-    height: 100px;
-    padding-top: 30px;
-    margin-top: 50px;
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a1a1a;
+  height: 100px;
+  padding-top: 30px;
+  margin-top: 50px;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.4);
 }
 
 footer h4 {
-    color: #888;
+  color: #888;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 30px;
+  background-color: #A5C9FF;
+  color: #1f1f1f;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.25);
+  text-align: center;
+}
+
+.back-button:hover {
+  background-color: #dce9ff;
+  transform: translateY(-2px);
 }

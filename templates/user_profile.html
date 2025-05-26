@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Min profil - MauPort</title>
+  <link href="/static/user_profile.css" type="text/css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <h1><a href="/" class="header-link">MauPort</a></h1>
+  </header>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="/">Startsida</a></li>
+      <li><a href="/upload">Publicera</a></li>
+      <li><a href="/about">Om MauPort</a></li>
+    </ul>
+    <form class="search-form" action="/search" method="get">
+      <input type="text" name="q" placeholder="Sök...">
+      <button type="submit">Sök</button>
+    </form>
+    <a href="/logout" class="logout-link">Logga ut</a>
+  </nav>
+
+  <main class="profile-wrapper">
+    <div class="profile-header">
+      <img src="{{ url_for('static', filename=profile_pic) }}" alt="Profilbild">
+      <h2>{{ full_name }}</h2>
+      <p class="program">{{ program }}</p>
+      {% if bio %}<p class="bio">{{ bio }}</p>{% endif %}
+    </div>
+
+    <div class="profile-nav">
+      <a href="/profile" class="nav-link active">Mina portfolio</a>
+      <a href="/upload" class="nav-link">Skapa portfolio</a>
+      <a href="/favorites" class="nav-link">Mina favoriter</a>
+      <a href="/settings" class="nav-link">Inställningar</a>
+    </div>
+
+    <div class="portfolio-grid">
+      {% for portfolio in portfolios %}
+        <a href="/portfolio/{{ portfolio[0] }}" class="portfolio-card">
+          <img src="{{ url_for('static', filename=portfolio[2]) }}" alt="Thumbnail" class="thumbnail">
+          <div class="card-content">
+            <h5>{{ portfolio[1] }}</h5>
+            <p>{{ full_name }}<br>{{ program }}</p>
+            <span class="bookmark">🔗</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </main>
+
+  <footer>
+    <h4>Copyright MauPort 2025</h4>
+  </footer>
+
+</body>
+</html>
