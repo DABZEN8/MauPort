@@ -80,7 +80,7 @@
                     {% if profile_picture %}
                     <div class="form-group">
                         <p>Nuvarande profilbild:</p>
-                        <img src="{{ url_for('static', filename=profile_picture) }}" alt="Profilbild">
+                        <img src="{{ url_for('static', filename=profile_picture or 'images/default_profile.png') }}" alt="Profilbild">
                     </div>
                     {% endif %}
 

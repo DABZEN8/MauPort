@@ -38,7 +38,7 @@ def profile():
     full_name = f"{user[0]} {user[1]}"
     program = user[2]
     bio = user[3]
-    profile_pic = user[4]
+    profile_pic = user[4] or "profile_pictures/default_profile.jpg"
 
     return render_template(
         "user_profile.html",
