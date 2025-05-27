@@ -54,11 +54,14 @@
                 <input type="file" name="thumbnail" id="thumbnail" accept=".jpg,.jpeg,.png" required>
             </div>
         
-            <div class="drop-zone" id="dropZone">
-                <p>Dra och släpp filer här eller klicka för att välja</p>
-                <input type="file" id="fileInput" name="files" multiple hidden>
+            <div class="file-section">
+                <label for="fileInput">Välj filer som ska synas i ditt portfolio!</label>
             </div>
-        
+                <div class="drop-zone" id="dropZone">
+                    <p>Dra och släpp filer här eller klicka för att välja</p>
+                    <input type="file" id="fileInput" name="files" multiple hidden>
+                </div>
+
             <div id="fileList" class="file-list"></div>
         
             <textarea name="text_content" placeholder="Beskriv ditt projekt..." required></textarea>
