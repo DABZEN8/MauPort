@@ -1,0 +1,136 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2E2E2E;
+    color: #f0f0f0;
+    overflow-x: hidden;
+    font-family: "Rubik", sans-serif;
+    box-sizing: border-box;
+  }
+  
+  body * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  header {
+    display: flex;
+    align-items: center;
+    color: #A5C9FF;
+    background-color: #2E2E2E;
+    height: 20vh;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+  }
+  
+  header h1 {
+    padding-left: 15px;
+    font-size: 100px;
+    font-family: "Oswald", sans-serif;
+  }
+
+  .header-link {
+    color: #A5C9FF;
+    text-decoration: none;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .navbar ul {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar li {
+    list-style-type: none;
+  }
+  
+  .navbar a {
+    color: #A5C9FF;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+    border-radius: 6px;
+  }
+  
+  .navbar a:hover {
+    background-color: #333;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .search-form input {
+      padding: 5px;
+      font-size: 16px;
+      border: 1px solid #555;
+      background-color: #1f1f1f;
+      color: #eee;
+      border-radius: 5px;
+  }
+  
+  .search-form button {
+      padding: 6px 12px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  
+  .search-form button:hover {
+      background-color: #555;
+  }  
+
+.about-container {
+    padding: 40px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-container h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    color: #A5C9FF;
+}
+
+.about-container h3 {
+    color: #A5C9FF;
+    margin-top: 40px;
+}
+
+.about-container p, .about-container ul {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    color: #bbb;
+}

@@ -14,7 +14,8 @@ from settings import user_settings
 from portfolio import view_portfolio
 from upload import handle_file_upload
 from search_results import search_portfolios
-from werkzeug.utils import secure_filename
+from user_profile import profile as user_profile_view
+from werkzeug.utils import secure_filename #Ska denna plockas bort? Används ej i nuläget.
 from wtforms.validators import Email
 from db import connect_db
 import os
@@ -66,7 +67,7 @@ def register():
 # Route till profil sidan
 @app.route("/profile")
 def profile():
-    return render_template("profile.html")
+    return user_profile_view()
 
 # Route till portfoliosidan
 @app.route("/portfolio")
@@ -82,6 +83,10 @@ def upload_files():
 @app.route("/settings", methods=["GET", "POST"])
 def settings():
     return user_settings()
+
+@app.route("/about")
+def om_oss():
+    return render_template("about.html")
 
 # Route till enskilt portfolio
 @app.route('/portfolio/<int:portfolio_id>')
