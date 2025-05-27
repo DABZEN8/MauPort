@@ -1,75 +1,56 @@
-const titleInput = document.getElementById("titleInput");
-const titleDisplay = document.getElementById("titleDisplay");
-const dropZone = document.getElementById("dropZone");
-const fileInput = document.getElementById("fileInput");
-const fileList = document.getElementById("fileList");
+let fileInput = document.getElementById("fileInput");
+let previewContainer = document.getElementById("fileList");
+let selectedFiles = [];
 
-// Uppdatera rubriken dynamiskt
-if (titleInput && titleDisplay) {
-    titleInput.addEventListener("input", () => {
-        const value = titleInput.value.trim();
-        if (value !== "") {
-            titleDisplay.textContent = value;
-            titleDisplay.classList.remove("hidden");
-        } else {
-            titleDisplay.classList.add("hidden");
-        }
+fileInput.addEventListener("change", function (event) {
+  const newFiles = Array.from(event.target.files);
+
+  // Lägg till nya filer utan att ersätta gamla
+  newFiles.forEach((newFile) => {
+    // Förhindra dubbletter baserat på filnamn och storlek
+    const exists = selectedFiles.some(f => f.name === newFile.name && f.size === newFile.size);
+    if (!exists) {
+      selectedFiles.push(newFile);
+    }
+  });
+
+  renderPreviews();
+
+  // Skapa ett nytt DataTransfer-objekt för att simulera nya input.files
+  const dataTransfer = new DataTransfer();
+  selectedFiles.forEach(file => dataTransfer.items.add(file));
+  fileInput.files = dataTransfer.files;
+});
+
+function renderPreviews() {
+  previewContainer.innerHTML = "";
+
+  selectedFiles.forEach((file, index) => {
+    const fileElement = document.createElement("div");
+    fileElement.classList.add("file-item");
+
+    const fileName = document.createElement("span");
+    fileName.textContent = file.name;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.innerText = "X";
+    removeBtn.addEventListener("click", () => {
+      selectedFiles.splice(index, 1);
+      renderPreviews();
+
+      const dataTransfer = new DataTransfer();
+      selectedFiles.forEach(file => dataTransfer.items.add(file));
+      fileInput.files = dataTransfer.files;
     });
+
+    fileElement.appendChild(fileName);
+    fileElement.appendChild(removeBtn);
+    previewContainer.appendChild(fileElement);
+  });
 }
 
-// Klicka på dropzone = trigga file input
-if (dropZone && fileInput) {
-    dropZone.addEventListener("click", () => fileInput.click());
+let dropZone = document.getElementById("dropZone");
 
-    dropZone.addEventListener("dragover", e => {
-        e.preventDefault();
-        dropZone.style.backgroundColor = "#333";
-    });
-
-    dropZone.addEventListener("dragleave", () => {
-        dropZone.style.backgroundColor = "#1e1e1e";
-    });
-
-    dropZone.addEventListener("drop", e => {
-        e.preventDefault();
-        dropZone.style.backgroundColor = "#1e1e1e";
-
-        const dt = new DataTransfer();
-        Array.from(fileInput.files).forEach(file => dt.items.add(file));
-        Array.from(e.dataTransfer.files).forEach(file => dt.items.add(file));
-
-        fileInput.files = dt.files;
-        updateFileList();
-    });
-
-    fileInput.addEventListener("change", updateFileList);
-}
-
-function updateFileList() {
-    if (!fileInput || !fileList) return;
-
-    fileList.innerHTML = "";
-    Array.from(fileInput.files).forEach((file, index) => {
-        const div = document.createElement("div");
-        div.textContent = file.name;
-
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "X";
-        removeBtn.type = "button";
-        removeBtn.addEventListener("click", () => removeFile(index));
-
-        div.appendChild(removeBtn);
-        fileList.appendChild(div);
-    });
-}
-
-function removeFile(indexToRemove) {
-    const dt = new DataTransfer();
-    Array.from(fileInput.files).forEach((file, index) => {
-        if (index !== indexToRemove) {
-            dt.items.add(file);
-        }
-    });
-    fileInput.files = dt.files;
-    updateFileList();
-}
+dropZone.addEventListener("click", () => {
+  fileInput.click();
+});

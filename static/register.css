@@ -24,6 +24,11 @@ header h1 {
     padding-left: 15px;
 }
 
+.header-link {
+    color: #A5C9FF;
+    text-decoration: none;
+  }
+
 /* Navbar */
 nav {
     display: flex;

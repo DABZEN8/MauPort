@@ -14,7 +14,7 @@ def handle_file_upload():
         return redirect(url_for("login"))
 
     if request.method == "POST":
-        files = request.files.getlist("file")
+        files = request.files.getlist("files")
         thumbnail_file = request.files.get("thumbnail")
         title = request.form.get("title")
         text_content = request.form.get("text_content")

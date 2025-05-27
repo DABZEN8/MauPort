@@ -66,7 +66,7 @@ def register():
 # Route till profil sidan
 @app.route("/profile")
 def profile():
-    return render_template("profile.html")
+    return user_profile_view()
 
 # Route till portfoliosidan
 @app.route("/portfolio")
@@ -82,6 +82,11 @@ def upload_files():
 @app.route("/settings", methods=["GET", "POST"])
 def settings():
     return user_settings()
+
+@app.route("/about")
+def om_oss():
+    return render_template("about.html")
+
 
 # Route till enskilt portfolio
 @app.route('/portfolio/<int:portfolio_id>')
