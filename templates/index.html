@@ -69,6 +69,13 @@
                             <div class="portfolio-content">
                                 <h3>{{ portfolio[1] }}</h3>
                                 <p><b>{{ portfolio[5] }}</b></p> <!-- Namnet på användaren -->
+                                {% if portfolio[0] in saved_ids %}
+                                <button class="save-btn" disabled>Sparad!</button>
+                                {% else %}
+                                <button class="save-btn" data-portfolio-id="{{ portfolio[0] }}">Spara</button>
+                                {% endif %}
+
+                                
                             </div>
                         </div>
                     </a>
@@ -80,6 +87,9 @@
         <footer>
             <h4>© 2025 MauPort. All rights reserved.</h4>
         </footer>
+        
+        <script src="{{ url_for('static', filename='bookmark.js') }}"></script>
+
 
     </body>
 </html>
