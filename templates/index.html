@@ -69,11 +69,15 @@
                             <div class="portfolio-content">
                                 <h3>{{ portfolio[1] }}</h3>
                                 <p><b>{{ portfolio[5] }}</b></p> <!-- Namnet på användaren -->
+                                
+                                <!--Knapp för att spara nedan-->
                                 {% if portfolio[0] in saved_ids %}
-                                <button class="save-btn" disabled>Sparad!</button>
+                                <button class="save-btn active" data-portfolio-id="{{ portfolio[0] }}">Inlägg sparad!</button>
                                 {% else %}
-                                <button class="save-btn" data-portfolio-id="{{ portfolio[0] }}">Spara</button>
+                                <button class="save-btn" data-portfolio-id="{{ portfolio[0] }}">Spara inlägg</button>
                                 {% endif %}
+                                <!--Knappen slutar här-->
+
 
                                 
                             </div>

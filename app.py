@@ -167,6 +167,44 @@ def favorites():
     return render_template("favorites.html", favorites=favorites)
 
 
+# Denna funktion ser till att inloggad användare kan både lägga till och ta bort sparade inlägg.
+@app.route("/toggle_favorite", methods=["POST"])
+def toggle_favorite():
+    if "user_id" not in session:
+        return jsonify({"success": False, "message": "Du måste vara inloggad."}), 403
+
+    data = request.get_json()
+    portfolio_id = data.get("portfolio_id")
+    user_id = session["user_id"]
+
+    if not portfolio_id:
+        return jsonify({"success": False, "message": "Portfolio saknas."}), 400
+
+    try:
+        conn = connect_db()
+        cur = conn.cursor()
+
+        # Kontrollera om det redan är sparat
+        cur.execute("SELECT 1 FROM saved_portfolios WHERE user_id = %s AND portfolio_id = %s", (user_id, portfolio_id))
+        exists = cur.fetchone()
+
+        if exists:
+            cur.execute("DELETE FROM saved_portfolios WHERE user_id = %s AND portfolio_id = %s", (user_id, portfolio_id))
+            conn.commit()
+            status = "removed"
+        else:
+            cur.execute("INSERT INTO saved_portfolios (user_id, portfolio_id) VALUES (%s, %s)", (user_id, portfolio_id))
+            conn.commit()
+            status = "added"
+
+        cur.close()
+        conn.close()
+        return jsonify({"success": True, "status": status})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
+
+
 
 # Säkerställer att fel meddelas under testning
 if __name__ == "__main__":

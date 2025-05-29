@@ -4,24 +4,31 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const portfolioId = button.dataset.portfolioId;
 
-      try {
-        const res = await fetch("/save_favorite", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ portfolio_id: portfolioId })
-        });
+      const res = await fetch("/toggle_favorite", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ portfolio_id: portfolioId })
+      });
 
-        const data = await res.json();
-        if (data.success) {
-          button.textContent = "Sparad!";
-          button.disabled = true;
+      const data = await res.json();
+
+      if (data.success) {
+        const isFavoritesPage = window.location.pathname === "/favorites";
+
+        if (data.status === "added") {
+          button.textContent = "Inlägg sparad!";
+          button.classList.add("active");
         } else {
-          alert(data.message || "Något gick fel.");
+          if (isFavoritesPage) {
+            const card = button.closest(".portfolio-card");
+            if (card) card.remove();
+          } else {
+            button.textContent = "Spara inlägg";
+            button.classList.remove("active");
+          }
         }
-
-      } catch (err) {
-        console.error("Fel vid spara-försök:", err);
-        alert("Ett tekniskt fel inträffade.");
+      } else {
+        alert(data.message || "Något gick fel.");
       }
     });
   });

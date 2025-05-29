@@ -39,13 +39,11 @@ body * {
   transform: scale(1.05);
 }
 
-.save-btn:disabled {
+.save-btn.active {
   background-color: #A5C9FF;
   color: #1f1f1f;
-  opacity: 0.7;
-  cursor: default;
-  pointer-events: none;
 }
+
 
 
 header {
