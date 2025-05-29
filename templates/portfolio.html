@@ -32,12 +32,22 @@
 </nav>
 
 <main>
+    <!-- Profilkort överst -->
+    <section class="owner-mini-card">
+        <img src="{{ url_for('static', filename=owner_pic) }}" alt="Profilbild" class="mini-profile-pic">
+        <div class="owner-info">
+            <p class="owner-role">ÄGARE</p>
+            <p class="owner-name">{{ owner_name }}</p>
+            <p class="owner-program">{{ owner_program }}</p>
+        </div>
+    </section>
+
     <div class="content">
       <div class="caption-grid">
         <h1 style="color: #A5C9FF;">{{ portfolio[0] }}</h1>
         <p>{{ portfolio[1] }}</p>
       </div>
-  
+
       {% if images %}
       <section class="section">
         <h2 class="caption-grid">Bilder</h2>
@@ -48,7 +58,7 @@
         </div>
       </section>
       {% endif %}
-  
+
       {% if videos %}
       <section class="section">
         <h2 class="caption-grid">Videor</h2>
@@ -62,7 +72,7 @@
         </div>
       </section>
       {% endif %}
-  
+
       {% if codes %}
       <section class="section">
         <h2 class="caption-grid">Kodfiler</h2>
@@ -75,13 +85,20 @@
         </ul>
       </section>
       {% endif %}
-  
+
+      <!-- Större profilkort i slutet -->
+      <section class="owner-full-card">
+        <img src="{{ url_for('static', filename=owner_pic) }}" alt="Profilbild" class="full-profile-pic">
+        <h2>{{ owner_name }}</h2>
+        <p>{{ owner_program }}</p>
+        <a href="/profile/{{ owner_id }}" class="profile-button">Besök profil</a>
+      </section>
+
       <div class="caption-grid" style="margin-top: 40px;">
-        <a href="/profile" class="profile-button" style="width: 300px;">← Tillbaka till Min Sida</a>
+        <a href="/" class="profile-button" style="width: 300px;">&larr; Tillbaka till startsidan</a>
       </div>
     </div>
-  </main>
-  
+</main>
 
 <footer>
     <h4>© 2025 MauPort. All rights reserved.</h4>
