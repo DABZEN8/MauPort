@@ -1,25 +1,17 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-}
-
-body {
-    background-color: #2E2E2E;
-    color: #f0f0f0;
-    overflow-x: hidden;
-}
-
-body * {
-    font-family: "Rubik", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
+* { 
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
+  }
+  
+  html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: "Rubik", sans-serif;
+    background-color: #1f1f1f;
+    color: white;
+  }
+  
 .save-btn {
   background-color: transparent;
   border: 2px solid #A5C9FF;
@@ -47,18 +39,18 @@ body * {
 
 
 header {
+    background-color: #2E2E2E;
     display: flex;
     align-items: center;
     color: #A5C9FF;
-    background-color: #2E2E2E;
+    padding-left: 15px;
     height: 20vh;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 header h1 {
-    padding-left: 15px;
-    font-size: 100px;
     font-family: "Oswald", sans-serif;
+    font-size: 100px;
 }
 
 .header-link {
@@ -66,20 +58,12 @@ header h1 {
     text-decoration: none;
   }
 
-/* Styling för navigation */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 40px;
-    background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
-}
-
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  padding: 10px 40px;
+  background: linear-gradient(to right, rgba(63,63,63,1) 28%, rgba(63,63,63,1) 53%, rgba(46,46,46,1) 100%);
 }
 
 
@@ -91,8 +75,6 @@ nav {
   display: flex;
   gap: 25px;
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .navbar a {
@@ -222,18 +204,8 @@ main {
     color: #ccc;
 }
 
-
-
-/* Styling för Footer */
 footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    padding-top: 30px;
-    margin-top: 50px;
-}
-
-footer h4 {
+    text-align: center;
+    padding: 30px 0;
     color: #888;
-}
+  }
