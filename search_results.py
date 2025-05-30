@@ -5,7 +5,7 @@ def search_portfolios():
     """ En funktion som hanterar sökningar efter innehåll/portfolios och genererar sökresultatet.
         
         Hämtar söksträng från GET-parameter "query" och söker i databasen efter portfolios,
-        där titel eller beskrivning matchar sökordet. 
+        användarnamn och kurs där titel eller beskrivning matchar sökordet. 
         Sedan returneras en HTML-sida med resultaten.
         
         Returns: 
