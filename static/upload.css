@@ -215,7 +215,21 @@ html, body {
     border-radius: 6px;
     width: 60%;
   }
-  
+
+  .file-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .file-section {
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+    width: 95%;
+    max-width: 1100px;
+  }
+
   textarea[name="text_content"] {
     width: 95%;
     max-width: 1100px;

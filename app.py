@@ -7,7 +7,7 @@ Denna fil gör följande:
 - Definierar grundinställningar för appen
 
 """
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for, flash  
 from auth import register as auth_register, login as auth_login, logout as auth_logout
 from upload import handle_file_upload
 from settings import user_settings
@@ -43,10 +43,17 @@ def index():
     """)
     portfolios = cur.fetchall()
 
+    saved_ids = []
+    if "user_id" in session:
+        cur.execute("SELECT portfolio_id FROM saved_portfolios WHERE user_id = %s", (session["user_id"],))
+        saved_rows = cur.fetchall()
+        saved_ids = [row[0] for row in saved_rows]
+
     cur.close()
     conn.close()
 
-    return render_template("index.html", portfolios=portfolios)
+    return render_template("index.html", portfolios=portfolios, saved_ids=saved_ids)
+
 
 
 # Route till login sidan
@@ -102,6 +109,101 @@ def page_not_found(e):
 @app.route("/search")
 def search():
     return search_portfolios()
+
+from flask import request, jsonify
+
+# Route för att spara inlägg
+@app.route("/save_favorite", methods=["POST"])
+def save_favorite():
+    if "user_id" not in session:
+        return jsonify({"success": False, "message": "Du måste vara inloggad för att spara favoriter."}), 403
+
+    data = request.get_json()
+    portfolio_id = data.get("portfolio_id")
+    user_id = session["user_id"]
+
+    if not portfolio_id:
+        return jsonify({"success": False, "message": "Portfolio saknas."}), 400
+
+    try:
+        conn = connect_db()
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT INTO saved_portfolios (user_id, portfolio_id)
+            VALUES (%s, %s)
+            ON CONFLICT (user_id, portfolio_id) DO NOTHING
+        """, (user_id, portfolio_id))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
+
+@app.route("/favorites")
+def favorites():
+    if "user_id" not in session:
+        flash("Logga in för att se dina favoriter.", "warning")
+        return redirect(url_for("login"))
+
+    user_id = session["user_id"]
+    conn = connect_db()
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT p.id, p.title, p.thumbnail, u.username
+        FROM saved_portfolios sp
+        JOIN portfolio p ON sp.portfolio_id = p.id
+        JOIN users u ON p.user_id = u.id
+        WHERE sp.user_id = %s
+        ORDER BY sp.created_at DESC
+    """, (user_id,))
+    favorites = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    return render_template("favorites.html", favorites=favorites)
+
+
+# Denna funktion ser till att inloggad användare kan både lägga till och ta bort sparade inlägg.
+@app.route("/toggle_favorite", methods=["POST"])
+def toggle_favorite():
+    if "user_id" not in session:
+        return jsonify({"success": False, "message": "Du måste vara inloggad."}), 403
+
+    data = request.get_json()
+    portfolio_id = data.get("portfolio_id")
+    user_id = session["user_id"]
+
+    if not portfolio_id:
+        return jsonify({"success": False, "message": "Portfolio saknas."}), 400
+
+    try:
+        conn = connect_db()
+        cur = conn.cursor()
+
+        # Kontrollera om det redan är sparat
+        cur.execute("SELECT 1 FROM saved_portfolios WHERE user_id = %s AND portfolio_id = %s", (user_id, portfolio_id))
+        exists = cur.fetchone()
+
+        if exists:
+            cur.execute("DELETE FROM saved_portfolios WHERE user_id = %s AND portfolio_id = %s", (user_id, portfolio_id))
+            conn.commit()
+            status = "removed"
+        else:
+            cur.execute("INSERT INTO saved_portfolios (user_id, portfolio_id) VALUES (%s, %s)", (user_id, portfolio_id))
+            conn.commit()
+            status = "added"
+
+        cur.close()
+        conn.close()
+        return jsonify({"success": True, "status": status})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
+
 
 
 # Säkerställer att fel meddelas under testning

@@ -28,6 +28,10 @@ header h1 {
     text-decoration: none;
   }
 
+.header-link:hover {
+    text-decoration: none;
+}
+
 /* Styling för navigation */
 nav {
     display: flex;
