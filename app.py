@@ -76,6 +76,10 @@ def register():
 def profile():
     return user_profile_view()
 
+@app.route("/profile/<int:user_id>")
+def view_user_profile(user_id):
+    return user_profile_view(user_id=user_id)  # andras profil
+
 # Route till portfoliosidan
 @app.route("/portfolio")
 def portfolio():
@@ -151,6 +155,15 @@ def favorites():
     conn = connect_db()
     cur = conn.cursor()
 
+    # Hämta användarens information
+    cur.execute("""
+        SELECT first_name, last_name, username, program, email, bio, profile_pic
+        FROM users
+        WHERE id = %s
+    """, (user_id,))
+    user = cur.fetchone()
+
+    # Hämta sparade portfolios
     cur.execute("""
         SELECT p.id, p.title, p.thumbnail, u.username
         FROM saved_portfolios sp
@@ -164,7 +177,19 @@ def favorites():
     cur.close()
     conn.close()
 
-    return render_template("favorites.html", favorites=favorites)
+    full_name = f"{user[0]} {user[1]}"
+    profile_pic = user[6] or "profile_pictures/default_profile.jpg"
+
+    return render_template("favorites.html",
+        favorites=favorites,
+        full_name=full_name,
+        username=user[2],
+        program=user[3],
+        email=user[4],
+        bio=user[5],
+        profile_pic=profile_pic
+    )
+
 
 
 # Denna funktion ser till att inloggad användare kan både lägga till och ta bort sparade inlägg.
