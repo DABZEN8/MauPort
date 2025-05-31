@@ -1,92 +1,88 @@
 <!DOCTYPE html>
 <html lang="sv">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MauPort - Startsida</title>
-        <link href="/static/styles.css" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        
-        <header>
-            <h1><a href="/" class="header-link">MauPort</a></h1>
-        </header>
-        
-        <nav>
-            <div class="navbar">
-                <ul>
-                    <li><a href="/">Startsida</a></li>
-                    <li><a href="/profile">Min sida</a></li>
-                    <li><a href="{{ url_for('upload_files') }}">Skapa portfolio </a></li>
-                    <li><a href="/about">Om oss</a></li>
-                </ul>
-                <form class="search-form" method="get" action="{{ url_for('search') }}">
-                    <input type="search" name="query" id="search" placeholder="Sök..." required>
-                    <button type="submit">Sök</button>
-                </form>
-            </div> 
-        </nav>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MauPort - Startsida</title>
+    <link href="/static/styles.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  </head>
+  <body>
+    <header>
+      <h1><a href="/" class="header-link">MauPort</a></h1>
+    </header>
 
-        <main>
-            <div class="profile-wrapper">
-                {% if username %}
-                    {% set image_path = profile_pic if profile_pic else 'profile_pictures/default.png' %}
-                    <div class="profile-card" onclick="toggleDropdown()">
-                        <img src="{{ url_for('static', filename=image_path) }}" alt="Profilbild" class="profile-image">
-                        <span>{{ username }}</span>
-                        <span class="arrow">▼</span>
-                    </div>
+    <nav>
+      <div class="navbar">
+        <ul>
+          <li><a href="/">Startsida</a></li>
+          <li><a href="/profile">Min sida</a></li>
+          <li><a href="{{ url_for('upload_files') }}">Skapa portfolio </a></li>
+          <li><a href="/about">Om oss</a></li>
+        </ul>
+        <form class="search-form" method="get" action="{{ url_for('search') }}">
+          <input type="search" name="query" id="search" placeholder="Sök..." required>
+          <button type="submit">Sök</button>
+        </form>
+      </div>
+    </nav>
 
-                    <div id="dropdown-menu" class="dropdown hidden">
-                        <a href="/profile">Min profil</a>
-                        <a href="/settings">Inställningar</a>
-                        <a href="/logout">Logga ut</a>
-                    </div>
+    <main>
+      <div class="profile-wrapper">
+        {% if username %}
+          {% set image_path = profile_pic if profile_pic else 'profile_pictures/default.png' %}
+          <div class="profile-card" onclick="toggleDropdown()">
+            <img src="{{ url_for('static', filename=image_path) }}" alt="Profilbild" class="profile-image">
+            <span>{{ username }}</span>
+            <span class="arrow">▼</span>
+          </div>
+
+          <div id="dropdown-menu" class="dropdown hidden">
+            <a href="/profile">Min profil</a>
+            <a href="/settings">Inställningar</a>
+            <a href="/logout">Logga ut</a>
+          </div>
+        {% else %}
+          <div class="login-links">
+            <a href="/login">Logga in</a>
+            <a href="/register">Registrera dig</a>
+          </div>
+        {% endif %}
+      </div>
+
+      <h1>Portfolios</h1>
+      <div class="portfolio-container">
+        {% for portfolio in portfolios %}
+          <div class="card-content">
+            <a href="/portfolio/{{ portfolio[0] }}" class="portfolio-link">
+              <div class="portfolio-image">
+                {% if portfolio[6] %}
+                  <img src="{{ url_for('static', filename=portfolio[6]) }}" alt="Portfolio-bild">
                 {% else %}
-                    <div class="login-links">
-                    <a href="/login">Logga in</a>
-                    <a href="/register">Registrera dig</a>
-                    </div>
+                  <img src="/static/placeholder.jpg" alt="Placeholder-bild">
                 {% endif %}
+              </div>
+            </a>
+            <div class="portfolio-content">
+              <div class="content-row">
+                <h3>{{ portfolio[1] }}</h3>
+                <button class="bookmark-btn" data-portfolio-id="{{ portfolio[0] }}">
+                  <i class="fa{{ 's' if portfolio[0] in saved_ids else 'r' }} fa-bookmark"></i>
+                </button>
+              </div>
+              <p><b>{{ portfolio[5] }}</b></p>
             </div>
-            <h1>Portfolios</h1>
-            <div class="portfolio-container">
-                {% for portfolio in portfolios %}
-                    <a href="/portfolio/{{ portfolio[0] }}" class="portfolio-link">
-                        <div class="portfolio-card">
-                            <div class="portfolio-image">
-                                {% if portfolio[6] %}
-                                    <img src="{{ url_for('static', filename=portfolio[6]) }}" alt="Portfolio-bild">
-                                {% else %}
-                                    <img src="/static/placeholder.jpg" alt="Placeholder-bild">
-                                {% endif %}
-                            </div>
-                            <div class="portfolio-content">
-                                <h3>{{ portfolio[1] }}</h3>
-                                <p><b>{{ portfolio[5] }}</b></p> <!-- Namnet på användaren -->
-                                
-                                <!--Knapp för att spara nedan-->
-                                {% if portfolio[0] in saved_ids %}
-                                <button class="save-btn active" data-portfolio-id="{{ portfolio[0] }}">Inlägg sparad!</button>
-                                {% else %}
-                                <button class="save-btn" data-portfolio-id="{{ portfolio[0] }}">Spara inlägg</button>
-                                {% endif %}
-                                <!--Knappen slutar här-->
+          </div>
+        {% endfor %}
+      </div>
+    </main>
 
-                            </div>
-                        </div>
-                    </a>
-                {% endfor %}
-            </div>
-        </main>
+    <footer>
+      <h4>© 2025 MauPort. All rights reserved.</h4>
+    </footer>
 
-        <footer>
-            <h4>© 2025 MauPort. All rights reserved.</h4>
-        </footer>
-
-        <script src="{{ url_for('static', filename='bookmark.js') }}"></script>
-
-    </body>
+    <script src="{{ url_for('static', filename='bookmark.js') }}"></script>
+  </body>
 </html>

@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Min profil - MauPort</title>
+  <title>Användarprofil - MauPort</title>
   <link href="/static/user_profile.css" type="text/css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
@@ -17,7 +18,7 @@
   <nav class="navbar">
     <ul>
       <li><a href="/">Startsida</a></li>
-      <li><a href="/upload">Skapa portfolio </a></li>
+      <li><a href="/upload">Skapa portfolio</a></li>
       <li><a href="/about">Om MauPort</a></li>
     </ul>
     <form class="search-form" action="/search" method="get">
@@ -28,29 +29,33 @@
 
   <main class="profile-wrapper">
     <div class="profile-header">
-      <img src="{{ url_for('static', filename=profile_pic) }}" alt="Profilbild">
-      <h2>{{ full_name }}</h2>
-      <p class="program">{{ program }}</p>
-      {% if bio %}<p class="bio">{{ bio }}</p>{% endif %}
+      <img src="{{ url_for('static', filename=profile_pic) }}" alt="Profilbild" class="profile-pic">
+      <div class="profile-info">
+        <h2>{{ full_name }}</h2>
+        <p class="program">{{ program }}</p>
+        {% if bio %}<p class="bio">{{ bio }}</p>{% endif %}
+      </div>
     </div>
 
-    <div class="profile-nav">
-      <a href="/profile" class="nav-link active">Mina portfolio</a>
-      <a href="/upload" class="nav-link">Skapa portfolio</a>
-      <a href="/favorites" class="nav-link">Mina favoriter</a>
-      <a href="/settings" class="nav-link">Inställningar</a>
-    </div>
-
-    <div class="portfolio-grid">
+    <div class="portfolio-container">
       {% for portfolio in portfolios %}
-        <a href="/portfolio/{{ portfolio[0] }}" class="portfolio-card">
-          <img src="{{ url_for('static', filename=portfolio[2]) }}" alt="Thumbnail" class="thumbnail">
-          <div class="card-content">
-            <h5>{{ portfolio[1] }}</h5>
-            <p>{{ full_name }}<br>{{ program }}</p>
-            <span class="bookmark">🔗</span>
+        <div class="portfolio-card" data-portfolio-id="{{ portfolio[0] }}">
+          <a href="/portfolio/{{ portfolio[0] }}" class="portfolio-link">
+            <div class="portfolio-image">
+              <img src="{{ url_for('static', filename=portfolio[2]) }}" alt="Thumbnail">
+            </div>
+          </a>
+          <div class="portfolio-content">
+            <div class="content-row">
+              <h3>{{ portfolio[1] }}</h3>
+              <button class="bookmark-btn" data-portfolio-id="{{ portfolio[0] }}">
+                <i class="{% if portfolio[0] in saved_ids %}fas{% else %}far{% endif %} fa-bookmark"></i>
+              </button>
+            </div>
+            <p>{{ full_name }}</p>
+            <p>{{ program }}</p>
           </div>
-        </a>
+        </div>
       {% endfor %}
     </div>
   </main>
@@ -59,5 +64,6 @@
     <h4>Copyright MauPort 2025</h4>
   </footer>
 
+  <script src="{{ url_for('static', filename='bookmark.js') }}"></script>
 </body>
 </html>

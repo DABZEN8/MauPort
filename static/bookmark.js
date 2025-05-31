@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".save-btn").forEach(button => {
+  document.querySelectorAll(".bookmark-btn, .save-btn").forEach(button => {
     button.addEventListener("click", async (e) => {
       e.preventDefault();
-      e.stopPropagation(); // Hindrar klick från att följa länk om knappen ligger i en <a>
+      e.stopPropagation();
 
       const portfolioId = button.dataset.portfolioId;
 
@@ -15,21 +15,23 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
 
       if (data.success) {
+        const icon = button.querySelector("i");
         const isFavoritesPage = window.location.pathname === "/favorites";
 
-        if (data.status === "added") {
-          button.textContent = "Inlägg sparad!";
-          button.classList.add("active");
+        if (icon) {
+          icon.classList.toggle("fas", data.status === "added");
+          icon.classList.toggle("far", data.status !== "added");
         } else {
-          if (isFavoritesPage) {
-            const card = button.closest(".portfolio-card");
-            if (card) {
-              card.classList.add("removed");
-              setTimeout(() => card.remove(), 300); // Matchar CSS-transition
-            }
-          } else {
-            button.textContent = "Spara inlägg";
-            button.classList.remove("active");
+          // textknapp fallback
+          button.textContent = data.status === "added" ? "Inlägg sparad!" : "Borttagen";
+          button.classList.toggle("active", data.status === "added");
+        }
+
+        if (isFavoritesPage && data.status === "removed") {
+          const card = button.closest(".card, .portfolio-card");
+          if (card) {
+            card.classList.add("removed");
+            setTimeout(() => card.remove(), 300);
           }
         }
       } else {
