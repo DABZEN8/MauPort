@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Min profil - MauPort</title>
-  <link href="/static/styles.css" type="text/css" rel="stylesheet">
+  <title>Mina favoriter - MauPort</title>
+  <link href="/static/user_profile.css" type="text/css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <header>
-    <h1>MauPort</h1>
+    <h1><a href="/" class="header-link">MauPort</a></h1>
   </header>
 
   <nav>
@@ -19,11 +19,8 @@
       <ul>
         <li><a href="/">Startsida</a></li>
         <li><a href="/profile">Min sida</a></li>
-        <li><a href="{{ url_for('upload_files') }}">Publicera</a></li>
-        <li><a href="#">Om oss</a></li>
-        <li><a href="/settings">Inställningar</a></li>
-        <li><a href="/login">Logga in</a></li>
-        <li><a href="{{ url_for('register') }}">Registrera dig</a></li>
+        <li><a href="/upload">Skapa portfolio</a></li>
+        <li><a href="/about">Om oss</a></li>
       </ul>
       <form class="search-form" method="get" action="{{ url_for('search') }}">
         <input type="search" name="query" id="search" placeholder="Sök..." required>
@@ -34,38 +31,47 @@
 
   <main class="profile-main">
     <div class="profile-header">
-      <img src="Photos/stockphotostudent.jpg" alt="Profilbild" class="profile-pic">
+      <img src="{{ url_for('static', filename=profile_pic) }}" alt="Profilbild" class="profile-pic">
       <div class="profile-info">
-        <h2>Förnamn Efternamn</h2>
-        <p><strong>Användarnamn:</strong> FÖREFT</p>
-        <p><strong>Program:</strong> Spelutveckling</p>
-        <p><strong>E-post:</strong> fornamn.efternamn@student.mau.se</p>
-        <p><strong>Om mig:</strong> Passionerad student inom UX och frontend. Gillar att skapa, koda och samarbeta.</p>
+        <h2>{{ full_name }}</h2>
+        <p><strong>Användarnamn:</strong> {{ username }}</p>
+        <p><strong>Program:</strong> {{ program }}</p>
+        <p><strong>E-post:</strong> {{ email }}</p>
+        {% if bio %}<p><strong>Om mig:</strong> {{ bio }}</p>{% endif %}
         <div class="logout-button">
-          <a href="#">Logga ut</a>
+          <a href="/logout">Logga ut</a>
         </div>
       </div>
     </div>
 
-    <h1>Mina favoriter</h1>
-    <div class="portfolio-container">
-      {% for p in favorites %}
-        <div class="portfolio-card" data-portfolio-id="{{ p[0] }}">
-          <a href="/portfolio/{{ p[0] }}" class="portfolio-link">
-            <div class="portfolio-image">
-              <img src="{{ url_for('static', filename=p[2]) }}" alt="Bild">
-            </div>
-          </a>
-          <div class="portfolio-content">
-            <h3>{{ p[1] }}</h3>
-            <p><b>{{ p[3] }}</b></p>
+    <div class="profile-nav">
+      <a href="/profile" class="nav-link">Mina portfolios</a>
+      <a href="/upload" class="nav-link">Ladda upp</a>
+      <a href="/favorites" class="nav-link active">Mina favoriter</a>
+      <a href="/settings" class="nav-link">Inställningar</a>
+    </div>
+
+    <h1 style="margin-top: 40px;">Mina favoriter</h1>
+      <div class="portfolio-container">
+        {% for p in favorites %}
+          <div class="portfolio-card" data-portfolio-id="{{ p[0] }}">
+            <a href="/portfolio/{{ p[0] }}" class="portfolio-link">
+              <div class="portfolio-image">
+                <img src="{{ url_for('static', filename=p[2]) }}" alt="Bild">
+              </div>
+              <div class="portfolio-content">
+                <h3>{{ p[1] }}</h3>
+                <p><b>{{ p[3] }}</b></p>
+              </div>
+            </a>
             <button class="save-btn active" data-portfolio-id="{{ p[0] }}">Ta bort</button>
           </div>
-        </div>
-      {% else %}
-        <p>Du har inga favoriter ännu.</p>
-      {% endfor %}
-    </div>
+
+        {% else %}
+          <p>Du har inga favoriter ännu.</p>
+        {% endfor %}
+      </div>
+
   </main>
 
   <footer>

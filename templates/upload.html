@@ -19,11 +19,8 @@
             <ul>
                 <li><a href="/">Startsida</a></li>
                 <li><a href="/profile">Min sida</a></li>
-                <a href="{{ url_for('upload_files') }}">Publicera</a>
-                <li><a href="#">Om oss</a></li>
-                <li><a href="/settings">Inställningar</a></li>
-                <li><a href="/login">Logga in</a></li>
-                <li><a href="/register">Registrera dig</a></li>
+                <li><a href="{{ url_for('upload_files') }}">Skapa portfolio</a></li>
+                <li><a href="/about">Om oss</a></li>
             </ul>
             <form class="search-form" method="get" action="{{ url_for('search') }}">
                 <input type="search" name="query" id="search" placeholder="Sök..." required>
@@ -50,7 +47,7 @@
             </div>
         
             <div class="thumbnail-section">
-                <label for="thumbnail">Thumbnail - Välj omslagsbild till ditt portfolio!</label>
+                <label for="thumbnail"> Thumbnail - Välj omslagsbild till ditt portfolio!</label>
                 <input type="file" name="thumbnail" id="thumbnail" accept=".jpg,.jpeg,.png" required>
             </div>
         
@@ -76,5 +73,8 @@
     <footer>
         <h4>© 2025 MauPort. All rights reserved.</h4>
     </footer>
+
+        <script defer src="/static/placeholder_behavior.js"></script>
+
 </body>
 </html>

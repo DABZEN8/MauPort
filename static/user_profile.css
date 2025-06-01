@@ -6,6 +6,7 @@ body {
   color: white;
 }
 
+
 header {
   background-color: #2E2E2E;
   height: 20vh;
@@ -85,12 +86,12 @@ header h1 {
   cursor: pointer;
 }
 
-.profile-wrapper {
+.profile-main {
   padding: 40px 5%;
   text-align: center;
 }
 
-.profile-header img {
+.profile-header img.profile-pic {
   width: 120px;
   height: 120px;
   object-fit: cover;
@@ -100,109 +101,273 @@ header h1 {
   margin-bottom: 10px;
 }
 
-.profile-header h2 {
+.profile-info h2 {
   font-size: 24px;
   margin: 5px 0;
 }
 
-.profile-header .program {
+.profile-info p {
   font-size: 14px;
+  margin: 4px 0;
   color: #ccc;
 }
 
-.profile-header .bio {
-  margin-top: 15px;
-  font-size: 16px;
-  line-height: 1.5;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+.logout-button {
+  margin-top: 10px;
 }
 
 .profile-nav {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  margin: 30px 0;
-  border-bottom: 2px solid #444;
-  padding-bottom: 10px;
-  font-size: 18px;
-  font-weight: 500;
+  gap: 30px;
+  margin-top: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #444;
 }
 
-.profile-nav .nav-link {
-  color: #eee;
+.profile-nav a {
+  color: #A5C9FF;
   text-decoration: none;
   padding: 6px 12px;
   border-radius: 4px;
+  font-weight: 500;
+  font-size: 16px;
 }
 
-.profile-nav .nav-link.active {
-  color: #A5C9FF;
-  text-decoration: underline;
-  font-weight: 600;
+.profile-nav a:hover,
+.profile-nav a.active {
+  background-color: #333;
+  color: #fff;
 }
 
-.profile-nav .nav-link:hover,
-.profile-nav .nav-link:focus {
-  color: #A5C9FF;
-  text-decoration: underline;
+.banner-button {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 12px 24px;
+  background-color: #A5C9FF;
+  color: #1f1f1f;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.25);
+  transition: background-color 0.3s ease;
 }
 
-.portfolio-grid {
+.banner-button:hover {
+  background-color: #dce9ff;
+}
+
+.project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 30px;
-  justify-items: center;
   margin-top: 30px;
+  justify-items: center;
 }
 
-.portfolio-card {
-  width: 100%;
-  max-width: 300px;
-  background-color: #444;
+.card {
+  background-color: #2E2E2E;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  text-decoration: none;
-  color: white;
+  max-width: 300px;
+  text-align: left;
+  transition: transform 0.2s;
 }
 
-.portfolio-card img.thumbnail {
+.card:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.card img {
   width: 100%;
   height: 180px;
   object-fit: cover;
-  display: block;
 }
 
 .card-content {
   padding: 16px;
-  text-align: left;
   color: white;
 }
 
-.card-content h5 {
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 5px;
+.card-content h3 {
+  font-size: 18px;
+  margin: 0 0 5px;
 }
 
 .card-content p {
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 14px;
+  margin: 2px 0;
+  color: #ccc;
 }
 
-.card-content .bookmark {
-  display: block;
-  text-align: right;
-  font-size: 20px;
+/* Animera borttagning av favoriter här */
+.card.removed {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.portfolio-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  /* Exakt 4 kort i rad */
+  gap: 30px;                              /* Bra mellanrum mellan korten */
+  padding: 40px;
+  justify-content: center;
+}
+
+.portfolio-card {
+  background-color: #1e1e1e;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 250px;
+  margin: auto;
+}
+
+.portfolio-card:hover {
+  transform: scale(1.05);
+}
+
+.portfolio-image {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.portfolio-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.portfolio-content {
+  text-align: center;
+  padding: 10px;
+  min-height: 80px;
+}
+
+.portfolio-content h3 {
+  margin: 10px 0 5px;
+  font-size: 22px;
   color: #A5C9FF;
+  white-space: nowrap;
+  max-width: 90%;
+}
+
+.portfolio-content p {
+  font-size: 16px;
+  color: #ccc;
+}
+
+
+.portfolio-content h3 {
+  margin: 10px 0 5px;
+  font-size: 22px;
+  color: #A5C9FF;
+  white-space: nowrap;
+  max-width: 90%;
+  text-align:center;
+}
+
+.portfolio-content h3 {
+  margin: 10px 0 5px;
+  font-size: 22px;
+  color: #A5C9FF;
+  max-width: 100%;
+  white-space: normal; 
+  text-align: center;
+}
+
+
+.portfolio-content p {
+  font-size: 16px;
+  color: #ccc;
+  text-align:center;
+}
+
+.save-btn {
+  background-color: transparent;
+  border: 2px solid #A5C9FF;
+  color: #A5C9FF;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
   margin-top: 10px;
 }
+
+.save-btn:hover {
+  background-color: #A5C9FF;
+  color: #1f1f1f;
+  transform: scale(1.05);
+}
+
+.save-btn.active {
+  background-color: #A5C9FF;
+  color: #1f1f1f;
+}
+
 
 footer {
   text-align: center;
   padding: 30px 0;
   color: #888;
 }
+
+/* Stress-tillägg för portfoliokorten, sue me */
+  
+.card-content {
+    background: rgb(49, 49, 49);
+    border-radius:5px;
+    width:500px;
+}
+
+.card-content:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.card-content p, h3 {
+    text-align:left;
+}
+
+.portfolio-content .content-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.bookmark-btn {
+  background: none;
+  border: none;
+  color: #A5C9FF;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 10px;
+  transition: transform 0.2s ease;
+}
+
+.bookmark-btn:hover {
+  transform: scale(1.2);
+}
+
+.bookmark-btn .fas,
+.bookmark-btn .far {
+  pointer-events: none; /* förhindrar dubbelklickbugg */
+}
+
