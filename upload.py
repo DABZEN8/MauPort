@@ -6,9 +6,17 @@ from db import connect_db
 import psycopg2
 
 
-
-# Hanterar filuppladdningen
 def handle_file_upload():
+    """
+        Hanterar filuppladdningen via ett formulär.
+        Kontrollerar att användaren är inloggad och validerarformulärdata (titel, beskrivning,thumbnail) 
+        och sparar filerna lokalt samt i databasen. Om något saknas eller är fel visas ett felmeddelande 
+        och användaren omdirigeras tillbaka till uppladdningssidan.
+        
+        Returns:
+                Response: En Flask-redirect till rätt sida beroende på om uppladdningen lyckades eller inte.
+        
+    """
     if "user_id" not in session:
         flash("Du måste vara inloggad för att ladda upp filer!")
         return redirect(url_for("login"))
@@ -43,8 +51,28 @@ def handle_file_upload():
         
     return render_template('upload.html')
 
-# Sparar filerna i databasen
+
 def save_portfolio_to_database(files, title, text_content, thumbnail_path):         
+    """
+        Sparar ett nytt portfolio-inlägg i databasen, inlusive tillhörande filer.
+        Baserat på filtyp till exempel bild, video eller kod sparas filerna i olika tabeller.
+        Filerna sparas först lokalt och sedan registreras deras sökvägar i databasen.
+        
+        Args: 
+            files: list 
+                  En lista med filobjekt som användaren laddat upp.
+            title : str
+                  Titeln på portfolion.
+            text_content: str   
+                    En beskrivande text för portolions innehåll.   
+            thumbnail_path: str
+                    Sökväg till sparad thumbnail.        
+
+        Returns: 
+                int: Unikt ID för det nya portfolio-inlägget i databasen.                
+                  
+    """
+    
     conn = connect_db()
     cur = conn.cursor()    
             
@@ -91,6 +119,19 @@ def save_portfolio_to_database(files, title, text_content, thumbnail_path):
     return portfolio_id
                 
 def save_file_locally(file, filename):
+    """ Sparar en uppladdad fil lokalt i mappen 'static/project_uploads'. 
+        Om en fil med samma namn redan existerar läggs en tidstämpel till i början av filnmanet
+        för att undvika överskrivning. 
+        
+        Args: 
+            file: FileStorage
+                    Filobjektet som ska sparas exempelvis från en Flask-formulärupload).
+            filename: str
+                    Det önskade filnamnet inklusive filändelse.
+        
+        Returns: 
+            str: Den relativa sökvägen till den sparade filen, avsedd för lagring i databasen. 
+    """
     from app import app
 
     upload_folder = os.path.join(app.root_path, "static", "project_uploads")
