@@ -35,11 +35,12 @@ def index():
     cur = conn.cursor()
 
     cur.execute("""
-        SELECT p.id, p.title, p.description, p.thumbnail, p.created_at, u.username, img.img_path
+        SELECT DISTINCT on (p.id)
+        p.id, p.title, p.description, p.thumbnail, p.created_at, u.username, img.img_path
         FROM portfolio p
         JOIN users u ON p.user_id = u.id
         LEFT JOIN portfolio_images img ON p.id = img.portfolio_id
-        ORDER BY p.created_at DESC
+        ORDER BY p.id, img.img_path ASC
     """)
     portfolios = cur.fetchall()
 
