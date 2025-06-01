@@ -112,10 +112,17 @@ header h1 {
   color: #ccc;
 }
 
-.logout-button {
+.logout-button a {
   margin-top: 10px;
+  color: #A5C9FF;
+  text-decoration: none;
 }
 
+.logout-button a:hover {
+  background-color: #333;
+    color: #fff;
+  }
+  
 .profile-nav {
   display: flex;
   justify-content: center;

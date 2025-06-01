@@ -9,7 +9,7 @@ def search_portfolios():
         Sedan returneras en HTML-sida med resultaten.
         
         Returns: 
-                string: En renderad HTML-sida med portfolios som matchar sökningen.
+                str: En renderad HTML-sida med portfolios som matchar sökningen.
     """
     
     search_input = request.args.get("query", "").strip()

@@ -122,10 +122,7 @@ header h1 {
 
 
 main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+
     min-height: 80vh;
     padding: 20px;
 }
@@ -133,10 +130,12 @@ main {
 /* Styling för portfoliokort */
 .portfolio-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
     padding: 20px;
-    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .portfolio-card {
@@ -152,6 +151,15 @@ main {
     max-width: 280px;
     margin: auto;
 }
+
+
+.portfolio-container.few-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+    gap: 20px;
+    justify-content: center;
+    margin: 0 auto;
+  }
 
 .portfolio-card:hover {
     transform: scale(1.05);
@@ -173,7 +181,7 @@ main {
 }
 
 .portfolio-content {
-    text-align: center;
+    text-align: left;
     padding: 10px;
     min-height: 80px; /* Ger korten en fast minsta höjd */
 }
@@ -251,14 +259,5 @@ footer {
 .bookmark-btn .fas,
 .bookmark-btn .far {
   pointer-events: none; /* förhindrar dubbelklickbugg */
-  
-}
-.login-links a {
-  color:#A5C9FF;
-  text-decoration: none;
 }
 
-.login-links a:hover{
-  background-color: #333;
-    color: #fff;
-  }
