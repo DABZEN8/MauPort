@@ -21,6 +21,12 @@
         <li><a href="/profile">Min sida</a></li>
         <li><a href="/upload">Skapa portfolio</a></li>
         <li><a href="/about">Om oss</a></li>
+        {% if 'user_id' in session %}
+          <li><a href="{{ url_for('logout') }}">Logga ut</a></li>
+        {% else %}
+          <li><a href="{{ url_for('login') }}">Logga in</a></li>
+          <li><a href="{{ url_for('register') }}">Registrera dig</a></li>
+        {% endif %}
       </ul>
       <form class="search-form" method="get" action="{{ url_for('search') }}">
         <input type="search" name="query" id="search" placeholder="Sök..." required>
