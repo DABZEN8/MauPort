@@ -253,12 +253,3 @@ footer {
   pointer-events: none; /* förhindrar dubbelklickbugg */
   
 }
-.login-links a {
-  color:#A5C9FF;
-  text-decoration: none;
-}
-
-.login-links a:hover{
-  background-color: #333;
-    color: #fff;
-  }
