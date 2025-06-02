@@ -42,21 +42,6 @@
         </div>    
         <div class="center">
             <h3> Logga in </h3>
-            <!--
-            <form action="#"> Marinas gamla formulär.
-                <label for="username"> Användarnamn/E-mail:</label>
-                    <input type="text" id="username" name="E-mail" size="15" maxlength="45">
-                    <a href="#">Skapa profil</a>
-              
-                <label for="password"> Lösenord:</label>
-                    <input type="password" id="password" name="password" size="15" maxlength="20">
-                    <a href="#"> Glömt lösenord </a>
-                <div class="login_button">     
-                    <button> <a href="profile.html"> Logga in </a> </button>
-                </div>    
-                </p>
-            -->
-                <!--<FORM TILL LOGIN KOPPLAT TILL PYTHON:<!-->
             <form action="{{url_for('login')}}" method="POST">
                 {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
@@ -68,21 +53,21 @@
                     {% endif %}
                 {% endwith %}
                 <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username" required placeholder="Enter your username">
+                    <label for="username">Användarnamn:</label>
+                    <input type="text" id="username" name="username" required placeholder="Användarnamn">
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                    <label for="password">Lösenord:</label>
+                    <input type="password" id="password" name="password" required placeholder="Lösenord">
                 </div>
 
                 <div class="form-group">
-                    <button type="submit">Login</button>
+                    <button type="submit">Logga in</button>
                 </div>
 
                 <div class="form-group">
-                    <p>Don't have an account? <a href="{{url_for('register')}}">Register</a></p>
+                    <p>Har du inte ett konto? <a href="{{url_for('register')}}">Registera dig</a></p>
                 </div>
 
             </form>

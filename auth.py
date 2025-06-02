@@ -36,24 +36,24 @@ def register():
 
         # Validera namn och efternamn
         if not re.match(r"^[A-Za-z]+$", first_name) or not re.match(r"^[A-Za-z]+$", last_name):
-            flash("För- och efternamn kan endast innehålla bokstäver.")
+            flash("För- och efternamn kan endast innehålla bokstäver.", "error")
             return render_template('register.html', form_data=form_data)
 
         # Validerar användarnamn
         if not re.match(r"^(?=.*[A-Za-z])[A-Za-z0-9_]+$", username):
-            flash("Användarnamn kan endast innehålla bokstäver, siffror och understreck.")
+            flash("Användarnamn kan endast innehålla bokstäver, siffror och understreck.", "error")
             return render_template('register.html', form_data=form_data)
 
         # Validera email
         if not re.match(r"^[A-Za-z0-9._%+-]+@(hotmail|gmail|outlook|yahoo)\.com$", email):
-            flash("Ogiltig email.")
+            flash("Ogiltig email.", "error")
             return render_template('register.html', form_data=request.form)
         
         password = request.form['password']
 
         # Validerar lösenord
         if not re.match(r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$", password):
-            flash("Lösenordet måste innehålla minst 8 karaktärer och inkludera en versal, en siffra och ett specialtecken.")
+            flash("Lösenordet måste innehålla minst 8 karaktärer och inkludera en versal, en siffra och ett specialtecken.", "error")
             return render_template('register.html', form_data=form_data)
 
         

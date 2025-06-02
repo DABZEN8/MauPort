@@ -201,7 +201,6 @@ nav ul li a:hover {
     border-radius: 5px;
     margin-bottom: 10px;
     text-align: center;
-    font-size: 16px; /* Optional: Set font size to make it more readable */
 }
 
 .success {
@@ -209,14 +208,9 @@ nav ul li a:hover {
     color: #155724;
 }
 
-.danger, .error {
+.error {
     background-color: #f8d7da;
-    color: red; /* Apply red color directly */
-    font-weight: bold; /* Optional: Make the text bold to emphasize it */
-}
-
-.flashes .error {
-    color: red !important;
+    color: #721c24;
 }
 
 /* Footer */
