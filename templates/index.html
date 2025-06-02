@@ -56,8 +56,8 @@
       <h1>Portfolios</h1>
       <div class="portfolio-container">
         {% for portfolio in portfolios %}
-          <div class="card-content">
-            <a href="/portfolio/{{ portfolio[0] }}" class="portfolio-link">
+          <a href="/portfolio/{{ portfolio[0] }}" class="portfolio-link">
+            <div class="card-content">
               <div class="portfolio-image">
                 {% if portfolio[6] %}
                   <img src="{{ url_for('static', filename=portfolio[6]) }}" alt="Portfolio-bild">
@@ -65,17 +65,17 @@
                   <img src="/static/placeholder.jpg" alt="Placeholder-bild">
                 {% endif %}
               </div>
-            </a>
-            <div class="portfolio-content">
-              <div class="content-row">
-                <h3>{{ portfolio[1] }}</h3>
-                <button class="bookmark-btn" data-portfolio-id="{{ portfolio[0] }}">
-                  <i class="fa{{ 's' if portfolio[0] in saved_ids else 'r' }} fa-bookmark"></i>
-                </button>
+              <div class="portfolio-content">
+                <div class="content-row">
+                  <h3>{{ portfolio[1] }}</h3>
+                  <button class="bookmark-btn" data-portfolio-id="{{ portfolio[0] }}">
+                    <i class="fa{{ 's' if portfolio[0] in saved_ids else 'r' }} fa-bookmark"></i>
+                  </button>
+                </div>
+                <p><b>{{ portfolio[5] }}</b></p>
               </div>
-              <p><b>{{ portfolio[5] }}</b></p>
             </div>
-          </div>
+          </a>
         {% endfor %}
       </div>
     </main>
