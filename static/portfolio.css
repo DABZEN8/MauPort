@@ -180,15 +180,28 @@ footer h4 {
 /* Mini-profilkort överst i portfolio.html */
 .owner-mini-card {
   display: flex;
-  align-items: center;
+  align-items: left;
   background-color: #1f1f1f;
   padding: 15px 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+
   margin-bottom: 30px;
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.owner-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.owner-info p {
+  margin: 2px 0;
+  line-height: 1.2;
+  text-align: left;
 }
 
 .mini-profile-pic {
@@ -198,11 +211,6 @@ footer h4 {
   object-fit: cover;
   margin-right: 15px;
   border: 2px solid #A5C9FF;
-}
-
-.owner-info p {
-  margin: 2px 0;
-  line-height: 1.2;
 }
 
 .owner-role {
@@ -242,7 +250,6 @@ footer h4 {
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #A5C9FF;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
   margin-bottom: 15px;
 }
 
@@ -272,3 +279,4 @@ footer h4 {
 .profile-button:hover {
   background-color: #dce9ff;
 }
+
