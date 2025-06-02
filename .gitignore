@@ -339,7 +339,7 @@ $RECYCLE.BIN/
 *.lnk
 
 #.gitignore för uppladdningar
-static/uploads/
+static/projects_uploads/
 static/profile_pictures/
 
 
