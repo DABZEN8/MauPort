@@ -36,6 +36,16 @@
     </nav>
 
     <main>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flashes">
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
       <div class="profile-wrapper">
         {% if username %}
           {% set image_path = profile_pic if profile_pic else 'profile_pictures/default.png' %}
@@ -85,5 +95,21 @@
     </footer>
 
     <script src="{{ url_for('static', filename='bookmark.js') }}"></script>
+
+    <script>
+      // Hitta alla flashmeddelanden
+      const flashMessages = document.querySelectorAll('.flashes li');
+      
+      // Vänta 3 sekunder, sen ta bort dem
+      if (flashMessages.length > 0) {
+        setTimeout(() => {
+          flashMessages.forEach(msg => {
+            msg.style.opacity = '0';
+            setTimeout(() => msg.remove(), 500);
+          });
+        }, 3000);
+      }
+    </script>
+
   </body>
 </html>
