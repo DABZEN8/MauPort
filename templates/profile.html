@@ -44,11 +44,6 @@
         <p><strong>Program:</strong> {{ program }}</p>
         <p><strong>E-post:</strong> {{ email }}</p>
         {% if bio %}<p><strong>Om mig:</strong> {{ bio }}</p>{% endif %}
-        {% if is_own_profile %}
-        <div class="logout-button">
-          <a href="/logout">Logga ut</a>
-        </div>
-        {% endif %}
       </div>
     </div>
 

@@ -123,8 +123,8 @@ def login():
 
         session['user_id'] = user['id']
         session['username'] = user['username']
-        flash('Login successful!', 'success')
-        redirect(url_for('index'))
+        flash('Inloggning lyckades!', 'success')
+        return redirect(url_for('index'))
     
     return render_template('login.html')
 

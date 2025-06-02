@@ -208,7 +208,7 @@ nav ul li a:hover {
     color: #155724;
 }
 
-.danger, .error {
+.danger, .error, .info {
     background-color: #f8d7da;
     color: #721c24;
 }
