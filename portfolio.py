@@ -49,6 +49,8 @@ def view_portfolio(portfolio_id):
 
     cur.close()
     conn.close()
+    print("IMAGES:", images)
+
 
     return render_template(
         "portfolio.html",
