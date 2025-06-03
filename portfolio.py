@@ -1,6 +1,8 @@
 from flask import render_template, flash, redirect, url_for
 from db import connect_db
 
+DEFAULT_PROFILE_PIC = "profile_pictures/default_profile.jpg"
+
 def view_portfolio(portfolio_id):
     """
     Visar ett portfolioinlägg med tillhörande media och information om ägaren.
@@ -36,7 +38,7 @@ def view_portfolio(portfolio_id):
 
     title, text_content, user_id, first_name, last_name, program, profile_pic = result
     full_name = f"{first_name} {last_name}"
-    profile_pic = profile_pic or "profile_pictures/default_profile.jpg"
+    profile_pic = profile_pic if profile_pic and profile_pic.strip() else "profile_pictures/default_profile.jpg"
 
     cur.execute("SELECT img_path FROM portfolio_images WHERE portfolio_id = %s", (portfolio_id,))
     images = cur.fetchall()

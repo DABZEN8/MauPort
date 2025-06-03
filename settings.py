@@ -66,7 +66,7 @@ def user_settings():
 
         # Om ingen ny bild laddas upp, använd nuvarande
         if not new_profile_picture_path:
-            new_profile_picture_path = current_profile_picture or "images/default_profile.jpg"
+            new_profile_picture_path = current_profile_picture or "profile_pictures/default_profile.jpg"
 
         try:
             current_password = form.current_password.data
