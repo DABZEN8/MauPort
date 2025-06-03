@@ -7,6 +7,7 @@
         <link href="/static/search_content.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
         
@@ -51,15 +52,14 @@
                                 {% endif %}
                             </div>
                             <div class="portfolio-content">
-                                <h3>{{ portfolio[1] }}</h3>
+                                <div class="content-row">
+                                    <h3>{{ portfolio[1] }}</h3>
+                                    <button class="bookmark-btn" data-portfolio-id="{{ portfolio[0] }}">
+                                        <i class="fa{{ 's' if portfolio[0] in saved_ids else 'r' }} fa-bookmark"></i>
+                                    </button>
+                                </div>
                                 <p><b>{{ portfolio[5] }}</b></p> <!-- Namnet på användaren -->
                                 <p>{{ portfolio[7] }}</p>        <!-- Program -->
-        
-                                {% if portfolio[0] in saved_ids %}
-                                <button class="save-btn active" data-portfolio-id="{{ portfolio[0] }}">Inlägg sparad!</button>
-                                {% else %}
-                                <button class="save-btn" data-portfolio-id="{{ portfolio[0] }}">Spara inlägg</button>
-                                {% endif %}
                             </div>
                         </div>
                     </a>
@@ -74,7 +74,7 @@
         <footer>
             <h4>© 2025 MauPort. All rights reserved.</h4>
         </footer>
-    
+        <script src="{{ url_for('static', filename='bookmark.js') }}"></script> 
     </body>
 </html>
 
