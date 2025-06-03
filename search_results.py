@@ -18,18 +18,19 @@ def search_portfolios():
     cur = conn.cursor()
     
     cur.execute("""
-                SELECT p.id, p.title, p.description, p.thumbnail, p.created_at, u.username, img.img_path, u.program
-                FROM portfolio AS p
-                JOIN users AS u ON p.user_id = u.id
-                LEFT JOIN portfolio_images AS img ON p.id = img.portfolio_id
-                WHERE LOWER(p.title) LIKE LOWER(%s) 
-                    OR LOWER(p.description) LIKE LOWER(%s)
-                    OR LOWER(u.username) LIKE LOWER(%s)
-                    OR LOWER(u.program) LIKE LOWER(%s)
-                ORDER BY p.created_at DESC
-                """,( 
-                    f"%{search_input}%",f"%{search_input}%",
-                    f"%{search_input}%",f"%{search_input}%"))
+        SELECT p.id, p.title, p.description, p.thumbnail, p.created_at, u.username, u.program
+        FROM portfolio AS p
+        JOIN users AS u ON p.user_id = u.id
+        WHERE LOWER(p.title) LIKE LOWER(%s) 
+            OR LOWER(p.description) LIKE LOWER(%s)
+            OR LOWER(u.username) LIKE LOWER(%s)
+            OR LOWER(u.program) LIKE LOWER(%s)
+        ORDER BY p.created_at DESC
+    """, (
+        f"%{search_input}%", f"%{search_input}%",
+        f"%{search_input}%", f"%{search_input}%"
+    ))
+
                 
     
     portfolios = cur.fetchall()
