@@ -69,8 +69,8 @@
           <a href="/portfolio/{{ portfolio[0] }}" class="portfolio-link">
             <div class="card-content">
               <div class="portfolio-image">
-                {% if portfolio[6] %}
-                  <img src="{{ url_for('static', filename=portfolio[6]) }}" alt="Portfolio-bild">
+                {% if portfolio[3] %}
+                  <img src="{{ url_for('static', filename=portfolio[3]) }}" alt="Portfolio-bild">
                 {% else %}
                   <img src="/static/placeholder.jpg" alt="Placeholder-bild">
                 {% endif %}
