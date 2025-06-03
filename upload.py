@@ -149,4 +149,4 @@ def save_file_locally(file, filename):
     file.save(file_path)
 
     # Returnera relativ sökväg (till databasen)
-    return os.path.join("project_uploads", filename)
+    return os.path.join("project_uploads", filename).replace("\\", "/")
