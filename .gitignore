@@ -339,8 +339,8 @@ $RECYCLE.BIN/
 *.lnk
 
 #.gitignore för uppladdningar
-static/project_uploads/
-static/profile_pictures/
+#static/project_uploads/
+#static/profile_pictures/
 
 
 # End of https://www.toptal.com/developers/gitignore/api/python,windows,macos,visualstudiocode,flask
