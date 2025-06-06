@@ -31,12 +31,21 @@ app.config['UPLOAD_FOLDER'] = "static"
 # Route till startsidan - listar alla portfolioinlägg
 @app.route('/')
 def index():
+    """
+    Denna funktion visar startsidan med alla portfolioinlägg.
+
+    Hämtar en lista över alla uppladdade portfolios från databasen, 
+    tillsammans med användarnamn och annan info. Om en användare är inloggad 
+    kollas även vilka inlägg hen har sparat som favoriter. All data skickas 
+    sedan vidare till index.html för visning.
+    """
+        
     conn = connect_db()
     cur = conn.cursor()
 
     cur.execute("""
         SELECT 
-            p.id, p.title, p.description, p.thumbnail, p.created_at, u.username
+        p.id, p.title, p.description, p.thumbnail, p.created_at, u.username
         FROM portfolio p
         JOIN users u ON p.user_id = u.id
         ORDER BY p.id DESC
@@ -60,16 +69,31 @@ def index():
 # Route till login sidan
 @app.route("/login", methods =["GET", "POST"])
 def login():
+    """
+    Visar inloggningssidan och hanterar inloggning.
+
+    Vid GET visas formuläret, vid POST behandlas inloggningen via auth_login().
+    """
     return auth_login()
 
 # Utloggning som avslutar inloggningsessionen
 @app.route("/logout")
 def logout():
+    """
+    Loggar ut användaren och avslutar sessionen.
+
+    Skickar användaren vidare till startsidan efter utloggning.
+    """
     return auth_logout()
 
 # Route till registreringssidan
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    Visar registreringssidan och hanterar skapande av konto.
+
+    Vid GET visas formuläret, vid POST behandlas registreringen via auth_register().
+    """
     return auth_register()
 
 # Route till profil sidan
@@ -84,6 +108,10 @@ def view_user_profile(user_id):
 # Route till portfoliosidan
 @app.route("/portfolio")
 def portfolio():
+    """
+    Returnerar portfoliosidan och dess innehåll.
+    """
+
     return render_template("portfolio.html")
 
 # Route till sida för att ladda upp inlägg
@@ -98,16 +126,25 @@ def settings():
 
 @app.route("/about")
 def om_oss():
+    """
+    Returnerar Om oss-sidan och dess innehåll.
+    """
     return render_template("about.html")
 
 # Route till enskilt portfolio
 @app.route('/portfolio/<int:portfolio_id>')
 def show_portfolio(portfolio_id):
+    """
+    Returnerar korrekt portfoliosida som användaren klickar på.
+    """
     return view_portfolio(portfolio_id)
 
 # Route till felhantering 
 @app.errorhandler(404)
 def page_not_found(e):
+    """
+    Felhantering: Returnerar sida på ett felmeddelande till användare.
+    """
     return render_template("404.html")
 
 #Route till sökfunktion
@@ -120,6 +157,13 @@ from flask import request, jsonify
 # Route för att spara inlägg
 @app.route("/save_favorite", methods=["POST"])
 def save_favorite():
+    """
+    Sparar ett portfolioinlägg som favorit för den inloggade användaren.
+
+    Lägger till en rad i tabellen saved_portfolios om inlägget inte redan är sparat.
+    Returnerar ett JSON-svar som bekräftar om operationen lyckades eller misslyckades.
+    """
+
     if "user_id" not in session:
         return jsonify({"success": False, "message": "Du måste vara inloggad för att spara favoriter."}), 403
 
@@ -148,6 +192,14 @@ def save_favorite():
 
 @app.route("/favorites")
 def favorites():
+    """
+    Visar användarens sparade portfolioinlägg.
+
+    Om användaren inte är inloggad skickas hen till inloggningssidan.
+    Hämtar användarens info och en lista på inlägg som markerats som favoriter.
+    Allt skickas till favorites.html för att visas tillsammans med profilinformation.
+    """
+
     if "user_id" not in session:
         flash("Logga in för att se dina favoriter.", "warning")
         return redirect(url_for("login"))
@@ -196,6 +248,14 @@ def favorites():
 # Denna funktion ser till att inloggad användare kan både lägga till och ta bort sparade inlägg.
 @app.route("/toggle_favorite", methods=["POST"])
 def toggle_favorite():
+    """
+    Denna funktion lägger till eller tar bort ett portfolioinlägg från användarens favoriter.
+
+    Kräver att användaren är inloggad. Om inlägget redan är sparat tas det bort, 
+    annars sparas det som favorit. Returnerar ett JSON-svar med status "added" 
+    eller "removed" beroende på åtgärd.
+    """
+
     if "user_id" not in session:
         return jsonify({"success": False, "message": "Du måste vara inloggad."}), 403
 
