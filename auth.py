@@ -36,14 +36,12 @@ def register():
     """
     Hanterar registrering av en ny användare.
 
-    POST:
-        Validerar formulärdata.
-        Kontrollerar om användaren redan finns.
-        Hashar lösenord och sparar ny användare i databasen.
-        Visar felmeddelanden vid ogiltiga indata eller databasfel.
+    Vid POST valideras formulärdata.
+    Kontrollerar om användaren redan finns.
+    Hashar lösenord och sparar ny användare i databasen.
+    Visar felmeddelanden vid ogiltiga indata eller databasfel.
 
-    GET:
-        Visar registreringsformuläret.
+    Vid GET visas registreringsformuläret.
     
     Returns:
         Flask response object: HTML-sida eller omdirigering.
@@ -118,8 +116,8 @@ def login():
     Hanterar inloggning för användare.
 
     Vid POST hämtas användare från databasen baserat på användarnamn.
-        Verifierar lösenord med hash.
-        Startar session vid korrekt inloggning.
+    Lösenord verifieras med hash.
+    Startar session vid korrekt inloggning.
     
     Vid GET visas inloggningsformuläret.
     
