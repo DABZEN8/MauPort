@@ -1,3 +1,8 @@
+// bookmark.js
+// Hanterar klick på favorit-/bokmärkesknappar för portfolioinlägg.
+// Skickar POST till /toggle_favorite, uppdaterar ikon eller text på knappen.
+// Tar även bort kort från sidan om det är på /favorites och inlägget tas bort.
+
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".bookmark-btn, .save-btn").forEach(button => {
     button.addEventListener("click", async (e) => {

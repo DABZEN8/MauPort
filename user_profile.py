@@ -2,7 +2,18 @@ from flask import render_template, session, redirect, url_for, flash
 from db import connect_db
 
 def profile(user_id=None):
-    """Visar användarens egen profil eller en annan användares profil baserat på user_id."""
+    """Visar användarens egen profil eller en annan användares profil baserat på user_id.
+    - Visar inloggad användares egen profil om user_id inte anges.
+    - Visar annan användares profil om user_id är angiven.
+    - Hämtar användarinformation och användarens portfolioinlägg från databasen.
+    
+    Parametrar:
+    - user_id: ID för användaren vars profil ska visas. Om "None" så visas den inloggades profil.
+    
+    Returnerar:
+    - HTML-sida "profile.html" med användarinfo.
+    - Redirect till login (index) om användaren inte är inloggad eller inte finns.
+    """
     viewing_own = False
     if user_id is None:
         if "user_id" not in session:

@@ -7,6 +7,9 @@ password_message = "Lösenordet måste vara minst 8 tecken och innehålla minst 
 
 # Formulär där användare ändrar inställningar i inloggat läge
 class SettingsForm(FlaskForm):
+    """
+    Formulär för att hantera användarens inställningar.
+    """
     first_name = StringField("Förnamn", validators=[DataRequired()])
     last_name = StringField("Efternamn", validators=[DataRequired()])
     username = StringField ("Användarnamn", validators=[DataRequired()])

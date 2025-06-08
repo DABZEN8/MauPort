@@ -5,7 +5,16 @@ import psycopg2.extras
 import re
 
 def user_exists(username, email):
-    """Kollar om användaren redan finns i databasen baserat på användarnamn eller e-post."""
+    """
+    Kontrollera om en användare redan finns i databasen baserat på användarnamn eller e-post.
+
+    Args:
+        username (str): Användarnamn att kontrollera.
+        email (str): E-postadress att kontrollera.
+
+    Returns:
+        bool or None: True om användaren finns, False om inte, None vid databasfel.
+    """
     try:
         conn = connect_db()
         cursor = conn.cursor()
@@ -24,6 +33,19 @@ def user_exists(username, email):
             conn.close()
 
 def register():
+    """
+    Hanterar registrering av en ny användare.
+
+    Vid POST valideras formulärdata.
+    Kontrollerar om användaren redan finns.
+    Hashar lösenord och sparar ny användare i databasen.
+    Visar felmeddelanden vid ogiltiga indata eller databasfel.
+
+    Vid GET visas registreringsformuläret.
+    
+    Returns:
+        Flask response object: HTML-sida eller omdirigering.
+    """
     if request.method == 'POST':
         form_data = request.form.copy()  # Gör en kopia med alla inputs
         form_data.pop('password', None)  # Ta bort lösenord från form_data
@@ -90,6 +112,18 @@ def register():
     return render_template('register.html', form_data={})
 
 def login():
+    """
+    Hanterar inloggning för användare.
+
+    Vid POST hämtas användare från databasen baserat på användarnamn.
+    Lösenord verifieras med hash.
+    Startar session vid korrekt inloggning.
+    
+    Vid GET visas inloggningsformuläret.
+    
+    Returns:
+        Flask response object: HTML-sida eller omdirigering.
+    """
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -129,6 +163,12 @@ def login():
     return render_template('login.html')
 
 def logout():
+    """
+    Loggar ut användaren och tömmer sessionen.
+
+    Returns:
+        Flask response object: Omdirigerar till login-sidan.
+    """
     session.clear()
     flash("Du har loggats ut.", "info")
     

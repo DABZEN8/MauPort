@@ -12,10 +12,33 @@ ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
 # Kontrollerar att filändelsen är korrekt
 def allowed_file(filename):
+    """
+    Kontrollerar om en fil har en tillåten filändelse (profilbild).
+    
+    Parametrar:
+    - filename (str): namnet på den fil som ska kontrolleras.
+    
+    Returnerar:
+    - bool: True om filändelsen är tillåten (.png, .jpg, .jpeg), annars False.
+    """
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # Visa/ändra användarens inställningar
 def user_settings():
+    """
+    Visar och behandlar formuläret för att ändra användarens kontoinställningar.
+    
+    Syfte:
+    - Ladda användarens aktuella info i formuläret vid GET-förfrågan.
+    - Validera och uppdatera informationen vid POST-förfrågan.
+    - Hantera profilbilds- och lösenordsändring.
+    - Säkerställa att endast inloggade användare kan ändra sina inställningar.
+    
+    Returnerar:
+    - HTML-sida "settings.html" med formuläret och aktuell profilbild.
+    - Redirect till login om användaren inte är inloggad.
+    - Redirect till inställningssidan med flashmeddelanden efter ändringar.
+    """
     form = SettingsForm()
     current_profile_picture = None
 
