@@ -117,6 +117,16 @@ def portfolio():
 # Route till sida för att ladda upp inlägg
 @app.route("/upload", methods=["GET", "POST"])
 def upload_files():
+    """
+    Hanterar HTTP-förfrågningar för att ladda upp filer till servern.
+
+    GET:
+        Returnerar en sida eller ett svar som tillåter användaren att ladda upp filer.
+
+    POST:
+        Tar emot uppladdade filer från användaren och bearbetar dem via funktionen
+        handle_file_upload
+    """
     return handle_file_upload()
 
 # Route till sida för inställningar
@@ -150,6 +160,15 @@ def page_not_found(e):
 #Route till sökfunktion
 @app.route("/search")
 def search():
+    """
+    Hanterar sökförfrågningar för portföljer.
+    Den tar emot sökparametrar från användaren och returnerar relevanta portföljer 
+    baserat på sökningar.
+
+    Returns:
+            Response: Ett HTTP-svar som innehåller sökresultaten för portföljer.
+    """
+
     return search_portfolios()
 
 from flask import request, jsonify
